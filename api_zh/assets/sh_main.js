@@ -550,4 +550,39 @@ function sh_highlightDocument(prefix, suffix) {
   highlight(prefix, suffix, 'pre');
 }
 
-/*************/
+/** toggle original text */
+var btns = document.querySelectorAll('.hhy-toggle-btn');
+for (var i = 0; i < btns.length; i++) {
+    btns[i].addEventListener('click', function() {
+        var self = this;
+        var nextSibling = self.nextElementSibling;
+        if (nextSibling) {
+            toggle(nextSibling);
+        }
+    });
+}
+
+function toggle(elements, specifiedDisplay) {
+    var element, index;
+
+    elements = elements.length ? elements : [elements];
+    for (index = 0; index < elements.length; index++) {
+        element = elements[index];
+
+        if (isElementHidden(element)) {
+            element.style.display = '';
+
+            // If the element is still hidden after removing the inline display
+            if (isElementHidden(element)) {
+                element.style.display = specifiedDisplay || 'block';
+            }
+        } else {
+            element.style.display = 'none';
+        }
+    }
+
+    function isElementHidden(element) {
+        return window.getComputedStyle(element, null).getPropertyValue('display') === 'none';
+    }
+}
+/** / toggle original text */

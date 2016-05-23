@@ -481,4 +481,11 @@ th > *:last-child, td > *:last-child {
   }
 }
 
-/**/
+/** toggle original text */
+.hhy-original-div {
+	border: 1px solid green;
+	padding: 5px;
+    margin-top: 5px;
+}
+.hhy-original-text { display: none; }
+/* / toggle original text */
