@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="zh">
 
 <head>
     <meta charset="utf-8">
@@ -153,7 +153,7 @@ assert(false, &#39;it\&#39;s false&#39;);
                 <div class="api_metadata">
                     <span>Added in: v0.1.21</span>
                 </div>
-                <p>测试<code>实际</code>和<code>预期</code>参数的深度相等性。原始类型值使用相等比较运算符( <code>==</code> )比较。</p>
+                <p>测试<code>actual</code>和<code>expected</code>两个参数的深度相等性。原始类型值使用相等比较运算符( <code>==</code> )比较。</p>
                 <p>只有可枚举的的 &quot;own&quot; 属性会被考虑在内。<code>deepEqual()</code> 的实现没有测试对象原型、附加的 symbols 或者不可枚举属性。这可能会产生一些令人意想不到的（潜在的）结果。
                     比如下面的代码，不会抛出 <code>AssertionError</code>，因为在 <code>AssertionError</code> 对象上的属性是不可枚举的：</p>
                 <div class="hhy-original-div">
@@ -207,7 +207,7 @@ assert.deepEqual(obj1, obj4);
   // AssertionError: { a: { b: 1 } } deepEqual {}
   // Prototypes are ignored
 </code></pre>
-                <p>如果这些之都相等了，一个 <code>message</code> 属性被设置成和 <code>message</code> 参数等值的 <code>AssertionError</code> 就会被抛出。如果 <code>message</code> 参数是 undefined，则会分配一个默认错误消息给它。</p>
+                <p>如果这些值都相等了，一个 <code>message</code> 属性被设置成和 <code>message</code> 参数等值的 <code>AssertionError</code> 就会被抛出。如果 <code>message</code> 参数是 undefined，则会分配一个默认错误消息给它。</p>
                     <div class="hhy-original-div">
                         <button class="hhy-toggle-btn">原文</button>
                         <div class="hhy-original-text">
@@ -218,7 +218,7 @@ assert.deepEqual(obj1, obj4);
                 <div class="api_metadata">
                     <span>Added in: v1.2.0</span>
                 </div>
-                <p>Generally identical to <code>assert.deepEqual()</code> with two exceptions. First, primitive values are compared using the strict equality operator ( <code>===</code> ). Second, object comparisons include a strict equality check of their prototypes.</p>
+                <p>除了两点外和 <code>assert.deepEqual()</code> 基本相同：第一点，原始类型值使用严格相等运算符 ( <code>===</code> ) 比较。第二点，对象的比较要包括她们的原型的严格相等比较。</p>
                 <div class="hhy-original-div">
                     <button class="hhy-toggle-btn">原文</button>
                     <div class="hhy-original-text">
@@ -234,19 +234,33 @@ assert.deepStrictEqual({a:1}, {a:&#39;1&#39;});
   // AssertionError: { a: 1 } deepStrictEqual { a: &#39;1&#39; }
   // because 1 !== &#39;1&#39; using strict equality
 </code></pre>
-                <p>If the values are not equal, an <code>AssertionError</code> is thrown with a <code>message</code> property set equal to the value of the <code>message</code> parameter. If the <code>message</code> parameter is undefined, a default error
-                    message is assigned.</p>
+                <p>如果这些值都相等了，一个 message 属性被设置成和 message 参数等值的 AssertionError 就会被抛出。如果 message 参数是 undefined，则会分配一个默认错误消息给它。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>If the values are not equal, an <code>AssertionError</code> is thrown with a <code>message</code> property set equal to the value of the <code>message</code> parameter. If the <code>message</code> parameter is undefined, a default error message is assigned.</p>
+                    </div>
+                </div>
                 <h2>assert.doesNotThrow(block[, error][, message])<span><a class="mark" href="#assert_assert_doesnotthrow_block_error_message" id="assert_assert_doesnotthrow_block_error_message">#</a></span></h2>
                 <div class="api_metadata">
                     <span>Added in: v0.1.21</span>
                 </div>
-                <p>Asserts that the function <code>block</code> does not throw an error. See
-                    <a href="#assert_assert_throws_block_error_message"><code>assert.throws()</code></a> for more details.</p>
-                <p>When <code>assert.doesNotThrow()</code> is called, it will immediately call the <code>block</code> function.
+                <p>断言 <code>block</code> 不抛出错误。详见 <a href="#assert_assert_throws_block_error_message"><code>assert.throws()</code></a>。</p>
+                <p>当 <code>assert.doesNotThrow()</code> 被调用时，她会立即调用 <code>block</code> 方法。
                 </p>
-                <p>If an error is thrown and it is the same type as that specified by the <code>error</code> parameter, then an <code>AssertionError</code> is thrown. If the error is of a different type, or if the <code>error</code> parameter is undefined,
-                    the error is propagated back to the caller.</p>
-                <p>The following, for instance, will throw the <a href="errors.html#errors_class_typeerror"><code>TypeError</code></a> because there is no matching error type in the assertion:</p>
+                <p>如果有一个错误被抛出，同时她的类型和 <code>error</code> 参数指定的一样，那么会抛出一个 <code>AssertionError</code>。如果类型不一样，或者 <code>error</code> 参数是 undefined，这个被抛出的错误会被抛回给调用函数。</p>
+                <p>下面的这个示例将抛出一个 <a href="errors.html#errors_class_typeerror"><code>TypeError</code></a>，因为在断言的抛出错误类型没有与之匹配的：</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Asserts that the function <code>block</code> does not throw an error. See
+                            <a href="#assert_assert_throws_block_error_message"><code>assert.throws()</code></a> for more details.</p>
+                        <p>When <code>assert.doesNotThrow()</code> is called, it will immediately call the <code>block</code> function.
+                        </p>
+                        <p>If an error is thrown and it is the same type as that specified by the <code>error</code> parameter, then an <code>AssertionError</code> is thrown. If the error is of a different type, or if the <code>error</code> parameter is undefined, the error is propagated back to the caller.</p>
+                        <p>The following, for instance, will throw the <a href="errors.html#errors_class_typeerror"><code>TypeError</code></a> because there is no matching error type in the assertion:</p>
+                    </div>
+                </div>
                 <pre><code class="lang-js">assert.doesNotThrow(
   () =&gt; {
     throw new TypeError(&#39;Wrong value&#39;);
@@ -254,7 +268,13 @@ assert.deepStrictEqual({a:1}, {a:&#39;1&#39;});
   SyntaxError
 );
 </code></pre>
-                <p>However, the following will result in an <code>AssertionError</code> with the message &#39;Got unwanted exception (TypeError)..&#39;:</p>
+                <p>然而，以下代码将产生一个带有 &#39;Got unwanted exception (TypeError)..&#39; 信息的 <code>AssertionError</code>：</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>However, the following will result in an <code>AssertionError</code> with the message &#39;Got unwanted exception (TypeError)..&#39;:</p>
+                    </div>
+                </div>
                 <pre><code class="lang-js">assert.doesNotThrow(
   () =&gt; {
     throw new TypeError(&#39;Wrong value&#39;);
@@ -262,8 +282,13 @@ assert.deepStrictEqual({a:1}, {a:&#39;1&#39;});
   TypeError
 );
 </code></pre>
-                <p>If an <code>AssertionError</code> is thrown and a value is provided for the <code>message</code> parameter, the value of <code>message</code> will be appended to the <code>AssertionError</code> message:
-                </p>
+                <p>如果抛出了 <code>AssertionError</code> 并且 <code>message</code> 参数有给定值，这个给定值会被添加到 <code>AssertionError</code> 的 message上：</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>If an <code>AssertionError</code> is thrown and a value is provided for the <code>message</code> parameter, the value of <code>message</code> will be appended to the <code>AssertionError</code> message:</p>
+                    </div>
+                </div>
                 <pre><code class="lang-js">assert.doesNotThrow(
   () =&gt; {
     throw new TypeError(&#39;Wrong value&#39;);
@@ -277,7 +302,13 @@ assert.deepStrictEqual({a:1}, {a:&#39;1&#39;});
                 <div class="api_metadata">
                     <span>Added in: v0.1.21</span>
                 </div>
-                <p>Tests shallow, coercive equality between the <code>actual</code> and <code>expected</code> parameters using the equal comparison operator ( <code>==</code> ).</p>
+                <p>浅测试，等同于使用( <code>==</code> )进行 <code>actual</code> and <code>expected</code> 的相等判断。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Tests shallow, coercive equality between the <code>actual</code> and <code>expected</code> parameters using the equal comparison operator ( <code>==</code> ).</p>
+                    </div>
+                </div>
                 <pre><code class="lang-js">const assert = require(&#39;assert&#39;);
 
 assert.equal(1, 1);
@@ -290,14 +321,24 @@ assert.equal(1, 2);
 assert.equal({a: {b: 1}}, {a: {b: 1}});
   //AssertionError: { a: { b: 1 } } == { a: { b: 1 } }
 </code></pre>
-                <p>If the values are not equal, an <code>AssertionError</code> is thrown with a <code>message</code> property set equal to the value of the <code>message</code> parameter. If the <code>message</code> parameter is undefined, a default error
-                    message is assigned.</p>
+                <p>如果值不相等了，一个 message 属性被设置成和 message 参数等值的 AssertionError 就会被抛出。如果 message 参数是 undefined，则会分配一个默认错误消息给它。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>If the values are not equal, an <code>AssertionError</code> is thrown with a <code>message</code> property set equal to the value of the <code>message</code> parameter. If the <code>message</code> parameter is undefined, a default error message is assigned.</p>
+                    </div>
+                </div>
                 <h2>assert.fail(actual, expected, message, operator)<span><a class="mark" href="#assert_assert_fail_actual_expected_message_operator" id="assert_assert_fail_actual_expected_message_operator">#</a></span></h2>
                 <div class="api_metadata">
                     <span>Added in: v0.1.21</span>
                 </div>
-                <p>Throws an <code>AssertionError</code>. If <code>message</code> is falsy, the error message is set as the values of <code>actual</code> and <code>expected</code> separated by the provided <code>operator</code>. Otherwise, the error message
-                    is the value of <code>message</code>.</p>
+                <p>抛出一个 <code>AssertionError</code>，如果 <code>message</code> 是虚设的，错误信息会被设置成 <code>operator</code> 隔开的 <code>actual</code> and <code>expected</code> 值。否则被设置成 <code>message</code>。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Throws an <code>AssertionError</code>. If <code>message</code> is falsy, the error message is set as the values of <code>actual</code> and <code>expected</code> separated by the provided <code>operator</code>. Otherwise, the error message is the value of <code>message</code>.</p>
+                    </div>
+                </div>
                 <pre><code class="lang-js">const assert = require(&#39;assert&#39;);
 
 assert.fail(1, 2, undefined, &#39;&gt;&#39;);
@@ -310,7 +351,13 @@ assert.fail(1, 2, &#39;whoops&#39;, &#39;&gt;&#39;);
                 <div class="api_metadata">
                     <span>Added in: v0.1.97</span>
                 </div>
-                <p>Throws <code>value</code> if <code>value</code> is truthy. This is useful when testing the <code>error</code> argument in callbacks.</p>
+                <p>抛出 <code>value</code> 如果 <code>value</code> 为真。这个在回调中检查第一个 <code>error</code> 参数时很有用。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Throws <code>value</code> if <code>value</code> is truthy. This is useful when testing the <code>error</code> argument in callbacks.</p>
+                    </div>
+                </div>
                 <pre><code class="lang-js">const assert = require(&#39;assert&#39;);
 
 assert.ifError(0); // OK
@@ -322,7 +369,13 @@ assert.ifError(new Error()); // Throws Error
                 <div class="api_metadata">
                     <span>Added in: v0.1.21</span>
                 </div>
-                <p>Tests for any deep inequality. Opposite of <a href="#assert_assert_deepequal_actual_expected_message"><code>assert.deepEqual()</code></a>.</p>
+                <p>测试深度不相等性，和 <a href="#assert_assert_deepequal_actual_expected_message"><code>assert.deepEqual()</code></a> 刚好相反。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Tests for any deep inequality. Opposite of <a href="#assert_assert_deepequal_actual_expected_message"><code>assert.deepEqual()</code></a>.</p>
+                    </div>
+                </div>
                 <pre><code class="lang-js">const assert = require(&#39;assert&#39;);
 
 const obj1 = {
@@ -354,13 +407,24 @@ assert.notDeepEqual(obj1, obj3);
 assert.notDeepEqual(obj1, obj4);
   // OK, obj1 and obj2 are not deeply equal
 </code></pre>
-                <p>If the values are deeply equal, an <code>AssertionError</code> is thrown with a <code>message</code> property set equal to the value of the <code>message</code> parameter. If the <code>message</code> parameter is undefined, a default error
-                    message is assigned.</p>
+                <p>如果这些这都是深度相等的，一个 <code>message</code> 属性被设置成和 <code>message</code> 参数等值的 <code>AssertionError</code> 就会被抛出。如果 <code>message</code> 参数是 undefined，则会分配一个默认错误消息给它。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>If the values are deeply equal, an <code>AssertionError</code> is thrown with a <code>message</code> property set equal to the value of the <code>message</code> parameter. If the <code>message</code> parameter is undefined, a default error message is assigned.</p>
+                    </div>
+                </div>
                 <h2>assert.notDeepStrictEqual(actual, expected[, message])<span><a class="mark" href="#assert_assert_notdeepstrictequal_actual_expected_message" id="assert_assert_notdeepstrictequal_actual_expected_message">#</a></span></h2>
                 <div class="api_metadata">
                     <span>Added in: v1.2.0</span>
                 </div>
-                <p>Tests for deep strict inequality. Opposite of <a href="#assert_assert_deepstrictequal_actual_expected_message"><code>assert.deepStrictEqual()</code></a>.</p>
+                <p>测试深度严格不等性,和 <a href="#assert_assert_deepstrictequal_actual_expected_message"><code>assert.deepStrictEqual()</code></a> 刚好相反。</p>
+                <div class="hhy-original-div">
+                	<button class="hhy-toggle-btn">原文</button>
+                	<div class="hhy-original-text">
+                		<p>Tests for deep strict inequality. Opposite of <a href="#assert_assert_deepstrictequal_actual_expected_message"><code>assert.deepStrictEqual()</code></a>.</p>
+                	</div>
+                </div>
                 <pre><code class="lang-js">const assert = require(&#39;assert&#39;);
 
 assert.notDeepEqual({a:1}, {a:&#39;1&#39;});
@@ -369,13 +433,24 @@ assert.notDeepEqual({a:1}, {a:&#39;1&#39;});
 assert.notDeepStrictEqual({a:1}, {a:&#39;1&#39;});
   // OK
 </code></pre>
-                <p>If the values are deeply and strictly equal, an <code>AssertionError</code> is thrown with a <code>message</code> property set equal to the value of the <code>message</code> parameter. If the <code>message</code> parameter is undefined,
-                    a default error message is assigned.</p>
+                <p>如果这些值都是深度严格相等，一个 <code>message</code> 属性被设置成和 <code>message</code> 参数等值的 <code>AssertionError</code> 就会被抛出。如果 <code>message</code> 参数是 undefined，则会分配一个默认错误消息给它。</p>
+                <div class="hhy-original-div">
+                	<button class="hhy-toggle-btn">原文</button>
+                	<div class="hhy-original-text">
+                		<p>If the values are deeply and strictly equal, an <code>AssertionError</code> is thrown with a <code>message</code> property set equal to the value of the <code>message</code> parameter. If the <code>message</code> parameter is undefined,a default error message is assigned.</p>
+                	</div>
+                </div>
                 <h2>assert.notEqual(actual, expected[, message])<span><a class="mark" href="#assert_assert_notequal_actual_expected_message" id="assert_assert_notequal_actual_expected_message">#</a></span></h2>
                 <div class="api_metadata">
                     <span>Added in: v0.1.21</span>
                 </div>
-                <p>Tests shallow, coercive inequality with the not equal comparison operator ( <code>!=</code> ).</p>
+                <p>浅测试，等同于使用( <code>!=</code> )进行 <code>actual</code> and <code>expected</code> 的相等判断。</p>
+                <div class="hhy-original-div">
+                	<button class="hhy-toggle-btn">原文</button>
+                	<div class="hhy-original-text">
+                		<p>Tests shallow, coercive inequality with the not equal comparison operator ( <code>!=</code> ).</p>
+                	</div>
+                </div>
                 <pre><code class="lang-js">const assert = require(&#39;assert&#39;);
 
 assert.notEqual(1, 2);
@@ -387,13 +462,24 @@ assert.notEqual(1, 1);
 assert.notEqual(1, &#39;1&#39;);
   // AssertionError: 1 != &#39;1&#39;
 </code></pre>
-                <p>If the values are equal, an <code>AssertionError</code> is thrown with a <code>message</code> property set equal to the value of the <code>message</code> parameter. If the <code>message</code> parameter is undefined, a default error message
-                    is assigned.</p>
+                <p>如果这些值都相等，一个 <code>message</code> 属性被设置成和 <code>message</code> 参数等值的 <code>AssertionError</code> 就会被抛出。如果 <code>message</code> 参数是 undefined，则会分配一个默认错误消息给它。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>If the values are equal, an <code>AssertionError</code> is thrown with a <code>message</code> property set equal to the value of the <code>message</code> parameter. If the <code>message</code> parameter is undefined, a default error message is assigned.</p>
+                    </div>
+                </div>
                 <h2>assert.notStrictEqual(actual, expected[, message])<span><a class="mark" href="#assert_assert_notstrictequal_actual_expected_message" id="assert_assert_notstrictequal_actual_expected_message">#</a></span></h2>
                 <div class="api_metadata">
                     <span>Added in: v0.1.21</span>
                 </div>
-                <p>Tests strict inequality as determined by the strict not equal operator ( <code>!==</code> ).</p>
+                <p>测试严格不等性，等同于严格不等运算符( <code>!==</code> )。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Tests strict inequality as determined by the strict not equal operator ( <code>!==</code> ).</p>
+                    </div>
+                </div>
                 <pre><code class="lang-js">const assert = require(&#39;assert&#39;);
 
 assert.notStrictEqual(1, 2);
@@ -405,17 +491,28 @@ assert.notStrictEqual(1, 1);
 assert.notStrictEqual(1, &#39;1&#39;);
   // OK
 </code></pre>
-                <p>If the values are strictly equal, an <code>AssertionError</code> is thrown with a
-                    <code>message</code> property set equal to the value of the <code>message</code> parameter. If the
-                    <code>message</code> parameter is undefined, a default error message is assigned.</p>
+                <p>如果这些值严格相等，一个 <code>message</code> 属性被设置成和 <code>message</code> 参数等值的 <code>AssertionError</code> 就会被抛出。如果 <code>message</code> 参数是 undefined，则会分配一个默认错误消息给它。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>If the values are strictly equal, an <code>AssertionError</code> is thrown with a <code>message</code> property set equal to the value of the <code>message</code> parameter. If the <code>message</code> parameter is undefined, a default error message is assigned.</p>
+                    </div>
+                </div>
                 <h2>assert.ok(value[, message])<span><a class="mark" href="#assert_assert_ok_value_message" id="assert_assert_ok_value_message">#</a></span></h2>
                 <div class="api_metadata">
                     <span>Added in: v0.1.21</span>
                 </div>
-                <p>Tests if <code>value</code> is truthy. It is equivalent to
-                    <code>assert.equal(!!value, true, message)</code>.</p>
-                <p>If <code>value</code> is not truthy, an <code>AssertionError</code> is thrown with a <code>message</code> property set equal to the value of the <code>message</code> parameter. If the <code>message</code> parameter is <code>undefined</code>,
-                    a default error message is assigned.</p>
+                <p>测试 <code>value</code> 是否为真。等价于 <code>assert.equal(!!value, true, message)</code>.</p>
+                <p>如果 <code>value</code> 非真，一个 <code>message</code> 属性被设置成和 <code>message</code> 参数等值的 <code>AssertionError</code> 就会被抛出。如果 <code>message</code> 参数是 <code>undefined</code>，则会分配一个默认错误消息给它。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Tests if <code>value</code> is truthy. It is equivalent to
+                            <code>assert.equal(!!value, true, message)</code>.</p>
+                        <p>If <code>value</code> is not truthy, an <code>AssertionError</code> is thrown with a <code>message</code> property set equal to the value of the <code>message</code> parameter. If the <code>message</code> parameter is <code>undefined</code>,
+                            a default error message is assigned.</p>
+                    </div>
+                </div>
                 <pre><code class="lang-js">const assert = require(&#39;assert&#39;);
 
 assert.ok(true);  // OK
@@ -431,7 +528,13 @@ assert.ok(false, &#39;it\&#39;s false&#39;);
                 <div class="api_metadata">
                     <span>Added in: v0.1.21</span>
                 </div>
-                <p>Tests strict equality as determined by the strict equality operator ( <code>===</code> ).</p>
+                <p>测试严格相等性，等同于严格相等运算符( <code>===</code> )。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Tests strict equality as determined by the strict equality operator ( <code>===</code> ).</p>
+                    </div>
+                </div>
                 <pre><code class="lang-js">const assert = require(&#39;assert&#39;);
 
 assert.strictEqual(1, 2);
@@ -443,18 +546,32 @@ assert.strictEqual(1, 1);
 assert.strictEqual(1, &#39;1&#39;);
   // AssertionError: 1 === &#39;1&#39;
 </code></pre>
-                <p>If the values are not strictly equal, an <code>AssertionError</code> is thrown with a
-                    <code>message</code> property set equal to the value of the <code>message</code> parameter. If the
-                    <code>message</code> parameter is undefined, a default error message is assigned.</p>
+                <p>如果这些值严格不等，一个 <code>message</code> 属性被设置成和 <code>message</code> 参数等值的 <code>AssertionError</code> 就会被抛出。如果 <code>message</code> 参数是 <code>undefined</code>，则会分配一个默认错误消息给它。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>If the values are not strictly equal, an <code>AssertionError</code> is thrown with a
+                            <code>message</code> property set equal to the value of the <code>message</code> parameter. If the
+                            <code>message</code> parameter is undefined, a default error message is assigned.</p>
+                    </div>
+                </div>
                 <h2>assert.throws(block[, error][, message])<span><a class="mark" href="#assert_assert_throws_block_error_message" id="assert_assert_throws_block_error_message">#</a></span></h2>
                 <div class="api_metadata">
                     <span>Added in: v0.1.21</span>
                 </div>
-                <p>Expects the function <code>block</code> to throw an error.</p>
-                <p>If specified, <code>error</code> can be a constructor, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions"><code>RegExp</code></a>, or validation function.
-                </p>
-                <p>If specified, <code>message</code> will be the message provided by the <code>AssertionError</code> if the block fails to throw.</p>
-                <p>Validate instanceof using constructor:</p>
+                <p>期望 <code>block</code> 方法抛出一个错误。</p>
+                <p>如果指定了 <code>error</code>，她可以是一个构造函数、<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions"><code>RegExp</code></a>正则表达式或者验证函数</p>
+                <p>如果指定了 <code>message</code> 她将成为在块函数 <code>block</code> 失败的情况下抛出 <code>AssertionError</code> 时的那个 message。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Expects the function <code>block</code> to throw an error.</p>
+                        <p>If specified, <code>error</code> can be a constructor, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions"><code>RegExp</code></a>, or validation function.
+                        </p>
+                        <p>If specified, <code>message</code> will be the message provided by the <code>AssertionError</code> if the block fails to throw.</p>
+                    </div>
+                </div>
+                <p>用构造函数验证实例(Validate instanceof using constructor)：</p>
                 <pre><code class="lang-js">assert.throws(
   () =&gt; {
     throw new Error(&#39;Wrong value&#39;);
@@ -462,7 +579,7 @@ assert.strictEqual(1, &#39;1&#39;);
   Error
 );
 </code></pre>
-                <p>Validate error message using <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions"><code>RegExp</code></a>:</p>
+                <p>用正则表达式 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions"><code>RegExp</code></a> 验证信息错误(Validate error message using RegExp)：</p>
                 <pre><code class="lang-js">assert.throws(
   () =&gt; {
     throw new Error(&#39;Wrong value&#39;);
@@ -470,7 +587,7 @@ assert.strictEqual(1, &#39;1&#39;);
   /value/
 );
 </code></pre>
-                <p>Custom error validation:</p>
+                <p>自定义错误校验(Custom error validation)：</p>
                 <pre><code class="lang-js">assert.throws(
   () =&gt; {
     throw new Error(&#39;Wrong value&#39;);
@@ -483,8 +600,14 @@ assert.strictEqual(1, &#39;1&#39;);
   &#39;unexpected error&#39;
 );
 </code></pre>
-                <p>Note that <code>error</code> can not be a string. If a string is provided as the second argument, then <code>error</code> is assumed to be omitted and the string will be used for
-                    <code>message</code> instead. This can lead to easy-to-miss mistakes:</p>
+                <p>注意： <code>error</code> 可能不是字符串 string。如果第二个参数提供的是字符串值，那么 <code>error</code> 就会被认为是缺省的，并且这个字符串值会被当作 <code>message</code>。这会导致易失误：</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Note that <code>error</code> can not be a string. If a string is provided as the second argument, then <code>error</code> is assumed to be omitted and the string will be used for
+                            <code>message</code> instead. This can lead to easy-to-miss mistakes:</p>
+                    </div>
+                </div>
                 <pre><code class="lang-js">// THIS IS A MISTAKE! DO NOT DO THIS!
 assert.throws(myFunction, &#39;missing foo&#39;, &#39;did not throw with expected message&#39;);
 
