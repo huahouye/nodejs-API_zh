@@ -693,7 +693,7 @@ Error: EISDIR: illegal operation on a directory, read
                 <p><code>options</code> 可以包含 <code>start</code> 和 <code>end</code> 值指定读取文件的字节范围而不是读整个文件。<code>start</code>
                     和 <code>end</code> 都是包含在范围内的（可理解为闭区间）且从 0 开始。<code>encoding</code> 可以是这些被 <a href="buffer.html#buffer_buffer"><code>Buffer</code></a> 接受的值中任何一个。</p>
                 <p>如果给定了 <code>fd</code>，<code>ReadStream</code> 将忽略 <code>path</code> 参数并使用这个给定的文件描述符。这意味着不会
-                    有 <code>&#39;open&#39;</code> 时间被触发。注意 <code>fd</code> 必须是阻塞的，非阻塞的 <code>fd</code> 必须传递给 <a href="net.html#net_class_net_socket"><code>net.Socket</code></a>。</p>
+                    有 <code>&#39;open&#39;</code> 事件被触发。注意 <code>fd</code> 必须是阻塞的，非阻塞的 <code>fd</code> 必须传递给 <a href="net.html#net_class_net_socket"><code>net.Socket</code></a>。</p>
                 <p>如果 <code>autoClose</code> 为 false，那么文件描述符见不会关闭，即使发生了错误也不会。关闭她并确保没有文件描述符泄漏时你的责任。
                     如果 <code>autoClose</code> 设置成 true (默认值)，在收到 <code>error</code> 或 <code>end</code> 时，文件描述符会自动关闭。
                 </p>
@@ -738,8 +738,15 @@ Error: EISDIR: illegal operation on a directory, read
                         </li>
                     </ul>
                 </div>
-                <p>Returns a new <a href="#fs_class_fs_writestream"><code>WriteStream</code></a> object. (See <a href="stream.html#stream_class_stream_writable">Writable Stream</a>).</p>
-                <p><code>options</code> is an object or string with the following defaults:</p>
+                <p>返回一个新的 <a href="#fs_class_fs_writestream"><code>WriteStream</code></a> 对象。(参考 <a href="stream.html#stream_class_stream_writable">Writable Stream</a>)。</p>
+                <p><code>options</code> 是一个对象或字符串，包含下列默认值：</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Returns a new <a href="#fs_class_fs_writestream"><code>WriteStream</code></a> object. (See <a href="stream.html#stream_class_stream_writable">Writable Stream</a>).</p>
+                        <p><code>options</code> is an object or string with the following defaults:</p>
+                    </div>
+                </div>
                 <pre><code class="lang-js">{
   flags: &#39;w&#39;,
   defaultEncoding: &#39;utf8&#39;,
@@ -748,39 +755,74 @@ Error: EISDIR: illegal operation on a directory, read
   autoClose: true
 }
 </code></pre>
-                <p><code>options</code> may also include a <code>start</code> option to allow writing data at some position past the beginning of the file. Modifying a file rather than replacing it may require a <code>flags</code> mode of <code>r+</code>                    rather than the default mode <code>w</code>. The <code>defaultEncoding</code> can be any one of those accepted by <a href="buffer.html#buffer_buffer"><code>Buffer</code></a>.</p>
-                <p>If <code>autoClose</code> is set to true (default behavior) on <code>error</code> or <code>end</code> the file descriptor will be closed automatically. If <code>autoClose</code> is false, then the file descriptor won&#39;t be closed, even
-                    if there&#39;s an error. It is your responsibility to close it and make sure there&#39;s no file descriptor leak.</p>
-                <p>Like <a href="#fs_class_fs_readstream"><code>ReadStream</code></a>, if <code>fd</code> is specified, <code>WriteStream</code> will ignore the
-                    <code>path</code> argument and will use the specified file descriptor. This means that no
-                    <code>&#39;open&#39;</code> event will be emitted. Note that <code>fd</code> should be blocking; non-blocking
-                    <code>fd</code>s should be passed to <a href="net.html#net_class_net_socket"><code>net.Socket</code></a>.</p>
-                <p>If <code>options</code> is a string, then it specifies the encoding.</p>
+                <p><code>options</code> 也可以包含一个 <code>start</code> 参数允许指定向文件写入数据的开始位置。修改文件而不是替换她需要
+                    一个模式为 <code>r+</code> 的 <code>flags</code> 而不是默认模式 <code>w</code>。<code>defaultEncoding</code> 可以
+                    是任一 <a href="buffer.html#buffer_buffer"><code>Buffer</code></a> 能接受的值。</p>
+                <p>如果 <code>autoClose</code> 设置为 true (缺省值) 当接收到 <code>error</code> 或 <code>end</code> 时，文件描述符将会自
+                    动关闭。如果 <code>autoClose</code> 是 false，那么，文件描述符不会自动关闭，即使是在发生错误时。关闭她并确保没有文件描述
+                    符泄漏时你的责任。</p>
+                <p>类似 <a href="#fs_class_fs_readstream"><code>ReadStream</code></a>，如果 <code>fd</code> 给定了值，<code>WriteStream</code>
+                    将忽略 <code>path</code> 参数并使用这个给定的文件描述符。 这意味着不会有 <code>&#39;open&#39;</code> 事件被触发。注意 <code>fd</code>
+                    必须是阻塞的，非阻塞的 <code>fd</code> 必须传递给 <a href="net.html#net_class_net_socket"><code>net.Socket</code></a>。</p>
+                <p>如果 <code>options</code> 是字符串，那么她指明的是字符编码。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p><code>options</code> may also include a <code>start</code> option to allow writing data at some position past the beginning of the file. Modifying a file rather than replacing it may require a <code>flags</code> mode of <code>r+</code>                    rather than the default mode <code>w</code>. The <code>defaultEncoding</code> can be any one of those accepted by <a href="buffer.html#buffer_buffer"><code>Buffer</code></a>.</p>
+                        <p>If <code>autoClose</code> is set to true (default behavior) on <code>error</code> or <code>end</code> the file descriptor will be closed automatically. If <code>autoClose</code> is false, then the file descriptor won&#39;t be closed, even
+                            if there&#39;s an error. It is your responsibility to close it and make sure there&#39;s no file descriptor leak.</p>
+                        <p>Like <a href="#fs_class_fs_readstream"><code>ReadStream</code></a>, if <code>fd</code> is specified, <code>WriteStream</code> will ignore the
+                            <code>path</code> argument and will use the specified file descriptor. This means that no
+                            <code>&#39;open&#39;</code> event will be emitted. Note that <code>fd</code> should be blocking; non-blocking
+                            <code>fd</code>s should be passed to <a href="net.html#net_class_net_socket"><code>net.Socket</code></a>.</p>
+                        <p>If <code>options</code> is a string, then it specifies the encoding.</p>
+                    </div>
+                </div>
                 <h2>fs.exists(path, callback)<span><a class="mark" href="#fs_fs_exists_path_callback" id="fs_fs_exists_path_callback">#</a></span></h2>
-                <pre class="api_stability api_stability_0">Stability: 0 - Deprecated: Use <a href="#fs_fs_stat_path_callback"><code>fs.stat()</code></a> or <a href="#fs_fs_access_path_mode_callback"><code>fs.access()</code></a> instead.</pre>
+                <pre class="api_stability api_stability_0">稳定性：0 - 已废弃：改用 <a href="#fs_fs_stat_path_callback"><code>fs.stat()</code></a> 或 <a href="#fs_fs_access_path_mode_callback"><code>fs.access()</code></a>。</pre>
                 <div class="signature">
                     <ul>
                         <li><code>path</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
                         <li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
                     </ul>
                 </div>
-                <p>Test whether or not the given path exists by checking with the file system. Then call the <code>callback</code> argument with either true or false. Example:</p>
+                <p>通过文件系统检测给定的路径文件是否存在。然后调用 <code>callback</code> 参数 true 或 false。示例：</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Test whether or not the given path exists by checking with the file system. Then call the <code>callback</code> argument with either true or false. Example:</p>
+                    </div>
+                </div>
                 <pre><code class="lang-js">fs.exists(&#39;/etc/passwd&#39;, (exists) =&gt; {
   console.log(exists ? &#39;it\&#39;s there&#39; : &#39;no passwd!&#39;);
 });
 </code></pre>
-                <p><code>fs.exists()</code> should not be used to check if a file exists before calling
-                    <code>fs.open()</code>. Doing so introduces a race condition since other processes may change the file&#39;s state between the two calls. Instead, user code should call <code>fs.open()</code> directly and handle the error raised if
-                    the file is non-existent.
+                <p>不要在调用 <code>fs.open()</code> 之前使用 <code>fs.exists()</code> 来检查文件是否存在，这样会做引入了竞争条件因为其他的进程
+                    可能就在两个调用之间改变了文件的状态。应该直接调用 <code>fs.open()</code> 并处理文件不存在引发的错误。
                 </p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p><code>fs.exists()</code> should not be used to check if a file exists before calling
+                            <code>fs.open()</code>. Doing so introduces a race condition since other processes may change the file&#39;s state between the two calls. Instead, user code should call <code>fs.open()</code> directly and handle the error raised if
+                            the file is non-existent.
+                        </p>
+                    </div>
+                </div>
                 <h2>fs.existsSync(path)<span><a class="mark" href="#fs_fs_existssync_path" id="fs_fs_existssync_path">#</a></span></h2>
-                <pre class="api_stability api_stability_0">Stability: 0 - Deprecated: Use <a href="#fs_fs_statsync_path"><code>fs.statSync()</code></a> or <a href="#fs_fs_accesssync_path_mode"><code>fs.accessSync()</code></a> instead.</pre>
+                <pre class="api_stability api_stability_0">稳定性：0 - 已废弃：改用 <a href="#fs_fs_statsync_path"><code>fs.statSync()</code></a> 或 <a href="#fs_fs_accesssync_path_mode"><code>fs.accessSync()</code></a>。</pre>
                 <div class="signature">
                     <ul>
                         <li><code>path</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
                     </ul>
                 </div>
-                <p>Synchronous version of <a href="fs.html#fs_fs_exists_path_callback"><code>fs.exists()</code></a>. Returns <code>true</code> if the file exists, <code>false</code> otherwise.</p>
+                <p><a href="fs.html#fs_fs_exists_path_callback"><code>fs.exists()</code></a> 的同步版本。如果文件存在返回 <code>true</code>，否则 <code>false</code>。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Synchronous version of <a href="fs.html#fs_fs_exists_path_callback"><code>fs.exists()</code></a>. Returns <code>true</code> if the file exists, <code>false</code> otherwise.</p>
+                    </div>
+                </div>
                 <h2>fs.fchmod(fd, mode, callback)<span><a class="mark" href="#fs_fs_fchmod_fd_mode_callback" id="fs_fs_fchmod_fd_mode_callback">#</a></span></h2>
                 <div class="signature">
                     <ul>
@@ -789,7 +831,13 @@ Error: EISDIR: illegal operation on a directory, read
                         <li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
                     </ul>
                 </div>
-                <p>Asynchronous <a href="http://man7.org/linux/man-pages/man2/fchmod.2.html">fchmod(2)</a>. No arguments other than a possible exception are given to the completion callback.</p>
+                <p>异步的 <a href="http://man7.org/linux/man-pages/man2/fchmod.2.html">fchmod(2)</a>。除了那个可能有值的异常外没有其他参数传递给她的完成回调。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Asynchronous <a href="http://man7.org/linux/man-pages/man2/fchmod.2.html">fchmod(2)</a>. No arguments other than a possible exception are given to the completion callback.</p>
+                    </div>
+                </div>
                 <h2>fs.fchmodSync(fd, mode)<span><a class="mark" href="#fs_fs_fchmodsync_fd_mode" id="fs_fs_fchmodsync_fd_mode">#</a></span></h2>
                 <div class="signature">
                     <ul>
@@ -797,7 +845,13 @@ Error: EISDIR: illegal operation on a directory, read
                         <li><code>mode</code> <span class="type">&lt;Integer&gt;</span></li>
                     </ul>
                 </div>
-                <p>Synchronous <a href="http://man7.org/linux/man-pages/man2/fchmod.2.html">fchmod(2)</a>. Returns <code>undefined</code>.</p>
+                <p>同步的 <a href="http://man7.org/linux/man-pages/man2/fchmod.2.html">fchmod(2)</a>。返回 <code>undefined</code>。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Synchronous <a href="http://man7.org/linux/man-pages/man2/fchmod.2.html">fchmod(2)</a>. Returns <code>undefined</code>.</p>
+                    </div>
+                </div>
                 <h2>fs.fchown(fd, uid, gid, callback)<span><a class="mark" href="#fs_fs_fchown_fd_uid_gid_callback" id="fs_fs_fchown_fd_uid_gid_callback">#</a></span></h2>
                 <div class="signature">
                     <ul>
@@ -807,7 +861,13 @@ Error: EISDIR: illegal operation on a directory, read
                         <li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
                     </ul>
                 </div>
-                <p>Asynchronous <a href="http://man7.org/linux/man-pages/man2/fchown.2.html">fchown(2)</a>. No arguments other than a possible exception are given to the completion callback.</p>
+                <p>异步的 <a href="http://man7.org/linux/man-pages/man2/fchown.2.html">fchown(2)</a>。除了那个可能有值的异常外没有其他参数传递给她的完成回调。</p>
+                <div class="hhy-original-div">
+                	<button class="hhy-toggle-btn">原文</button>
+                	<div class="hhy-original-text">
+                        <p>Asynchronous <a href="http://man7.org/linux/man-pages/man2/fchown.2.html">fchown(2)</a>. No arguments other than a possible exception are given to the completion callback.</p>
+                	</div>
+                </div>
                 <h2>fs.fchownSync(fd, uid, gid)<span><a class="mark" href="#fs_fs_fchownsync_fd_uid_gid" id="fs_fs_fchownsync_fd_uid_gid">#</a></span></h2>
                 <div class="signature">
                     <ul>
@@ -816,7 +876,13 @@ Error: EISDIR: illegal operation on a directory, read
                         <li><code>gid</code> <span class="type">&lt;Integer&gt;</span></li>
                     </ul>
                 </div>
-                <p>Synchronous <a href="http://man7.org/linux/man-pages/man2/fchown.2.html">fchown(2)</a>. Returns <code>undefined</code>.</p>
+                <p>同步的 <a href="http://man7.org/linux/man-pages/man2/fchown.2.html">fchown(2)</a>。返回 <code>undefined</code>。</p>
+                <div class="hhy-original-div">
+    				<button class="hhy-toggle-btn">原文</button>
+    				<div class="hhy-original-text">
+    					<p>Synchronous <a href="http://man7.org/linux/man-pages/man2/fchown.2.html">fchown(2)</a>. Returns <code>undefined</code>.</p>
+    				</div>
+    			</div>
                 <h2>fs.fdatasync(fd, callback)<span><a class="mark" href="#fs_fs_fdatasync_fd_callback" id="fs_fs_fdatasync_fd_callback">#</a></span></h2>
                 <div class="signature">
                     <ul>
@@ -824,14 +890,26 @@ Error: EISDIR: illegal operation on a directory, read
                         <li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
                     </ul>
                 </div>
-                <p>Asynchronous <a href="http://man7.org/linux/man-pages/man2/fdatasync.2.html">fdatasync(2)</a>. No arguments other than a possible exception are given to the completion callback.</p>
+                <p>异步的 <a href="http://man7.org/linux/man-pages/man2/fdatasync.2.html">fdatasync(2)</a>。除了那个可能有值的异常外没有其他参数传递给她的完成回调。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Asynchronous <a href="http://man7.org/linux/man-pages/man2/fdatasync.2.html">fdatasync(2)</a>. No arguments other than a possible exception are given to the completion callback.</p>
+                    </div>
+                </div>
                 <h2>fs.fdatasyncSync(fd)<span><a class="mark" href="#fs_fs_fdatasyncsync_fd" id="fs_fs_fdatasyncsync_fd">#</a></span></h2>
                 <div class="signature">
                     <ul>
                         <li><code>fd</code> <span class="type">&lt;Integer&gt;</span></li>
                     </ul>
                 </div>
-                <p>Synchronous <a href="http://man7.org/linux/man-pages/man2/fdatasync.2.html">fdatasync(2)</a>. Returns <code>undefined</code>.</p>
+                <p>同步的 <a href="http://man7.org/linux/man-pages/man2/fdatasync.2.html">fdatasync(2)</a>。返回 <code>undefined</code>。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Synchronous <a href="http://man7.org/linux/man-pages/man2/fdatasync.2.html">fdatasync(2)</a>. Returns <code>undefined</code>.</p>
+                    </div>
+                </div>
                 <h2>fs.fstat(fd, callback)<span><a class="mark" href="#fs_fs_fstat_fd_callback" id="fs_fs_fstat_fd_callback">#</a></span></h2>
                 <div class="signature">
                     <ul>
@@ -839,16 +917,30 @@ Error: EISDIR: illegal operation on a directory, read
                         <li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
                     </ul>
                 </div>
-                <p>Asynchronous <a href="http://man7.org/linux/man-pages/man2/fstat.2.html">fstat(2)</a>. The callback gets two arguments <code>(err, stats)</code> where
-                    <code>stats</code> is a <a href="#fs_class_fs_stats"><code>fs.Stats</code></a> object. <code>fstat()</code> is identical to <a href="fs.html#fs_fs_stat_path_callback"><code>stat()</code></a>, except that the file to be stat-ed is specified
-                    by the file descriptor <code>fd</code>.</p>
+                <p>异步的 <a href="http://man7.org/linux/man-pages/man2/fstat.2.html">fstat(2)</a>。回调接受两个参数 <code>(err, stats)</code> 其中
+                    <code>stats</code> 是一个 <a href="#fs_class_fs_stats"><code>fs.Stats</code></a> 对象。除了<code>fd</code> 指定哪个文件外，
+                    <code>fstat()</code> 和 <a href="fs.html#fs_fs_stat_path_callback"><code>stat()</code></a> 相同。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Asynchronous <a href="http://man7.org/linux/man-pages/man2/fstat.2.html">fstat(2)</a>. The callback gets two arguments <code>(err, stats)</code> where
+                            <code>stats</code> is a <a href="#fs_class_fs_stats"><code>fs.Stats</code></a> object. <code>fstat()</code> is identical to <a href="fs.html#fs_fs_stat_path_callback"><code>stat()</code></a>, except that the file to be stat-ed is specified
+                            by the file descriptor <code>fd</code>.</p>
+                    </div>
+                </div>
                 <h2>fs.fstatSync(fd)<span><a class="mark" href="#fs_fs_fstatsync_fd" id="fs_fs_fstatsync_fd">#</a></span></h2>
                 <div class="signature">
                     <ul>
                         <li><code>fd</code> <span class="type">&lt;Integer&gt;</span></li>
                     </ul>
                 </div>
-                <p>Synchronous <a href="http://man7.org/linux/man-pages/man2/fstat.2.html">fstat(2)</a>. Returns an instance of <code>fs.Stats</code>.</p>
+                <p>同步的 <a href="http://man7.org/linux/man-pages/man2/fstat.2.html">fstat(2)</a>。返回一个 <code>fs.Stats</code> 实例。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Synchronous <a href="http://man7.org/linux/man-pages/man2/fstat.2.html">fstat(2)</a>. Returns an instance of <code>fs.Stats</code>.</p>
+                    </div>
+                </div>
                 <h2>fs.fsync(fd, callback)<span><a class="mark" href="#fs_fs_fsync_fd_callback" id="fs_fs_fsync_fd_callback">#</a></span></h2>
                 <div class="signature">
                     <ul>
@@ -856,14 +948,26 @@ Error: EISDIR: illegal operation on a directory, read
                         <li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
                     </ul>
                 </div>
-                <p>Asynchronous <a href="http://man7.org/linux/man-pages/man2/fsync.2.html">fsync(2)</a>. No arguments other than a possible exception are given to the completion callback.</p>
+                <p>异步的 <a href="http://man7.org/linux/man-pages/man2/fsync.2.html">fsync(2)</a>。除了那个可能有值的异常外没有其他参数传递给她的完成回调。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Asynchronous <a href="http://man7.org/linux/man-pages/man2/fsync.2.html">fsync(2)</a>. No arguments other than a possible exception are given to the completion callback.</p>
+                    </div>
+                </div>
                 <h2>fs.fsyncSync(fd)<span><a class="mark" href="#fs_fs_fsyncsync_fd" id="fs_fs_fsyncsync_fd">#</a></span></h2>
                 <div class="signature">
                     <ul>
                         <li><code>fd</code> <span class="type">&lt;Integer&gt;</span></li>
                     </ul>
                 </div>
-                <p>Synchronous <a href="http://man7.org/linux/man-pages/man2/fsync.2.html">fsync(2)</a>. Returns <code>undefined</code>.</p>
+                <p>同步的 <a href="http://man7.org/linux/man-pages/man2/fsync.2.html">fsync(2)</a>。返回 <code>undefined</code>。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Synchronous <a href="http://man7.org/linux/man-pages/man2/fsync.2.html">fsync(2)</a>. Returns <code>undefined</code>.</p>
+                    </div>
+                </div>
                 <h2>fs.ftruncate(fd, len, callback)<span><a class="mark" href="#fs_fs_ftruncate_fd_len_callback" id="fs_fs_ftruncate_fd_len_callback">#</a></span></h2>
                 <div class="signature">
                     <ul>
@@ -872,7 +976,13 @@ Error: EISDIR: illegal operation on a directory, read
                         <li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
                     </ul>
                 </div>
-                <p>Asynchronous <a href="http://man7.org/linux/man-pages/man2/ftruncate.2.html">ftruncate(2)</a>. No arguments other than a possible exception are given to the completion callback.</p>
+                <p>异步的 <a href="http://man7.org/linux/man-pages/man2/ftruncate.2.html">ftruncate(2)</a>。除了那个可能有值的异常外没有其他参数传递给她的完成回调。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Asynchronous <a href="http://man7.org/linux/man-pages/man2/ftruncate.2.html">ftruncate(2)</a>. No arguments other than a possible exception are given to the completion callback.</p>
+                    </div>
+                </div>
                 <h2>fs.ftruncateSync(fd, len)<span><a class="mark" href="#fs_fs_ftruncatesync_fd_len" id="fs_fs_ftruncatesync_fd_len">#</a></span></h2>
                 <div class="signature">
                     <ul>
@@ -880,7 +990,13 @@ Error: EISDIR: illegal operation on a directory, read
                         <li><code>len</code> <span class="type">&lt;Integer&gt;</span></li>
                     </ul>
                 </div>
-                <p>Synchronous <a href="http://man7.org/linux/man-pages/man2/ftruncate.2.html">ftruncate(2)</a>. Returns <code>undefined</code>.</p>
+                <p>同步的 <a href="http://man7.org/linux/man-pages/man2/ftruncate.2.html">ftruncate(2)</a>。返回 <code>undefined</code>。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Synchronous <a href="http://man7.org/linux/man-pages/man2/ftruncate.2.html">ftruncate(2)</a>. Returns <code>undefined</code>.</p>
+                    </div>
+                </div>
                 <h2>fs.futimes(fd, atime, mtime, callback)<span><a class="mark" href="#fs_fs_futimes_fd_atime_mtime_callback" id="fs_fs_futimes_fd_atime_mtime_callback">#</a></span></h2>
                 <div class="signature">
                     <ul>
