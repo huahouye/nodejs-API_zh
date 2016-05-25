@@ -918,7 +918,7 @@ Error: EISDIR: illegal operation on a directory, read
                     </ul>
                 </div>
                 <p>异步的 <a href="http://man7.org/linux/man-pages/man2/fstat.2.html">fstat(2)</a>。回调接受两个参数 <code>(err, stats)</code> 其中
-                    <code>stats</code> 是一个 <a href="#fs_class_fs_stats"><code>fs.Stats</code></a> 对象。除了<code>fd</code> 指定哪个文件外，
+                    <code>stats</code> 是一个 <a href="#fs_class_fs_stats"><code>fs.Stats</code></a> 对象。除了<code>fd</code> 指定哪个读取（stat-ed 可理解为“被用于获取 stat”）文件外，
                     <code>fstat()</code> 和 <a href="fs.html#fs_fs_stat_path_callback"><code>stat()</code></a> 相同。</p>
                 <div class="hhy-original-div">
                     <button class="hhy-toggle-btn">原文</button>
@@ -1006,8 +1006,13 @@ Error: EISDIR: illegal operation on a directory, read
                         <li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
                     </ul>
                 </div>
-                <p>Change the file timestamps of a file referenced by the supplied file descriptor.
-                </p>
+                <p>修改文件描述符引用的文件的文件时间戳。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Change the file timestamps of a file referenced by the supplied file descriptor.</p>
+                    </div>
+                </div>
                 <h2>fs.futimesSync(fd, atime, mtime)<span><a class="mark" href="#fs_fs_futimessync_fd_atime_mtime" id="fs_fs_futimessync_fd_atime_mtime">#</a></span></h2>
                 <div class="signature">
                     <ul>
@@ -1016,7 +1021,13 @@ Error: EISDIR: illegal operation on a directory, read
                         <li><code>mtime</code> <span class="type">&lt;Integer&gt;</span></li>
                     </ul>
                 </div>
-                <p>Synchronous version of <a href="#fs_fs_futimes_fd_atime_mtime_callback"><code>fs.futimes()</code></a>. Returns <code>undefined</code>.</p>
+                <p><a href="#fs_fs_futimes_fd_atime_mtime_callback"><code>fs.futimes()</code></a> 的同步版本。返回 <code>undefined</code>。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Synchronous version of <a href="#fs_fs_futimes_fd_atime_mtime_callback"><code>fs.futimes()</code></a>. Returns <code>undefined</code>.</p>
+                    </div>
+                </div>
                 <h2>fs.lchmod(path, mode, callback)<span><a class="mark" href="#fs_fs_lchmod_path_mode_callback" id="fs_fs_lchmod_path_mode_callback">#</a></span></h2>
                 <div class="signature">
                     <ul>
@@ -1025,8 +1036,15 @@ Error: EISDIR: illegal operation on a directory, read
                         <li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
                     </ul>
                 </div>
-                <p>Asynchronous <a href="https://www.freebsd.org/cgi/man.cgi?query=lchmod&sektion=2">lchmod(2)</a>. No arguments other than a possible exception are given to the completion callback.</p>
-                <p>Only available on Mac OS X.</p>
+                <p>异步的 <a href="https://www.freebsd.org/cgi/man.cgi?query=lchmod&sektion=2">lchmod(2)</a>。除了那个可能有值的异常外没有其他参数传递给她的完成回调。</p>
+                <p>只有在 Mac OS X 上可用。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Asynchronous <a href="https://www.freebsd.org/cgi/man.cgi?query=lchmod&sektion=2">lchmod(2)</a>. No arguments other than a possible exception are given to the completion callback.</p>
+                        <p>Only available on Mac OS X.</p>
+                    </div>
+                </div>
                 <h2>fs.lchmodSync(path, mode)<span><a class="mark" href="#fs_fs_lchmodsync_path_mode" id="fs_fs_lchmodsync_path_mode">#</a></span></h2>
                 <div class="signature">
                     <ul>
@@ -1034,7 +1052,13 @@ Error: EISDIR: illegal operation on a directory, read
                         <li><code>mode</code> <span class="type">&lt;Integer&gt;</span></li>
                     </ul>
                 </div>
-                <p>Synchronous <a href="https://www.freebsd.org/cgi/man.cgi?query=lchmod&sektion=2">lchmod(2)</a>. Returns <code>undefined</code>.</p>
+                <p>同步的 <a href="https://www.freebsd.org/cgi/man.cgi?query=lchmod&sektion=2">lchmod(2)</a>。返回 <code>undefined</code>。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Synchronous <a href="https://www.freebsd.org/cgi/man.cgi?query=lchmod&sektion=2">lchmod(2)</a>. Returns <code>undefined</code>.</p>
+                    </div>
+                </div>
                 <h2>fs.lchown(path, uid, gid, callback)<span><a class="mark" href="#fs_fs_lchown_path_uid_gid_callback" id="fs_fs_lchown_path_uid_gid_callback">#</a></span></h2>
                 <div class="signature">
                     <ul>
@@ -1044,7 +1068,13 @@ Error: EISDIR: illegal operation on a directory, read
                         <li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
                     </ul>
                 </div>
-                <p>Asynchronous <a href="http://man7.org/linux/man-pages/man2/lchown.2.html">lchown(2)</a>. No arguments other than a possible exception are given to the completion callback.</p>
+                <p>异步的 <a href="http://man7.org/linux/man-pages/man2/lchown.2.html">lchown(2)</a>。除了那个可能有值的异常外没有其他参数传递给她的完成回调。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Asynchronous <a href="http://man7.org/linux/man-pages/man2/lchown.2.html">lchown(2)</a>. No arguments other than a possible exception are given to the completion callback.</p>
+                    </div>
+                </div>
                 <h2>fs.lchownSync(path, uid, gid)<span><a class="mark" href="#fs_fs_lchownsync_path_uid_gid" id="fs_fs_lchownsync_path_uid_gid">#</a></span></h2>
                 <div class="signature">
                     <ul>
@@ -1053,7 +1083,13 @@ Error: EISDIR: illegal operation on a directory, read
                         <li><code>gid</code> <span class="type">&lt;Integer&gt;</span></li>
                     </ul>
                 </div>
-                <p>Synchronous <a href="http://man7.org/linux/man-pages/man2/lchown.2.html">lchown(2)</a>. Returns <code>undefined</code>.</p>
+                <p>异步的 <a href="http://man7.org/linux/man-pages/man2/lchown.2.html">lchown(2)</a>。返回 <code>undefined</code>。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Synchronous <a href="http://man7.org/linux/man-pages/man2/lchown.2.html">lchown(2)</a>. Returns <code>undefined</code>.</p>
+                    </div>
+                </div>
                 <h2>fs.link(srcpath, dstpath, callback)<span><a class="mark" href="#fs_fs_link_srcpath_dstpath_callback" id="fs_fs_link_srcpath_dstpath_callback">#</a></span></h2>
                 <div class="signature">
                     <ul>
@@ -1062,7 +1098,13 @@ Error: EISDIR: illegal operation on a directory, read
                         <li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
                     </ul>
                 </div>
-                <p>Asynchronous <a href="http://man7.org/linux/man-pages/man2/link.2.html">link(2)</a>. No arguments other than a possible exception are given to the completion callback.</p>
+                <p>异步的 <a href="http://man7.org/linux/man-pages/man2/link.2.html">link(2)</a>。除了那个可能有值的异常外没有其他参数传递给她的完成回调。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Asynchronous <a href="http://man7.org/linux/man-pages/man2/link.2.html">link(2)</a>. No arguments other than a possible exception are given to the completion callback.</p>
+                    </div>
+                </div>
                 <h2>fs.linkSync(srcpath, dstpath)<span><a class="mark" href="#fs_fs_linksync_srcpath_dstpath" id="fs_fs_linksync_srcpath_dstpath">#</a></span></h2>
                 <div class="signature">
                     <ul>
@@ -1070,7 +1112,13 @@ Error: EISDIR: illegal operation on a directory, read
                         <li><code>dstpath</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
                     </ul>
                 </div>
-                <p>Synchronous <a href="http://man7.org/linux/man-pages/man2/link.2.html">link(2)</a>. Returns <code>undefined</code>.</p>
+                <p>同步的 <a href="http://man7.org/linux/man-pages/man2/link.2.html">link(2)</a>。返回 <code>undefined</code>。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Synchronous <a href="http://man7.org/linux/man-pages/man2/link.2.html">link(2)</a>. Returns <code>undefined</code>.</p>
+                    </div>
+                </div>
                 <h2>fs.lstat(path, callback)<span><a class="mark" href="#fs_fs_lstat_path_callback" id="fs_fs_lstat_path_callback">#</a></span></h2>
                 <div class="signature">
                     <ul>
@@ -1078,16 +1126,31 @@ Error: EISDIR: illegal operation on a directory, read
                         <li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
                     </ul>
                 </div>
-                <p>Asynchronous <a href="http://man7.org/linux/man-pages/man2/lstat.2.html">lstat(2)</a>. The callback gets two arguments <code>(err, stats)</code> where
-                    <code>stats</code> is a <a href="#fs_class_fs_stats"><code>fs.Stats</code></a> object. <code>lstat()</code> is identical to <code>stat()</code>, except that if <code>path</code> is a symbolic link, then the link itself is stat-ed,
-                    not the file that it refers to.</p>
+                <p>异步的 <a href="http://man7.org/linux/man-pages/man2/lstat.2.html">lstat(2)</a>。回调接受两个参数 <code>(err, stats)</code> 其中 <code>stats</code>
+                    是一个 <a href="#fs_class_fs_stats"><code>fs.Stats</code></a> 对象。除了如果 <code>path</code> 是一个符号链接，那么
+                    被读取（stat-ed 可理解为“被用于获取 stat”）是链接本身而不是她指向的文件外，<code>lstat()</code> 和 <code>stat()</code> 相同。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Asynchronous <a href="http://man7.org/linux/man-pages/man2/lstat.2.html">lstat(2)</a>. The callback gets two arguments <code>(err, stats)</code> where
+                            <code>stats</code> is a <a href="#fs_class_fs_stats"><code>fs.Stats</code></a> object. <code>lstat()</code> is identical
+                            to <code>stat()</code>, except that if <code>path</code> is a symbolic link, then the link itself is stat-ed,
+                            not the file that it refers to.</p>
+                    </div>
+                </div>
                 <h2>fs.lstatSync(path)<span><a class="mark" href="#fs_fs_lstatsync_path" id="fs_fs_lstatsync_path">#</a></span></h2>
                 <div class="signature">
                     <ul>
                         <li><code>path</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
                     </ul>
                 </div>
-                <p>Synchronous <a href="http://man7.org/linux/man-pages/man2/lstat.2.html">lstat(2)</a>. Returns an instance of <code>fs.Stats</code>.</p>
+                <p>同步的 <a href="http://man7.org/linux/man-pages/man2/lstat.2.html">lstat(2)</a>。返回一个 <code>fs.Stats</code> 实例。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Synchronous <a href="http://man7.org/linux/man-pages/man2/lstat.2.html">lstat(2)</a>. Returns an instance of <code>fs.Stats</code>.</p>
+                    </div>
+                </div>
                 <h2>fs.mkdir(path[, mode], callback)<span><a class="mark" href="#fs_fs_mkdir_path_mode_callback" id="fs_fs_mkdir_path_mode_callback">#</a></span></h2>
                 <div class="signature">
                     <ul>
@@ -1096,7 +1159,13 @@ Error: EISDIR: illegal operation on a directory, read
                         <li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
                     </ul>
                 </div>
-                <p>Asynchronous <a href="http://man7.org/linux/man-pages/man2/mkdir.2.html">mkdir(2)</a>. No arguments other than a possible exception are given to the completion callback. <code>mode</code> defaults to <code>0o777</code>.</p>
+                <p>异步的 <a href="http://man7.org/linux/man-pages/man2/mkdir.2.html">mkdir(2)</a>。除了那个可能有值的异常外没有其他参数传递给她的完成回调。<code>mode</code> 默认为 <code>0o777</code>.</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Asynchronous <a href="http://man7.org/linux/man-pages/man2/mkdir.2.html">mkdir(2)</a>. No arguments other than a possible exception are given to the completion callback. <code>mode</code> defaults to <code>0o777</code>.</p>
+                    </div>
+                </div>
                 <h2>fs.mkdirSync(path[, mode])<span><a class="mark" href="#fs_fs_mkdirsync_path_mode" id="fs_fs_mkdirsync_path_mode">#</a></span></h2>
                 <div class="signature">
                     <ul>
@@ -1104,21 +1173,41 @@ Error: EISDIR: illegal operation on a directory, read
                         <li><code>mode</code> <span class="type">&lt;Integer&gt;</span></li>
                     </ul>
                 </div>
-                <p>Synchronous <a href="http://man7.org/linux/man-pages/man2/mkdir.2.html">mkdir(2)</a>. Returns <code>undefined</code>.</p>
+                <p>同步的 <a href="http://man7.org/linux/man-pages/man2/mkdir.2.html">mkdir(2)</a>。返回 <code>undefined</code>。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Synchronous <a href="http://man7.org/linux/man-pages/man2/mkdir.2.html">mkdir(2)</a>. Returns <code>undefined</code>.</p>
+                    </div>
+                </div>
                 <h2>fs.mkdtemp(prefix, callback)<span><a class="mark" href="#fs_fs_mkdtemp_prefix_callback" id="fs_fs_mkdtemp_prefix_callback">#</a></span></h2>
-                <p>Creates a unique temporary directory.</p>
-                <p>Generates six random characters to be appended behind a required
-                    <code>prefix</code> to create a unique temporary directory.</p>
-                <p>The created folder path is passed as a string to the callback&#39;s second parameter.
-                </p>
-                <p>Example:</p>
+                <p>创建一个唯一的临时目录。</p>
+                <p>生成六个随机字符追加到必填参数 <code>prefix</code> 后面来创建一个唯一的临时目录。</p>
+                <p>所创建的目录路径字符串会被传递给回调的第二个参数。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Creates a unique temporary directory.</p>
+                        <p>Generates six random characters to be appended behind a required
+                            <code>prefix</code> to create a unique temporary directory.</p>
+                        <p>The created folder path is passed as a string to the callback&#39;s second parameter.
+                        </p>
+                    </div>
+                </div>
+                <p>示例(Example)：</p>
                 <pre><code class="lang-js">fs.mkdtemp(&#39;/tmp/foo-&#39;, (err, folder) =&gt; {
   console.log(folder);
     // Prints: /tmp/foo-itXde2
 });
 </code></pre>
                 <h2>fs.mkdtempSync(template)<span><a class="mark" href="#fs_fs_mkdtempsync_template" id="fs_fs_mkdtempsync_template">#</a></span></h2>
-                <p>The synchronous version of [<code>fs.mkdtemp()</code>][]. Returns the created folder path.</p>
+                <p>[<code>fs.mkdtemp()</code>][] 的同步版本，返回创建的目录路径。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>The synchronous version of [<code>fs.mkdtemp()</code>][]. Returns the created folder path.</p>
+                    </div>
+                </div>
                 <h2>fs.open(path, flags[, mode], callback)<span><a class="mark" href="#fs_fs_open_path_flags_mode_callback" id="fs_fs_open_path_flags_mode_callback">#</a></span></h2>
                 <div class="signature">
                     <ul>
@@ -1129,56 +1218,113 @@ Error: EISDIR: illegal operation on a directory, read
                         <li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
                     </ul>
                 </div>
-                <p>Asynchronous file open. See <a href="http://man7.org/linux/man-pages/man2/open.2.html">open(2)</a>. <code>flags</code> can be:</p>
+                <p>异步的打开文件方法。见 <a href="http://man7.org/linux/man-pages/man2/open.2.html">open(2)</a>。<code>flags</code> 可以是：</p>
                 <ul>
                     <li>
-                        <p><code>&#39;r&#39;</code> - Open file for reading. An exception occurs if the file does not exist.</p>
+                        <p><code>&#39;r&#39;</code> - 以读方式打开文件，如果文件不存在触发一个异常。</p>
                     </li>
                     <li>
-                        <p><code>&#39;r+&#39;</code> - Open file for reading and writing. An exception occurs if the file does not exist.</p>
+                        <p><code>&#39;r+&#39;</code> - 以读写方式打开文件，如果文件不存在触发一个异常。</p>
                     </li>
                     <li>
-                        <p><code>&#39;rs+&#39;</code> - Open file for reading and writing in synchronous mode. Instructs the operating system to bypass the local file system cache.</p>
-                        <p>This is primarily useful for opening files on NFS mounts as it allows you to skip the potentially stale local cache. It has a very real impact on I/O performance so don&#39;t use this flag unless you need it.</p>
-                        <p>Note that this doesn&#39;t turn <code>fs.open()</code> into a synchronous blocking call. If that&#39;s what you want then you should be using <code>fs.openSync()</code></p>
+                        <p><code>&#39;rs+&#39;</code> - 同步模式，以读写方式打开文件，指令命令操作系统绕过本地文件系统缓存。这主要是用于打开 NFS 挂载的文件,
+                            因为她允许你跳过使用可能存在的陈旧的本地缓存。这非常影响 I/O 操作性能，因此除非不得已，否则不要使用她。注意: 这并不把 <code>fs.open()</code> 变
+                            成了一个同步阻塞调用。如果你想要一个同步阻塞的调用，你应该使用 <code>fs.openSync()</code></p>
                     </li>
                     <li>
-                        <p><code>&#39;w&#39;</code> - Open file for writing. The file is created (if it does not exist) or truncated (if it exists).</p>
+                        <p><code>&#39;w&#39;</code> - 以写方式打开文件，文件被创建(如果不存在)或清空(如果存在)。</p>
                     </li>
                     <li>
-                        <p><code>&#39;wx&#39;</code> - Like <code>&#39;w&#39;</code> but fails if <code>path</code> exists.</p>
+                        <p><code>&#39;wx&#39;</code> - 像 <code>&#39;w&#39;</code> 但如果 <code>path</code> 存在则失败。</p>
                     </li>
                     <li>
-                        <p><code>&#39;w+&#39;</code> - Open file for reading and writing. The file is created (if it does not exist) or truncated (if it exists).</p>
+                        <p><code>&#39;w+&#39;</code> - 以读写方式打开文件，文件被创建(如果不存在)或清空(如果存在)。</p>
                     </li>
                     <li>
-                        <p><code>&#39;wx+&#39;</code> - Like <code>&#39;w+&#39;</code> but fails if <code>path</code> exists.</p>
+                        <p><code>&#39;wx+&#39;</code> - 像 <code>&#39;w+&#39;</code> 但如果 <code>path</code> 存在则失败。</p>
                     </li>
                     <li>
-                        <p><code>&#39;a&#39;</code> - Open file for appending. The file is created if it does not exist.</p>
+                        <p><code>&#39;a&#39;</code> - 以追加方式打开文件，如果文件不存在则创建。</p>
                     </li>
                     <li>
-                        <p><code>&#39;ax&#39;</code> - Like <code>&#39;a&#39;</code> but fails if <code>path</code> exists.</p>
+                        <p><code>&#39;ax&#39;</code> - 像 <code>&#39;a&#39;</code> 但如果 <code>path</code> 存在则失败。</p>
                     </li>
                     <li>
-                        <p><code>&#39;a+&#39;</code> - Open file for reading and appending. The file is created if it does not exist.</p>
+                        <p><code>&#39;a+&#39;</code> - 以读和追加方式打开文件，如果文件不存在则创建。</p>
                     </li>
                     <li>
-                        <p><code>&#39;ax+&#39;</code> - Like <code>&#39;a+&#39;</code> but fails if <code>path</code> exists.</p>
+                        <p><code>&#39;ax+&#39;</code> - 像 <code>&#39;a+&#39;</code> 但如果 <code>path</code> 存在则失败。</p>
                     </li>
                 </ul>
-                <p><code>mode</code> sets the file mode (permission and sticky bits), but only if the file was created. It defaults to <code>0666</code>, readable and writable.</p>
-                <p>The callback gets two arguments <code>(err, fd)</code>.</p>
-                <p>The exclusive flag <code>&#39;x&#39;</code> (<code>O_EXCL</code> flag in <a href="http://man7.org/linux/man-pages/man2/open.2.html">open(2)</a>) ensures that <code>path</code> is newly created. On POSIX systems, <code>path</code> is considered
+                <p><code>mode</code> 设置文件模式(权限和 sticky 位)，但只有在文件被创建才有用。默认为 <code>0666</code>，可读写。</p>
+                <p>回调接受两个参数 <code>(err, fd)</code>。</p>
+                <p><code>&#39;x&#39;</code> (<a href="http://man7.org/linux/man-pages/man2/open.2.html">open(2)</a> 对应的 <code>O_EXCL</code>) 这个排他标识，
+                    确保 <code>path</code> 是新创建的（译者：因为文件存在是失败）。在 POSIX 系统上，即使 <code>path</code> 是一个指向一个不存在的文件的符号链接，也会
+                    被认为指向的文件是存在的。这个排他标识在网络文件系统可能有效也可能无效。
                     to exist even if it is a symlink to a non-existent file. The exclusive flag may or may not work with network file systems.
                 </p>
-                <p><code>flags</code> can also be a number as documented by <a href="http://man7.org/linux/man-pages/man2/open.2.html">open(2)</a>; commonly used constants are available from <code>require(&#39;constants&#39;)</code>. On Windows, flags are
-                    translated to their equivalent ones where applicable, e.g. <code>O_WRONLY</code> to <code>FILE_GENERIC_WRITE</code>, or <code>O_EXCL|O_CREAT</code> to <code>CREATE_NEW</code>, as accepted by CreateFileW.</p>
-                <p>On Linux, positional writes don&#39;t work when the file is opened in append mode. The kernel ignores the position argument and always appends the data to the end of the file.</p>
-                <p><em>Note: The behavior of <code>fs.open()</code> is platform specific for some flags. As such,
-opening a directory on OS X and Linux with the <code>&#39;a+&#39;</code> flag - see example below -
-will return an error. In contrast, on Windows and FreeBSD, a file descriptor
-will be returned.</em></p>
+                <p><code>flags</code> 可以是一个 <a href="http://man7.org/linux/man-pages/man2/open.2.html">open(2)</a> 归档的数字；
+                    通常下 <code>require(&#39;constants&#39;)</code> 可以使用到这些常量。在 Windows 上标识会转换成 CreateFileW 可接受的对等的标识，比如：
+                    <code>O_WRONLY</code> 转成 <code>FILE_GENERIC_WRITE</code>，或者 <code>O_EXCL|O_CREAT</code> 转成 <code>CREATE_NEW</code>，
+                      as accepted by CreateFileW.</p>
+                <p>在 Linux 上，无法对以追加 (append) 模式打开的文件进行指定位置的写入操作。 内核会忽略位置参数并且总是将数据追加到文件尾部。</p>
+                <p><em>注意：<code>fs.open()</code> 默写标识(glags)的行为是是和平台相关的，就其本身而论(参考下面的例子)，在 OS X 和 Linux 系统上使
+                    用  <code>&#39;a+&#39;</code> 标识打开一个文件夹会返回一个错误。相反，在 Windows 和 FreeBSD 上则返回一个文件描述符。</em></p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Asynchronous file open. See <a href="http://man7.org/linux/man-pages/man2/open.2.html">open(2)</a>. <code>flags</code> can be:</p>
+                        <ul>
+                            <li>
+                                <p><code>&#39;r&#39;</code> - Open file for reading. An exception occurs if the file does not exist.</p>
+                            </li>
+                            <li>
+                                <p><code>&#39;r+&#39;</code> - Open file for reading and writing. An exception occurs if the file does not exist.</p>
+                            </li>
+                            <li>
+                                <p><code>&#39;rs+&#39;</code> - Open file for reading and writing in synchronous mode. Instructs the operating system to bypass the local file system cache.</p>
+                                <p>This is primarily useful for opening files on NFS mounts as it allows you to skip the potentially stale local cache. It has a very real impact on I/O performance so don&#39;t use this flag unless you need it.</p>
+                                <p>Note that this doesn&#39;t turn <code>fs.open()</code> into a synchronous blocking call. If that&#39;s what you want then you should be using <code>fs.openSync()</code></p>
+                            </li>
+                            <li>
+                                <p><code>&#39;w&#39;</code> - Open file for writing. The file is created (if it does not exist) or truncated (if it exists).</p>
+                            </li>
+                            <li>
+                                <p><code>&#39;wx&#39;</code> - Like <code>&#39;w&#39;</code> but fails if <code>path</code> exists.</p>
+                            </li>
+                            <li>
+                                <p><code>&#39;w+&#39;</code> - Open file for reading and writing. The file is created (if it does not exist) or truncated (if it exists).</p>
+                            </li>
+                            <li>
+                                <p><code>&#39;wx+&#39;</code> - Like <code>&#39;w+&#39;</code> but fails if <code>path</code> exists.</p>
+                            </li>
+                            <li>
+                                <p><code>&#39;a&#39;</code> - Open file for appending. The file is created if it does not exist.</p>
+                            </li>
+                            <li>
+                                <p><code>&#39;ax&#39;</code> - Like <code>&#39;a&#39;</code> but fails if <code>path</code> exists.</p>
+                            </li>
+                            <li>
+                                <p><code>&#39;a+&#39;</code> - Open file for reading and appending. The file is created if it does not exist.</p>
+                            </li>
+                            <li>
+                                <p><code>&#39;ax+&#39;</code> - Like <code>&#39;a+&#39;</code> but fails if <code>path</code> exists.</p>
+                            </li>
+                        </ul>
+                        <p><code>mode</code> sets the file mode (permission and sticky bits), but only if the file was created. It defaults to <code>0666</code>, readable and writable.</p>
+                        <p>The callback gets two arguments <code>(err, fd)</code>.</p>
+                        <p>The exclusive flag <code>&#39;x&#39;</code> (<code>O_EXCL</code> flag in <a href="http://man7.org/linux/man-pages/man2/open.2.html">open(2)</a>) ensures that <code>path</code> is newly created. On POSIX systems, <code>path</code> is considered
+                            to exist even if it is a symlink to a non-existent file. The exclusive flag may or may not work with network file systems.
+                        </p>
+                        <p><code>flags</code> can also be a number as documented by <a href="http://man7.org/linux/man-pages/man2/open.2.html">open(2)</a>; commonly used constants are available from <code>require(&#39;constants&#39;)</code>. On Windows, flags are
+                            translated to their equivalent ones where applicable, e.g. <code>O_WRONLY</code> to <code>FILE_GENERIC_WRITE</code>, or <code>O_EXCL|O_CREAT</code> to <code>CREATE_NEW</code>, as accepted by CreateFileW.</p>
+                        <p>On Linux, positional writes don&#39;t work when the file is opened in append mode. The kernel ignores the position argument and always appends the data to the end of the file.</p>
+                        <p><em>Note: The behavior of <code>fs.open()</code> is platform specific for some flags. As such,
+                            opening a directory on OS X and Linux with the <code>&#39;a+&#39;</code> flag - see example below -
+                            will return an error. In contrast, on Windows and FreeBSD, a file descriptor
+                            will be returned.</em></p>
+                    </div>
+                </div>
                 <pre><code class="lang-js">// OS X and Linux
 fs.open(&#39;&lt;directory&gt;&#39;, &#39;a+&#39;, (err, fd) =&gt; {
   // =&gt; [Error: EISDIR: illegal operation on a directory, open &lt;directory&gt;]
@@ -1198,8 +1344,13 @@ fs.open(&#39;&lt;directory&gt;&#39;, &#39;a+&#39;, (err, fd) =&gt; {
                         <li><code>mode</code> <span class="type">&lt;Integer&gt;</span></li>
                     </ul>
                 </div>
-                <p>Synchronous version of <a href="#fs_fs_open_path_flags_mode_callback"><code>fs.open()</code></a>. Returns an integer representing the file descriptor.
-                </p>
+                <p><a href="#fs_fs_open_path_flags_mode_callback"><code>fs.open()</code></a> 的同步版本，返回一个整数代表文件描述符。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Synchronous version of <a href="#fs_fs_open_path_flags_mode_callback"><code>fs.open()</code></a>. Returns an integer representing the file descriptor.</p>
+                    </div>
+                </div>
                 <h2>fs.read(fd, buffer, offset, length, position, callback)<span><a class="mark" href="#fs_fs_read_fd_buffer_offset_length_position_callback" id="fs_fs_read_fd_buffer_offset_length_position_callback">#</a></span></h2>
                 <div class="signature">
                     <ul>
@@ -1211,12 +1362,23 @@ fs.open(&#39;&lt;directory&gt;&#39;, &#39;a+&#39;, (err, fd) =&gt; {
                         <li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
                     </ul>
                 </div>
-                <p>Read data from the file specified by <code>fd</code>.</p>
-                <p><code>buffer</code> is the buffer that the data will be written to.</p>
-                <p><code>offset</code> is the offset in the buffer to start writing at.</p>
-                <p><code>length</code> is an integer specifying the number of bytes to read.</p>
-                <p><code>position</code> is an integer specifying where to begin reading from in the file. If <code>position</code> is <code>null</code>, data will be read from the current file position.</p>
-                <p>The callback is given the three arguments, <code>(err, bytesRead, buffer)</code>.</p>
+                <p>从 <code>fd</code> 文件描述符指定的文件读取数据。</p>
+                <p><code>buffer</code> 被写入数据的 buffer。</p>
+                <p><code>offset</code> buffer 开始写入位置的偏移量</p>
+                <p><code>length</code> 一个指定读取字节数的整数。</p>
+                <p><code>position</code> 一个指定开始从文件中读取数据的位置的整数。如果 <code>position</code> 为 <code>null</code>，数据将从文件当前的位置开始读。</p>
+                <p>回调接受三个参数  <code>(err, bytesRead, buffer)</code>。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Read data from the file specified by <code>fd</code>.</p>
+                        <p><code>buffer</code> is the buffer that the data will be written to.</p>
+                        <p><code>offset</code> is the offset in the buffer to start writing at.</p>
+                        <p><code>length</code> is an integer specifying the number of bytes to read.</p>
+                        <p><code>position</code> is an integer specifying where to begin reading from in the file. If <code>position</code> is <code>null</code>, data will be read from the current file position.</p>
+                        <p>The callback is given the three arguments, <code>(err, bytesRead, buffer)</code>.</p>
+                    </div>
+                </div>
                 <h2>fs.readdir(path[, options], callback)<span><a class="mark" href="#fs_fs_readdir_path_options_callback" id="fs_fs_readdir_path_options_callback">#</a></span></h2>
                 <div class="signature">
                     <ul>
@@ -1230,9 +1392,18 @@ fs.open(&#39;&lt;directory&gt;&#39;, &#39;a+&#39;, (err, fd) =&gt; {
                         <li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
                     </ul>
                 </div>
-                <p>Asynchronous <a href="http://man7.org/linux/man-pages/man3/readdir.3.html">readdir(3)</a>. Reads the contents of a directory. The callback gets two arguments <code>(err, files)</code> where <code>files</code> is an array of the names of
-                    the files in the directory excluding <code>&#39;.&#39;</code> and <code>&#39;..&#39;</code>.</p>
-                <p>The optional <code>options</code> argument can be a string specifying an encoding, or an object with an <code>encoding</code> property specifying the character encoding to use for the filenames passed to the callback. If the <code>encoding</code>                    is set to <code>&#39;buffer&#39;</code>, the filenames returned will be passed as <code>Buffer</code> objects.</p>
+                <p>异步的 <a href="http://man7.org/linux/man-pages/man3/readdir.3.html">readdir(3)</a>。读取文件夹内容。回调接受两个参
+                    数 <code>(err, files)</code>，其中，<code>files</code> 是目录下文件名的组成的一个数组，包括 <code>&#39;.&#39;</code> 和 <code>&#39;..&#39;</code>。</p>
+                <p><code>options</code> 参数可以是一个指定字符编码的字符串，或是一个具有 <code>encoding</code> 属性来指明要传递给回调的文件名的字符编码的对象。如果 <code>encoding</code>
+                    设置为 <code>&#39;buffer&#39;</code>，那么函数返回的每一个文件名将被当作 <code>Buffer</code> 对象传递。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Asynchronous <a href="http://man7.org/linux/man-pages/man3/readdir.3.html">readdir(3)</a>. Reads the contents of a directory. The callback gets two arguments <code>(err, files)</code> where <code>files</code> is an array of the names of
+                            the files in the directory excluding <code>&#39;.&#39;</code> and <code>&#39;..&#39;</code>.</p>
+                        <p>The optional <code>options</code> argument can be a string specifying an encoding, or an object with an <code>encoding</code> property specifying the character encoding to use for the filenames passed to the callback. If the <code>encoding</code>                    is set to <code>&#39;buffer&#39;</code>, the filenames returned will be passed as <code>Buffer</code> objects.</p>
+                    </div>
+                </div>
                 <h2>fs.readdirSync(path[, options])<span><a class="mark" href="#fs_fs_readdirsync_path_options" id="fs_fs_readdirsync_path_options">#</a></span></h2>
                 <div class="signature">
                     <ul>
@@ -1245,9 +1416,17 @@ fs.open(&#39;&lt;directory&gt;&#39;, &#39;a+&#39;, (err, fd) =&gt; {
                         </li>
                     </ul>
                 </div>
-                <p>Synchronous <a href="http://man7.org/linux/man-pages/man3/readdir.3.html">readdir(3)</a>. Returns an array of filenames excluding <code>&#39;.&#39;</code> and
-                    <code>&#39;..&#39;</code>.</p>
-                <p>The optional <code>options</code> argument can be a string specifying an encoding, or an object with an <code>encoding</code> property specifying the character encoding to use for the filenames passed to the callback. If the <code>encoding</code>                    is set to <code>&#39;buffer&#39;</code>, the filenames returned will be passed as <code>Buffer</code> objects.</p>
+                <p>同步的 <a href="http://man7.org/linux/man-pages/man3/readdir.3.html">readdir(3)</a>。返回一个包括 <code>&#39;.&#39;</code> 和 <code>&#39;..&#39;</code> 在内的文件名组成的数组。</p>
+                <p><code>options</code> 参数可以是一个指定字符编码的字符串，或是一个具有 <code>encoding</code> 属性来指明要传递给回调的文件名的字符编码的对象。如果 <code>encoding</code>
+                    设置为 <code>&#39;buffer&#39;</code>，那么函数返回的每一个文件名将被当作 <code>Buffer</code> 对象传递。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Synchronous <a href="http://man7.org/linux/man-pages/man3/readdir.3.html">readdir(3)</a>. Returns an array of filenames excluding <code>&#39;.&#39;</code> and
+                            <code>&#39;..&#39;</code>.</p>
+                        <p>The optional <code>options</code> argument can be a string specifying an encoding, or an object with an <code>encoding</code> property specifying the character encoding to use for the filenames passed to the callback. If the <code>encoding</code> is set to <code>&#39;buffer&#39;</code>, the filenames returned will be passed as <code>Buffer</code> objects.</p>
+                    </div>
+                </div>
                 <h2>fs.readFile(file[, options], callback)<span><a class="mark" href="#fs_fs_readfile_file_options_callback" id="fs_fs_readfile_file_options_callback">#</a></span></h2>
                 <div class="signature">
                     <ul>
@@ -1264,19 +1443,40 @@ fs.open(&#39;&lt;directory&gt;&#39;, &#39;a+&#39;, (err, fd) =&gt; {
                         <li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
                     </ul>
                 </div>
-                <p>Asynchronously reads the entire contents of a file. Example:</p>
+                <p>异步读取一个文件的全部内容。示例：</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Asynchronously reads the entire contents of a file. Example:</p>
+                    </div>
+                </div>
                 <pre><code class="lang-js">fs.readFile(&#39;/etc/passwd&#39;, (err, data) =&gt; {
   if (err) throw err;
   console.log(data);
 });
 </code></pre>
-                <p>The callback is passed two arguments <code>(err, data)</code>, where <code>data</code> is the contents of the file.</p>
-                <p>If no encoding is specified, then the raw buffer is returned.</p>
-                <p>If <code>options</code> is a string, then it specifies the encoding. Example:</p>
+                <p>回调接受两个参数 <code>(err, data)</code>，其中，<code>data</code> 是文件的内容。</p>
+                <p>如果没指定字符编码，返回原始的 buffer。</p>
+                <p>如果 <code>options</code> 是一个字符串，那么她指定的是字符编码。示例：</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>The callback is passed two arguments <code>(err, data)</code>, where <code>data</code> is the contents of the file.</p>
+                        <p>If no encoding is specified, then the raw buffer is returned.</p>
+                        <p>If <code>options</code> is a string, then it specifies the encoding. Example:</p>
+                    </div>
+                </div>
                 <pre><code class="lang-js">fs.readFile(&#39;/etc/passwd&#39;, &#39;utf8&#39;, callback);
 </code></pre>
-                <p>Any specified file descriptor has to support reading.</p>
-                <p><em>Note: Specified file descriptors will not be closed automatically.</em></p>
+                <p>任何指定的文件描述符都必须可读。</p>
+                <p><em>注意：指定的文件描述符不会自动关闭。</em></p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Any specified file descriptor has to support reading.</p>
+                        <p><em>Note: Specified file descriptors will not be closed automatically.</em></p>
+                    </div>
+                </div>
                 <h2>fs.readFileSync(file[, options])<span><a class="mark" href="#fs_fs_readfilesync_file_options" id="fs_fs_readfilesync_file_options">#</a></span></h2>
                 <div class="signature">
                     <ul>
@@ -1292,8 +1492,15 @@ fs.open(&#39;&lt;directory&gt;&#39;, &#39;a+&#39;, (err, fd) =&gt; {
                         </li>
                     </ul>
                 </div>
-                <p>Synchronous version of <a href="#fs_fs_readfile_file_options_callback"><code>fs.readFile</code></a>. Returns the contents of the <code>file</code>.</p>
-                <p>If the <code>encoding</code> option is specified then this function returns a string. Otherwise it returns a buffer.</p>
+                <p><a href="#fs_fs_readfile_file_options_callback"><code>fs.readFile</code></a> 的同步版本。返回 <code>file</code> 内容。</p>
+                <p>如果 <code>encoding</code> 参数指定，那么函数返回字符串，否则返回一个 buffer。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Synchronous version of <a href="#fs_fs_readfile_file_options_callback"><code>fs.readFile</code></a>. Returns the contents of the <code>file</code>.</p>
+                        <p>If the <code>encoding</code> option is specified then this function returns a string. Otherwise it returns a buffer.</p>
+                    </div>
+                </div>
                 <h2>fs.readlink(path[, options], callback)<span><a class="mark" href="#fs_fs_readlink_path_options_callback" id="fs_fs_readlink_path_options_callback">#</a></span></h2>
                 <div class="signature">
                     <ul>
@@ -1307,9 +1514,17 @@ fs.open(&#39;&lt;directory&gt;&#39;, &#39;a+&#39;, (err, fd) =&gt; {
                         <li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
                     </ul>
                 </div>
-                <p>Asynchronous <a href="http://man7.org/linux/man-pages/man2/readlink.2.html">readlink(2)</a>. The callback gets two arguments <code>(err,
-linkString)</code>.</p>
-                <p>The optional <code>options</code> argument can be a string specifying an encoding, or an object with an <code>encoding</code> property specifying the character encoding to use for the link path passed to the callback. If the <code>encoding</code>                    is set to <code>&#39;buffer&#39;</code>, the link path returned will be passed as a <code>Buffer</code> object.</p>
+                <p>同步的 <a href="http://man7.org/linux/man-pages/man2/readlink.2.html">readlink(2)</a>。回调加收两个参数 <code>(err, linkString)</code>。</p>
+                <p><code>options</code> 参数可以是一个指定字符编码的字符串，或是一个具有 <code>encoding</code> 属性来指明要传递给回调的链接路径的字符编码的对象。
+                    如果 <code>encoding</code> 设置为 <code>&#39;buffer&#39;</code>，那么函数返回的链接路径将被当作 <code>Buffer</code> 对象传递。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Asynchronous <a href="http://man7.org/linux/man-pages/man2/readlink.2.html">readlink(2)</a>. The callback gets two arguments <code>(err,
+                                linkString)</code>.</p>
+                        <p>The optional <code>options</code> argument can be a string specifying an encoding, or an object with an <code>encoding</code> property specifying the character encoding to use for the link path passed to the callback. If the <code>encoding</code>                    is set to <code>&#39;buffer&#39;</code>, the link path returned will be passed as a <code>Buffer</code> object.</p>
+                    </div>
+                </div>
                 <h2>fs.readlinkSync(path[, options])<span><a class="mark" href="#fs_fs_readlinksync_path_options" id="fs_fs_readlinksync_path_options">#</a></span></h2>
                 <div class="signature">
                     <ul>
@@ -1322,8 +1537,16 @@ linkString)</code>.</p>
                         </li>
                     </ul>
                 </div>
-                <p>Synchronous <a href="http://man7.org/linux/man-pages/man2/readlink.2.html">readlink(2)</a>. Returns the symbolic link&#39;s string value.</p>
-                <p>The optional <code>options</code> argument can be a string specifying an encoding, or an object with an <code>encoding</code> property specifying the character encoding to use for the link path passed to the callback. If the <code>encoding</code>                    is set to <code>&#39;buffer&#39;</code>, the link path returned will be passed as a <code>Buffer</code> object.</p>
+                <p>同步的 <a href="http://man7.org/linux/man-pages/man2/readlink.2.html">readlink(2)</a>。返回符号链接的字符串值。</p>
+                <p><code>options</code> 参数可以是一个指定字符编码的字符串，或是一个具有 <code>encoding</code> 属性来指明要传递给回调的链接路径的字符编码的对象。
+	                   如果 <code>encoding</code> 设置为 <code>&#39;buffer&#39;</code>，那么函数返回的链接路径将被当作 <code>Buffer</code> 对象传递。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Synchronous <a href="http://man7.org/linux/man-pages/man2/readlink.2.html">readlink(2)</a>. Returns the symbolic link&#39;s string value.</p>
+                        <p>The optional <code>options</code> argument can be a string specifying an encoding, or an object with an <code>encoding</code> property specifying the character encoding to use for the link path passed to the callback. If the <code>encoding</code>                    is set to <code>&#39;buffer&#39;</code>, the link path returned will be passed as a <code>Buffer</code> object.</p>
+                    </div>
+                </div>
                 <h2>fs.readSync(fd, buffer, offset, length, position)<span><a class="mark" href="#fs_fs_readsync_fd_buffer_offset_length_position" id="fs_fs_readsync_fd_buffer_offset_length_position">#</a></span></h2>
                 <div class="signature">
                     <ul>
@@ -1334,7 +1557,13 @@ linkString)</code>.</p>
                         <li><code>position</code> <span class="type">&lt;Integer&gt;</span></li>
                     </ul>
                 </div>
-                <p>Synchronous version of <a href="#fs_fs_read_fd_buffer_offset_length_position_callback"><code>fs.read()</code></a>. Returns the number of <code>bytesRead</code>.</p>
+                <p><a href="#fs_fs_read_fd_buffer_offset_length_position_callback"><code>fs.read()</code></a> 的同步版本。返回 <code>bytesRead</code> 的个数。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Synchronous version of <a href="#fs_fs_read_fd_buffer_offset_length_position_callback"><code>fs.read()</code></a>. Returns the number of <code>bytesRead</code>.</p>
+                    </div>
+                </div>
                 <h2>fs.realpath(path[, options], callback)<span><a class="mark" href="#fs_fs_realpath_path_options_callback" id="fs_fs_realpath_path_options_callback">#</a></span></h2>
                 <div class="signature">
                     <ul>
@@ -1348,9 +1577,21 @@ linkString)</code>.</p>
                         <li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
                     </ul>
                 </div>
-                <p>Asynchronous <a href="http://man7.org/linux/man-pages/man3/realpath.3.html">realpath(3)</a>. The <code>callback</code> gets two arguments <code>(err,
-resolvedPath)</code>. May use <code>process.cwd</code> to resolve relative paths.</p>
-                <p>The optional <code>options</code> argument can be a string specifying an encoding, or an object with an <code>encoding</code> property specifying the character encoding to use for the path passed to the callback. If the <code>encoding</code>                    is set to <code>&#39;buffer&#39;</code>, the path returned will be passed as a <code>Buffer</code> object.</p>
+                <p>异步的 <a href="http://man7.org/linux/man-pages/man3/realpath.3.html">realpath(3)</a>，<code>callback</code> 接受两个参数 <code>(err, resolvedPath)</code>。可以用 <code>process.cwd</code> 解析相对路径。</p>
+                <p><code>options</code> 参数可以是一个指定字符编码的字符串，或是一个具有 <code>encoding</code> 属性来指明要传递给回调的路径的字符编码的对象。
+                    如果 <code>encoding</code> 设置为 <code>&#39;buffer&#39;</code>，那么函数返回的路径将被当作 <code>Buffer</code> 对象传递。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Asynchronous <a href="http://man7.org/linux/man-pages/man3/realpath.3.html">realpath(3)</a>. The <code>callback</code> gets
+                            two arguments <code>(err,
+                            resolvedPath)</code>. May use <code>process.cwd</code> to resolve relative paths.</p>
+                        <p>The optional <code>options</code> argument can be a string specifying an encoding, or an object with
+                            an <code>encoding</code> property specifying the character encoding to use for the path passed to the
+                            callback. If the <code>encoding</code> is set to <code>&#39;buffer&#39;</code>, the path
+                            returned will be passed as a <code>Buffer</code> object.</p>
+                    </div>
+                </div>
                 <h2>fs.realpathSync(path[, options])<span><a class="mark" href="#fs_fs_realpathsync_path_options" id="fs_fs_realpathsync_path_options">#</a></span></h2>
                 <div class="signature">
                     <ul>
@@ -1363,8 +1604,18 @@ resolvedPath)</code>. May use <code>process.cwd</code> to resolve relative paths
                         </li>
                     </ul>
                 </div>
-                <p>Synchronous <a href="http://man7.org/linux/man-pages/man3/realpath.3.html">realpath(3)</a>. Returns the resolved path.</p>
-                <p>The optional <code>options</code> argument can be a string specifying an encoding, or an object with an <code>encoding</code> property specifying the character encoding to use for the path passed to the callback. If the <code>encoding</code>                    is set to <code>&#39;buffer&#39;</code>, the path returned will be passed as a <code>Buffer</code> object.</p>
+                <p>同步的 <a href="http://man7.org/linux/man-pages/man3/realpath.3.html">realpath(3)</a>。返回解析后的路径</p>
+                <p><code>options</code> 参数可以是一个指定字符编码的字符串，或是一个具有 <code>encoding</code> 属性来指明要传递给回调的路径的字符编码的对象。
+                    如果 <code>encoding</code> 设置为 <code>&#39;buffer&#39;</code>，那么函数返回的路径将被当作 <code>Buffer</code> 对象传递。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Synchronous <a href="http://man7.org/linux/man-pages/man3/realpath.3.html">realpath(3)</a>. Returns the resolved path.</p>
+                        <p>The optional <code>options</code> argument can be a string specifying an encoding, or an object with an <code>encoding</code> property
+                            specifying the character encoding to use for the path passed to the callback. If the <code>encoding</code> is set
+                            to <code>&#39;buffer&#39;</code>, the path returned will be passed as a <code>Buffer</code> object.</p>
+                    </div>
+                </div>
                 <h2>fs.rename(oldPath, newPath, callback)<span><a class="mark" href="#fs_fs_rename_oldpath_newpath_callback" id="fs_fs_rename_oldpath_newpath_callback">#</a></span></h2>
                 <div class="signature">
                     <ul>
@@ -1373,7 +1624,13 @@ resolvedPath)</code>. May use <code>process.cwd</code> to resolve relative paths
                         <li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
                     </ul>
                 </div>
-                <p>Asynchronous <a href="http://man7.org/linux/man-pages/man2/rename.2.html">rename(2)</a>. No arguments other than a possible exception are given to the completion callback.</p>
+                <p>异步的 <a href="http://man7.org/linux/man-pages/man2/rename.2.html">rename(2)</a>。除了那个可能有值的异常外没有其他参数传递给她的完成回调。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Asynchronous <a href="http://man7.org/linux/man-pages/man2/rename.2.html">rename(2)</a>. No arguments other than a possible exception are given to the completion callback.</p>
+                    </div>
+                </div>
                 <h2>fs.renameSync(oldPath, newPath)<span><a class="mark" href="#fs_fs_renamesync_oldpath_newpath" id="fs_fs_renamesync_oldpath_newpath">#</a></span></h2>
                 <div class="signature">
                     <ul>
@@ -1381,7 +1638,13 @@ resolvedPath)</code>. May use <code>process.cwd</code> to resolve relative paths
                         <li><code>newPath</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
                     </ul>
                 </div>
-                <p>Synchronous <a href="http://man7.org/linux/man-pages/man2/rename.2.html">rename(2)</a>. Returns <code>undefined</code>.</p>
+                <p>同步的 <a href="http://man7.org/linux/man-pages/man2/rename.2.html">rename(2)</a>。返回 <code>undefined</code>。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Synchronous <a href="http://man7.org/linux/man-pages/man2/rename.2.html">rename(2)</a>. Returns <code>undefined</code>.</p>
+                    </div>
+                </div>
                 <h2>fs.rmdir(path, callback)<span><a class="mark" href="#fs_fs_rmdir_path_callback" id="fs_fs_rmdir_path_callback">#</a></span></h2>
                 <div class="signature">
                     <ul>
@@ -1389,14 +1652,26 @@ resolvedPath)</code>. May use <code>process.cwd</code> to resolve relative paths
                         <li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
                     </ul>
                 </div>
-                <p>Asynchronous <a href="http://man7.org/linux/man-pages/man2/rmdir.2.html">rmdir(2)</a>. No arguments other than a possible exception are given to the completion callback.</p>
+                <p>异步的 <a href="http://man7.org/linux/man-pages/man2/rmdir.2.html">rmdir(2)</a>。除了那个可能有值的异常外没有其他参数传递给她的完成回调。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Asynchronous <a href="http://man7.org/linux/man-pages/man2/rmdir.2.html">rmdir(2)</a>. No arguments other than a possible exception are given to the completion callback.</p>
+                    </div>
+                </div>
                 <h2>fs.rmdirSync(path)<span><a class="mark" href="#fs_fs_rmdirsync_path" id="fs_fs_rmdirsync_path">#</a></span></h2>
                 <div class="signature">
                     <ul>
                         <li><code>path</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
                     </ul>
                 </div>
-                <p>Synchronous <a href="http://man7.org/linux/man-pages/man2/rmdir.2.html">rmdir(2)</a>. Returns <code>undefined</code>.</p>
+                <p>同步的 <a href="http://man7.org/linux/man-pages/man2/rmdir.2.html">rmdir(2)</a>。返回 <code>undefined</code>。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Synchronous <a href="http://man7.org/linux/man-pages/man2/rmdir.2.html">rmdir(2)</a>. Returns <code>undefined</code>.</p>
+                    </div>
+                </div>
                 <h2>fs.stat(path, callback)<span><a class="mark" href="#fs_fs_stat_path_callback" id="fs_fs_stat_path_callback">#</a></span></h2>
                 <div class="signature">
                     <ul>
@@ -1404,16 +1679,29 @@ resolvedPath)</code>. May use <code>process.cwd</code> to resolve relative paths
                         <li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
                     </ul>
                 </div>
-                <p>Asynchronous <a href="http://man7.org/linux/man-pages/man2/stat.2.html">stat(2)</a>. The callback gets two arguments <code>(err, stats)</code> where
-                    <code>stats</code> is a <a href="#fs_class_fs_stats"><code>fs.Stats</code></a> object. See the <a href="#fs_class_fs_stats"><code>fs.Stats</code></a> section for more information.
-                </p>
+                <p>异步的 <a href="http://man7.org/linux/man-pages/man2/stat.2.html">stat(2)</a>。回调接受两个参数 <code>(err, stats)</code> 其中 <code>stats</code>
+                    是一个 <a href="#fs_class_fs_stats"><code>fs.Stats</code></a> 对象，详见 <a href="#fs_class_fs_stats"><code>fs.Stats</code></a>。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Asynchronous <a href="http://man7.org/linux/man-pages/man2/stat.2.html">stat(2)</a>. The callback gets two arguments <code>(err, stats)</code> where
+                            <code>stats</code> is a <a href="#fs_class_fs_stats"><code>fs.Stats</code></a> object. See the <a href="#fs_class_fs_stats"><code>fs.Stats</code></a> section for more information.
+                        </p>
+                    </div>
+                </div>
                 <h2>fs.statSync(path)<span><a class="mark" href="#fs_fs_statsync_path" id="fs_fs_statsync_path">#</a></span></h2>
                 <div class="signature">
                     <ul>
                         <li><code>path</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
                     </ul>
                 </div>
-                <p>Synchronous <a href="http://man7.org/linux/man-pages/man2/stat.2.html">stat(2)</a>. Returns an instance of <a href="#fs_class_fs_stats"><code>fs.Stats</code></a>.</p>
+                <p>同步的 <a href="http://man7.org/linux/man-pages/man2/stat.2.html">stat(2)</a>。返回 <a href="#fs_class_fs_stats"><code>fs.Stats</code></a> 实例。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Synchronous <a href="http://man7.org/linux/man-pages/man2/stat.2.html">stat(2)</a>. Returns an instance of <a href="#fs_class_fs_stats"><code>fs.Stats</code></a>.</p>
+                    </div>
+                </div>
                 <h2>fs.symlink(target, path[, type], callback)<span><a class="mark" href="#fs_fs_symlink_target_path_type_callback" id="fs_fs_symlink_target_path_type_callback">#</a></span></h2>
                 <div class="signature">
                     <ul>
@@ -1423,14 +1711,23 @@ resolvedPath)</code>. May use <code>process.cwd</code> to resolve relative paths
                         <li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
                     </ul>
                 </div>
-                <p>Asynchronous <a href="http://man7.org/linux/man-pages/man2/symlink.2.html">symlink(2)</a>. No arguments other than a possible exception are given to the completion callback. The <code>type</code> argument can be set to <code>&#39;dir&#39;</code>,
-                    <code>&#39;file&#39;</code>, or <code>&#39;junction&#39;</code> (default is <code>&#39;file&#39;</code>) and is only available on Windows (ignored on other platforms). Note that Windows junction points require the destination path
-                    to be absolute. When using
-                    <code>&#39;junction&#39;</code>, the <code>target</code> argument will automatically be normalized to absolute path.</p>
-                <p>Here is an example below:</p>
-                <pre><code class="lang-js">fs.symlink(&#39;./foo&#39;, &#39;./new-port&#39;);
-</code></pre>
-                <p>It creates a symbolic link named &quot;new-port&quot; that points to &quot;foo&quot;.</p>
+                <p>异步的 <a href="http://man7.org/linux/man-pages/man2/symlink.2.html">symlink(2)</a>。除了那个可能有值的异常外没有其他参数传递给她的完成回调。<code>type</code> 参数可设置为 <code>&#39;dir&#39;</code>、
+                    <code>&#39;file&#39;</code> 或 <code>&#39;junction&#39;</code> (默认 <code>&#39;file&#39;</code>) 并且只有在 Windows 上可用(其他平台上被忽略)。
+                    注意 Windows 上的结点需要目标路径是绝对路径。当使用了 <code>&#39;junction&#39;</code>，<code>target</code> 参数会自动被归一化为绝对路径。</p>
+                <p>下面是一个例子：</p>
+                <p>创建一个名为 "new-port" 的符号链接，指向 "foo"。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Asynchronous <a href="http://man7.org/linux/man-pages/man2/symlink.2.html">symlink(2)</a>. No arguments other than a possible exception are given to the completion callback. The <code>type</code> argument can be set to <code>&#39;dir&#39;</code>,
+                            <code>&#39;file&#39;</code>, or <code>&#39;junction&#39;</code> (default is <code>&#39;file&#39;</code>) and is only available on Windows (ignored on other platforms). Note that Windows junction points require the destination path
+                            to be absolute. When using
+                            <code>&#39;junction&#39;</code>, the <code>target</code> argument will automatically be normalized to absolute path.</p>
+                        <p>Here is an example below:</p>
+                        <p>It creates a symbolic link named &quot;new-port&quot; that points to &quot;foo&quot;.</p>
+                    </div>
+                </div>
+                <pre><code class="lang-js">fs.symlink(&#39;./foo&#39;, &#39;./new-port&#39;);</code></pre>
                 <h2>fs.symlinkSync(target, path[, type])<span><a class="mark" href="#fs_fs_symlinksync_target_path_type" id="fs_fs_symlinksync_target_path_type">#</a></span></h2>
                 <div class="signature">
                     <ul>
@@ -1439,7 +1736,13 @@ resolvedPath)</code>. May use <code>process.cwd</code> to resolve relative paths
                         <li><code>type</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a></li>
                     </ul>
                 </div>
-                <p>Synchronous <a href="http://man7.org/linux/man-pages/man2/symlink.2.html">symlink(2)</a>. Returns <code>undefined</code>.</p>
+                <p>同步的 <a href="http://man7.org/linux/man-pages/man2/symlink.2.html">symlink(2)</a>。返回 <code>undefined</code>。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Synchronous <a href="http://man7.org/linux/man-pages/man2/symlink.2.html">symlink(2)</a>. Returns <code>undefined</code>.</p>
+                    </div>
+                </div>
                 <h2>fs.truncate(path, len, callback)<span><a class="mark" href="#fs_fs_truncate_path_len_callback" id="fs_fs_truncate_path_len_callback">#</a></span></h2>
                 <div class="signature">
                     <ul>
@@ -1448,8 +1751,15 @@ resolvedPath)</code>. May use <code>process.cwd</code> to resolve relative paths
                         <li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
                     </ul>
                 </div>
-                <p>Asynchronous <a href="http://man7.org/linux/man-pages/man2/truncate.2.html">truncate(2)</a>. No arguments other than a possible exception are given to the completion callback. A file descriptor can also be passed as the first argument.
-                    In this case, <code>fs.ftruncate()</code> is called.</p>
+                <p>异步的 <a href="http://man7.org/linux/man-pages/man2/truncate.2.html">truncate(2)</a>。除了那个可能有值的异常外没有其他参数传递给她的完成回调。第一个
+                    参数可以接受文件描述符业可以作为参数，在这种情况下调用的是 <code>fs.ftruncate()</code>。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Asynchronous <a href="http://man7.org/linux/man-pages/man2/truncate.2.html">truncate(2)</a>. No arguments other than a possible exception are given to the completion callback. A file descriptor can also be passed as the first argument.
+                            In this case, <code>fs.ftruncate()</code> is called.</p>
+                    </div>
+                </div>
                 <h2>fs.truncateSync(path, len)<span><a class="mark" href="#fs_fs_truncatesync_path_len" id="fs_fs_truncatesync_path_len">#</a></span></h2>
                 <div class="signature">
                     <ul>
@@ -1457,7 +1767,13 @@ resolvedPath)</code>. May use <code>process.cwd</code> to resolve relative paths
                         <li><code>len</code> <span class="type">&lt;Integer&gt;</span></li>
                     </ul>
                 </div>
-                <p>Synchronous <a href="http://man7.org/linux/man-pages/man2/truncate.2.html">truncate(2)</a>. Returns <code>undefined</code>.</p>
+                <p>同步的 <a href="http://man7.org/linux/man-pages/man2/truncate.2.html">truncate(2)</a>。返回 <code>undefined</code>。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Synchronous <a href="http://man7.org/linux/man-pages/man2/truncate.2.html">truncate(2)</a>. Returns <code>undefined</code>.</p>
+                    </div>
+                </div>
                 <h2>fs.unlink(path, callback)<span><a class="mark" href="#fs_fs_unlink_path_callback" id="fs_fs_unlink_path_callback">#</a></span></h2>
                 <div class="signature">
                     <ul>
@@ -1465,14 +1781,26 @@ resolvedPath)</code>. May use <code>process.cwd</code> to resolve relative paths
                         <li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
                     </ul>
                 </div>
-                <p>Asynchronous <a href="http://man7.org/linux/man-pages/man2/unlink.2.html">unlink(2)</a>. No arguments other than a possible exception are given to the completion callback.</p>
+                <p>异步的 <a href="http://man7.org/linux/man-pages/man2/unlink.2.html">unlink(2)</a>。除了那个可能有值的异常外没有其他参数传递给她的完成回调。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Asynchronous <a href="http://man7.org/linux/man-pages/man2/unlink.2.html">unlink(2)</a>. No arguments other than a possible exception are given to the completion callback.</p>
+                    </div>
+                </div>
                 <h2>fs.unlinkSync(path)<span><a class="mark" href="#fs_fs_unlinksync_path" id="fs_fs_unlinksync_path">#</a></span></h2>
                 <div class="signature">
                     <ul>
                         <li><code>path</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a></li>
                     </ul>
                 </div>
-                <p>Synchronous <a href="http://man7.org/linux/man-pages/man2/unlink.2.html">unlink(2)</a>. Returns <code>undefined</code>.</p>
+                <p>同步的 <a href="http://man7.org/linux/man-pages/man2/unlink.2.html">unlink(2)</a>。返回 <code>undefined</code>。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Synchronous <a href="http://man7.org/linux/man-pages/man2/unlink.2.html">unlink(2)</a>. Returns <code>undefined</code>.</p>
+                    </div>
+                </div>
                 <h2>fs.unwatchFile(filename[, listener])<span><a class="mark" href="#fs_fs_unwatchfile_filename_listener" id="fs_fs_unwatchfile_filename_listener">#</a></span></h2>
                 <div class="signature">
                     <ul>
@@ -1480,11 +1808,21 @@ resolvedPath)</code>. May use <code>process.cwd</code> to resolve relative paths
                         <li><code>listener</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
                     </ul>
                 </div>
-                <p>Stop watching for changes on <code>filename</code>. If <code>listener</code> is specified, only that particular listener is removed. Otherwise, <em>all</em> listeners are removed and you have effectively stopped watching <code>filename</code>.</p>
-                <p>Calling <code>fs.unwatchFile()</code> with a filename that is not being watched is a no-op, not an error.</p>
-                <p><em>Note: <a href="#fs_fs_watch_filename_options_listener"><code>fs.watch()</code></a> is more efficient than <code>fs.watchFile()</code> and <code>fs.unwatchFile()</code>.
-<code>fs.watch()</code> should be used instead of <code>fs.watchFile()</code> and <code>fs.unwatchFile()</code>
-when possible.</em></p>
+                <p>停止监视 <code>filename</code> 的变化。如果给定了 <code>listener</code>，那么只会删除指定的那个监听方法，否则删除<em>所有</em>的监听方法，
+                    从而有效的停止监视 <code>filename</code>。</p>
+                <p>调用 <code>fs.unwatchFile()</code> 只传一个文件名，那将使得监视变成一个空操作，不是错误。</p>
+                <p><em>注意：<a href="#fs_fs_watch_filename_options_listener"><code>fs.watch()</code></a> 比 <code>fs.watchFile()</code> 和
+                     <code>fs.unwatchFile()</code> 更高效。应该尽可能使用 <code>fs.watch()</code> 来替换 <code>fs.watchFile()</code> 和 <code>fs.unwatchFile()</code></em></p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Stop watching for changes on <code>filename</code>. If <code>listener</code> is specified, only that particular listener is removed. Otherwise, <em>all</em> listeners are removed and you have effectively stopped watching <code>filename</code>.</p>
+                        <p>Calling <code>fs.unwatchFile()</code> with a filename that is not being watched is a no-op, not an error.</p>
+                        <p><em>Note: <a href="#fs_fs_watch_filename_options_listener"><code>fs.watch()</code></a> is more efficient than <code>fs.watchFile()</code> and <code>fs.unwatchFile()</code>.
+                            <code>fs.watch()</code> should be used instead of <code>fs.watchFile()</code> and <code>fs.unwatchFile()</code>
+                            when possible.</em></p>
+                    </div>
+                </div>
                 <h2>fs.utimes(path, atime, mtime, callback)<span><a class="mark" href="#fs_fs_utimes_path_atime_mtime_callback" id="fs_fs_utimes_path_atime_mtime_callback">#</a></span></h2>
                 <div class="signature">
                     <ul>
@@ -1494,13 +1832,24 @@ when possible.</em></p>
                         <li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
                     </ul>
                 </div>
-                <p>Change file timestamps of the file referenced by the supplied path.</p>
-                <p>Note: the arguments <code>atime</code> and <code>mtime</code> of the following related functions does follow the below rules:</p>
+                <p>改变 <code>path</code> 指定的文件的时间戳。</p>
+                <p>注意：<code>atime</code> 和 <code>mtime</code> 在后面的这些有涉及到这两个变量的方法不遵循下面规则：</p>
                 <ul>
-                    <li>If the value is a numberable string like <code>&#39;123456789&#39;</code>, the value would get converted to corresponding number.</li>
-                    <li>If the value is <code>NaN</code> or <code>Infinity</code>, the value would get converted to
-                        <code>Date.now()</code>.</li>
+                    <li>如果是像 <code>&#39;123456789&#39;</code> 这样可数字化的值，会转化为对应的数字。</li>
+                    <li>如果值是 <code>NaN</code> 或 <code>Infinity</code>，会转化为 <code>Date.now()</code>。</li>
                 </ul>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Change file timestamps of the file referenced by the supplied path.</p>
+                        <p>Note: the arguments <code>atime</code> and <code>mtime</code> of the following related functions does follow the below rules:</p>
+                        <ul>
+                            <li>If the value is a numberable string like <code>&#39;123456789&#39;</code>, the value would get converted to corresponding number.</li>
+                            <li>If the value is <code>NaN</code> or <code>Infinity</code>, the value would get converted to
+                                <code>Date.now()</code>.</li>
+                        </ul>
+                    </div>
+                </div>
                 <h2>fs.utimesSync(path, atime, mtime)<span><a class="mark" href="#fs_fs_utimessync_path_atime_mtime" id="fs_fs_utimessync_path_atime_mtime">#</a></span></h2>
                 <div class="signature">
                     <ul>
@@ -1509,7 +1858,13 @@ when possible.</em></p>
                         <li><code>mtime</code> <span class="type">&lt;Integer&gt;</span></li>
                     </ul>
                 </div>
-                <p>Synchronous version of <a href="#fs_fs_futimes_fd_atime_mtime_callback"><code>fs.utimes()</code></a>. Returns <code>undefined</code>.</p>
+                <p><a href="#fs_fs_futimes_fd_atime_mtime_callback"><code>fs.utimes()</code></a> 的同步版本。返回 <code>undefined</code>。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Synchronous version of <a href="#fs_fs_futimes_fd_atime_mtime_callback"><code>fs.utimes()</code></a>. Returns <code>undefined</code>.</p>
+                    </div>
+                </div>
                 <h2>fs.watch(filename[, options][, listener])<span><a class="mark" href="#fs_fs_watch_filename_options_listener" id="fs_fs_watch_filename_options_listener">#</a></span></h2>
                 <div class="signature">
                     <ul>
@@ -1517,46 +1872,84 @@ when possible.</em></p>
                         <li><code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object"
                                 class="type">&lt;Object&gt;</a>
                             <ul>
-                                <li><code>persistent</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;Boolean&gt;</a> Indicates whether the process should continue to run as long as files
-                                    are being watched. default = <code>true</code></li>
-                                <li><code>recursive</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;Boolean&gt;</a> Indicates whether all subdirectories should be watched, or only the
-                                    current directory. The applies when a directory is specified, and only on supported platforms (See <a href="#fs_caveats">Caveats</a>). default =
-                                    <code>false</code></li>
-                                <li><code>encoding</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> Specifies the character encoding to be used for the filename passed to
-                                    the listener. default = <code>&#39;utf8&#39;</code></li>
+                                <li><code>persistent</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;Boolean&gt;</a>
+                                    指明进程是否要在被监视的文件改变时继续运行，默认 <code>true</code>。(Indicates whether the process should continue to run as long as files are being watched. default = <code>true</code>)</li>
+                                <li><code>recursive</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;Boolean&gt;</a>
+                                    指明是否监视所有子目录还是只监视当前目录。在目录被指定时，并且只在支持的平台上才有用(见 <a href="#fs_caveats">Caveats</a>)。默认 <code>false</code>。(Indicates whether all subdirectories should be watched, or only the current directory. The applies when a directory is specified, and only
+                                    on supported platforms (See <a href="#fs_caveats">Caveats</a>). default = <code>false</code>)
+                                </li>
+                                <li><code>encoding</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a>
+                                    指明了传递给监听器的文件名的字符编码。默认 <code>&#39;utf8&#39;</code>(Specifies the character encoding to be used for
+                                    the filename passed to the listener. default = <code>&#39;utf8&#39;</code>)
+                                </li>
                             </ul>
                         </li>
                         <li><code>listener</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
                     </ul>
                 </div>
-                <p>Watch for changes on <code>filename</code>, where <code>filename</code> is either a file or a directory. The returned object is a <a href="#fs_class_fs_fswatcher"><code>fs.FSWatcher</code></a>.</p>
-                <p>The second argument is optional. If <code>options</code> is provided as a string, it specifies the <code>encoding</code>. Otherwise <code>options</code> should be passed as an object.</p>
-                <p>The listener callback gets two arguments <code>(event, filename)</code>. <code>event</code> is either
-                    <code>&#39;rename&#39;</code> or <code>&#39;change&#39;</code>, and <code>filename</code> is the name of the file which triggered the event.</p>
-                <h3>Caveats<span><a class="mark" href="#fs_caveats" id="fs_caveats">#</a></span></h3>
+                <p>监视 <code>filename</code> 文件的变化，其中，<code>filename</code> 是文件或者目录，返回一个 <a href="#fs_class_fs_fswatcher"><code>fs.FSWatcher</code></a> 实例。</p>
+                <p>第二个参数可选，如果 <code>options</code> 给定的是一个字符串，她指明的是字符编码 <code>encoding</code>。否则 <code>options</code> 必须传递一个对象。</p>
+                <p>监听器回调接受两个参数 <code>(event, filename)</code>。<code>event</code> 是 <code>&#39;rename&#39;</code> 或 <code>&#39;change&#39;</code>，
+                    <code>filename</code> 是触发事件的文件的名称。</p>
+                <h3>注意事项<span><a class="mark" href="#fs_caveats" id="fs_caveats">#</a></span></h3>
                 <!--type=misc-->
-                <p>The <code>fs.watch</code> API is not 100% consistent across platforms, and is unavailable in some situations.</p>
-                <p>The recursive option is only supported on OS X and Windows.</p>
-                <h4>Availability<span><a class="mark" href="#fs_availability" id="fs_availability">#</a></span></h4>
+                <p><code>fs.watch</code> API 不是 100% 跨平台的。在默写情形下不可用。</p>
+                <p>那个递归参数只被 OS X 和 Windows 支持。</p>
+                <h4>可用性<span><a class="mark" href="#fs_availability" id="fs_availability">#</a></span></h4>
                 <!--type=misc-->
-                <p>This feature depends on the underlying operating system providing a way to be notified of filesystem changes.</p>
+                <p>这个特性依赖于底层操作系统提供的用来通知文件系统变化的方式。</p>
                 <ul>
-                    <li>On Linux systems, this uses <code>inotify</code>.</li>
-                    <li>On BSD systems, this uses <code>kqueue</code>.</li>
-                    <li>On OS X, this uses <code>kqueue</code> for files and &#39;FSEvents&#39; for directories.</li>
-                    <li>On SunOS systems (including Solaris and SmartOS), this uses <code>event ports</code>.</li>
-                    <li>On Windows systems, this feature depends on <code>ReadDirectoryChangesW</code>.</li>
+                    <li>在 Linux 上，使用 <code>inotify</code>。</li>
+                    <li>在 BSD 上, 使用 <code>kqueue</code>。</li>
+                    <li>在 OS X 上, 文件上使用 <code>kqueue</code> 而目录使用 &#39;FSEvents&#39;。</li>
+                    <li>在 SunOS 上 (包括 Solaris 和 SmartOS), 使用 <code>event ports</code>。</li>
+                    <li>在 Windows 上, 依赖于 <code>ReadDirectoryChangesW</code>。</li>
                 </ul>
-                <p>If the underlying functionality is not available for some reason, then
-                    <code>fs.watch</code> will not be able to function. For example, watching files or directories on network file systems (NFS, SMB, etc.) often doesn&#39;t work reliably or at all.</p>
-                <p>You can still use <code>fs.watchFile</code>, which uses stat polling, but it is slower and less reliable.</p>
-                <h4>Inodes<span><a class="mark" href="#fs_inodes" id="fs_inodes">#</a></span></h4>
+                <p>如果底层功能由于某些原因不可用，那么 <code>fs.watch</code> 功能将不可用。比如，在网络系统(NFS、SMB 等) 上监视
+                    文件或者目录经常不能可靠的工作或者完全不起作用。</p>
+                <p>你仍然可以使用 <code>fs.watchFile</code>，她靠的是对状态(stat)的轮询，但是更慢而且更不可靠。</p>
+                <h4>索引节点<span><a class="mark" href="#fs_inodes" id="fs_inodes">#</a></span></h4>
                 <!--type=misc-->
-                <p>On Linux and OS X systems, <code>fs.watch()</code> resolves the path to an <a href="http://www.linux.org/threads/intro-to-inodes.4130">inode</a> and watches the inode. If the watched path is deleted and recreated, it is assigned a new
-                    inode. The watch will emit an event for the delete but will continue watching the <em>original</em> inode. Events for the new inode will not be emitted. This is expected behavior.</p>
-                <h4>Filename Argument<span><a class="mark" href="#fs_filename_argument" id="fs_filename_argument">#</a></span></h4>
+                <p>在 Linux 和 OS X 上，<code>fs.watch()</code> 解析路径成一个索引节点(<a href="http://www.linux.org/threads/intro-to-inodes.4130">inode</a>) 然后监视
+                    这个节点，如果监视路径被删或创建，会有一个新的索引节点赋值给他。监视器会为删除操作触发一个事件但还是继续监视 <em>原始</em> 索引节点。不会为新的索引节点触发事件
+                    这是期望得到的结果。</p>
+                <h4>文件名参数<span><a class="mark" href="#fs_filename_argument" id="fs_filename_argument">#</a></span></h4>
                 <!--type=misc-->
-                <p>Providing <code>filename</code> argument in the callback is only supported on Linux and Windows. Even on supported platforms, <code>filename</code> is not always guaranteed to be provided. Therefore, don&#39;t assume that <code>filename</code>                    argument is always provided in the callback, and have some fallback logic if it is null.</p>
+                <p>只有 Linux 和 Windows 系统支持向回调传递 <code>filename</code> 参数。即使在支持的平台上，<code>filename</code> 也不能保证重视被提供。因此，不要
+                    假设 <code>filename</code> 参数总是被提供给回调，或在 null 情况下有一些反馈逻辑。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Watch for changes on <code>filename</code>, where <code>filename</code> is either a file or a directory. The returned object is a <a href="#fs_class_fs_fswatcher"><code>fs.FSWatcher</code></a>.</p>
+                        <p>The second argument is optional. If <code>options</code> is provided as a string, it specifies the <code>encoding</code>. Otherwise <code>options</code> should be passed as an object.</p>
+                        <p>The listener callback gets two arguments <code>(event, filename)</code>. <code>event</code> is either
+                            <code>&#39;rename&#39;</code> or <code>&#39;change&#39;</code>, and <code>filename</code> is the name of the file which triggered the event.</p>
+                        <h3>Caveats<span><a class="mark" href="#fs_caveats" id="fs_caveats">#</a></span></h3>
+                        <!--type=misc-->
+                        <p>The <code>fs.watch</code> API is not 100% consistent across platforms, and is unavailable in some situations.</p>
+                        <p>The recursive option is only supported on OS X and Windows.</p>
+                        <h4>Availability<span><a class="mark" href="#fs_availability" id="fs_availability">#</a></span></h4>
+                        <!--type=misc-->
+                        <p>This feature depends on the underlying operating system providing a way to be notified of filesystem changes.</p>
+                        <ul>
+                            <li>On Linux systems, this uses <code>inotify</code>.</li>
+                            <li>On BSD systems, this uses <code>kqueue</code>.</li>
+                            <li>On OS X, this uses <code>kqueue</code> for files and &#39;FSEvents&#39; for directories.</li>
+                            <li>On SunOS systems (including Solaris and SmartOS), this uses <code>event ports</code>.</li>
+                            <li>On Windows systems, this feature depends on <code>ReadDirectoryChangesW</code>.</li>
+                        </ul>
+                        <p>If the underlying functionality is not available for some reason, then
+                            <code>fs.watch</code> will not be able to function. For example, watching files or directories on network file systems (NFS, SMB, etc.) often doesn&#39;t work reliably or at all.</p>
+                        <p>You can still use <code>fs.watchFile</code>, which uses stat polling, but it is slower and less reliable.</p>
+                        <h4>Inodes<span><a class="mark" href="#fs_inodes" id="fs_inodes">#</a></span></h4>
+                        <!--type=misc-->
+                        <p>On Linux and OS X systems, <code>fs.watch()</code> resolves the path to an <a href="http://www.linux.org/threads/intro-to-inodes.4130">inode</a> and watches the inode. If the watched path is deleted and recreated, it is assigned a new
+                            inode. The watch will emit an event for the delete but will continue watching the <em>original</em> inode. Events for the new inode will not be emitted. This is expected behavior.</p>
+                        <h4>Filename Argument<span><a class="mark" href="#fs_filename_argument" id="fs_filename_argument">#</a></span></h4>
+                        <!--type=misc-->
+                        <p>Providing <code>filename</code> argument in the callback is only supported on Linux and Windows. Even on supported platforms, <code>filename</code> is not always guaranteed to be provided. Therefore, don&#39;t assume that <code>filename</code>                    argument is always provided in the callback, and have some fallback logic if it is null.</p>
+                    </div>
+                </div>
                 <pre><code class="lang-js">fs.watch(&#39;somedir&#39;, (event, filename) =&gt; {
   console.log(`event is: ${event}`);
   if (filename) {
@@ -1579,26 +1972,49 @@ when possible.</em></p>
                         <li><code>listener</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
                     </ul>
                 </div>
-                <p>Watch for changes on <code>filename</code>. The callback <code>listener</code> will be called each time the file is accessed.</p>
-                <p>The <code>options</code> argument may be omitted. If provided, it should be an object. The
-                    <code>options</code> object may contain a boolean named <code>persistent</code> that indicates whether the process should continue to run as long as files are being watched. The <code>options</code> object may specify an <code>interval</code>                    property indicating how often the target should be polled in milliseconds. The default is
-                    <code>{ persistent: true, interval: 5007 }</code>.</p>
-                <p>The <code>listener</code> gets two arguments the current stat object and the previous stat object:</p>
+                <p>监视 <code>filename</code> 文件的变化，回调 <code>listener</code> 会在每一次文件被访问是调用。</p>
+                <p><code>options</code> 参数可以缺省。如果给定了值，必须给定一个对象，<code>options</code> 可包含一个 boolean 类型的 <code>persistent</code> 指明
+                    进程是否该在监视到文件发生变化时继续执行。<code>options</code> 对象可指明 <code>interval</code> 属性，指明多少毫秒轮询一次目标的频率。
+                    默认 <code>{ persistent: true, interval: 5007 }</code>。</p>
+                <p><code>listener</code> 接受两个参数，一个是当前状态(stat)对象，另一个是前一个状态(stat)对象：</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Watch for changes on <code>filename</code>. The callback <code>listener</code> will be called each time the file is accessed.</p>
+                        <p>The <code>options</code> argument may be omitted. If provided, it should be an object. The
+                            <code>options</code> object may contain a boolean named <code>persistent</code> that indicates whether the process should continue to run as long as files are being watched. The <code>options</code> object may specify an <code>interval</code>                    property indicating how often the target should be polled in milliseconds. The default is
+                            <code>{ persistent: true, interval: 5007 }</code>.</p>
+                        <p>The <code>listener</code> gets two arguments the current stat object and the previous stat object:</p>
+                    </div>
+                </div>
                 <pre><code class="lang-js">fs.watchFile(&#39;message.text&#39;, (curr, prev) =&gt; {
   console.log(`the current mtime is: ${curr.mtime}`);
   console.log(`the previous mtime was: ${prev.mtime}`);
 });
 </code></pre>
-                <p>These stat objects are instances of <code>fs.Stat</code>.</p>
-                <p>If you want to be notified when the file was modified, not just accessed, you need to compare <code>curr.mtime</code> and <code>prev.mtime</code>.</p>
-                <p><em>Note: when an <code>fs.watchFile</code> operation results in an <code>ENOENT</code> error, it will
- invoke the listener once, with all the fields zeroed (or, for dates, the Unix
- Epoch). In Windows, <code>blksize</code> and <code>blocks</code> fields will be <code>undefined</code>, instead
- of zero. If the file is created later on, the listener will be called again,
- with the latest stat objects. This is a change in functionality since v0.10.</em></p>
+                <p>这些状态(stat)对象都是 <code>fs.Stat</code> 实例。</p>
+                <p>如果你还要得到文件被修改时的通知，而不是仅仅文件被访问时通知，你需要比较 <code>curr.mtime</code> 和 <code>prev.mtime</code>。</p>
+                <p><em>注意：当一个 <code>fs.watchFile</code> 操作导致一个 <code>ENOENT</code> 错误，她将会用所有的字段都归零(对于时间字段，使用 UNIX 新纪元)
+                    的参数调用监听器一次。在 Windows 上 <code>blksize</code> 和 <code>blocks</code> 字段是 <code>undefined</code> 而不是零，如果文件稍后创建，
+                    监听器将会再次被调用，接受的参数是最后一个状态(stat)对象。这个改变始于 v0.10.</em></p>
                 <p><em>Note: <a href="#fs_fs_watch_filename_options_listener"><code>fs.watch()</code></a> is more efficient than <code>fs.watchFile</code> and <code>fs.unwatchFile</code>.
-<code>fs.watch</code> should be used instead of <code>fs.watchFile</code> and <code>fs.unwatchFile</code>
-when possible.</em></p>
+                    <code>fs.watch</code> should be used instead of <code>fs.watchFile</code> and <code>fs.unwatchFile</code>
+                    when possible.</em></p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>These stat objects are instances of <code>fs.Stat</code>.</p>
+                        <p>If you want to be notified when the file was modified, not just accessed, you need to compare <code>curr.mtime</code> and <code>prev.mtime</code>.</p>
+                        <p><em>Note: when an <code>fs.watchFile</code> operation results in an <code>ENOENT</code> error, it will
+                             invoke the listener once, with all the fields zeroed (or, for dates, the Unix
+                             Epoch). In Windows, <code>blksize</code> and <code>blocks</code> fields will be <code>undefined</code>, instead
+                             of zero. If the file is created later on, the listener will be called again,
+                             with the latest stat objects. This is a change in functionality since v0.10.</em></p>
+                        <p><em>Note: <a href="#fs_fs_watch_filename_options_listener"><code>fs.watch()</code></a> is more efficient than <code>fs.watchFile</code> and <code>fs.unwatchFile</code>.
+                            <code>fs.watch</code> should be used instead of <code>fs.watchFile</code> and <code>fs.unwatchFile</code>
+                            when possible.</em></p>
+                    </div>
+                </div>
                 <h2>fs.write(fd, buffer, offset, length[, position], callback)<span><a class="mark" href="#fs_fs_write_fd_buffer_offset_length_position_callback" id="fs_fs_write_fd_buffer_offset_length_position_callback">#</a></span></h2>
                 <div class="signature">
                     <ul>
