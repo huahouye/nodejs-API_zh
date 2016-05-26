@@ -258,9 +258,17 @@ fs.stat(&#39;/tmp/world&#39;, (err, stats) =&gt; {
   });
 });
 </code></pre>
-                <p>In busy processes, the programmer is <em>strongly encouraged</em> to use the asynchronous versions of these calls. The synchronous versions will block the entire process until they complete--halting all connections.</p>
-                <p>The relative path to a filename can be used. Remember, however, that this path will be relative to <code>process.cwd()</code>.</p>
-                <p>Most fs functions let you omit the callback argument. If you do, a default callback is used that rethrows errors. To get a trace to the original call site, set the <code>NODE_DEBUG</code> environment variable:</p>
+                <p>在高发的进程中，<em>强烈建议</em>程序员使用这些调用当发的异步版本。同步版本将会阻塞整个进程直至他们执行完成 -- 停止了所有的连接。</p>
+                <p>相对路径文件名可以使用，但切记，这样的路径将是相对于 <code>process.cwd()</code>。</p>
+                <p>大部分 fs 方法允许你无视回调这个参数，如果你这么干，那么一个默认用来再次抛出错误的回调会被调用。通过设置 <code>NODE_DEBUG</code> 环境变量可以要查看原始调用信息：</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>In busy processes, the programmer is <em>strongly encouraged</em> to use the asynchronous versions of these calls. The synchronous versions will block the entire process until they complete--halting all connections.</p>
+                        <p>The relative path to a filename can be used. Remember, however, that this path will be relative to <code>process.cwd()</code>.</p>
+                        <p>Most fs functions let you omit the callback argument. If you do, a default callback is used that rethrows errors. To get a trace to the original call site, set the <code>NODE_DEBUG</code> environment variable:</p>
+                    </div>
+                </div>
                 <pre><code>$ cat script.js
 function bad() {
   require(&#39;fs&#39;).readFile(&#39;/&#39;);
@@ -275,23 +283,42 @@ Error: EISDIR: illegal operation on a directory, read
     &lt;stack trace.&gt;
 </code></pre>
                 <h2>Buffer API<span><a class="mark" href="#fs_buffer_api" id="fs_buffer_api">#</a></span></h2>
-                <p><code>fs</code> functions support passing and receiving paths as both strings and Buffers. The latter is intended to make it possible to work with filesystems that allow for non-UTF-8 filenames. For most typical uses, working with paths
-                    as Buffers will be unnecessary, as the string API converts to and from UTF-8 automatically.</p>
-                <p><em>Note</em> that on certain file systems (such as NTFS and HFS+) filenames will always be encoded as UTF-8. On such file systems, passing non-UTF-8 encoded Buffers to <code>fs</code> functions will not work as expected.</p>
+                <p><code>fs</code> 方法同时支持传递和接受字符串和 Buffers 路径，后者是为了使允许 非-UTF-8 文件名的文件系统凑效成为可能。
+                    最典型的使用就是，对待路径如对待 Buffers 一样是没必要的，因为字符串 API 自动在字符串和 UTF-8 之间来回转换。</p>
+                <p><em>注意</em>：在某些文件系统(如 NTFS 和 HFS+) 文件名总是被编码为 UTF-8。在这类文件系统上传递 非-UTF-8 编码
+                    的 Buffers 给 <code>fs</code> 方法，见不能得到期望的结果。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <h2>Buffer API<span><a class="mark" href="#fs_buffer_api" id="fs_buffer_api">#</a></span></h2>
+                        <p><code>fs</code> functions support passing and receiving paths as both strings and Buffers. The latter is intended to make it possible to work with filesystems that allow for non-UTF-8 filenames. For most typical uses, working with paths
+                            as Buffers will be unnecessary, as the string API converts to and from UTF-8 automatically.</p>
+                        <p><em>Note</em> that on certain file systems (such as NTFS and HFS+) filenames will always be encoded as UTF-8. On such file systems, passing non-UTF-8 encoded Buffers to <code>fs</code> functions will not work as expected.</p>
+                    </div>
+                </div>
                 <h2>Class: fs.FSWatcher<span><a class="mark" href="#fs_class_fs_fswatcher" id="fs_class_fs_fswatcher">#</a></span></h2>
-                <p>Objects returned from <code>fs.watch()</code> are of this type.</p>
+                <p>从 <code>fs.watch()</code> 返回的对象都是这个类型。(Objects returned from <code>fs.watch()</code> are of this type.)</p>
                 <h3>Event: &#39;change&#39;<span><a class="mark" href="#fs_event_change" id="fs_event_change">#</a></span></h3>
                 <div class="signature">
                     <ul>
-                        <li><code>event</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> The type of fs change</li>
+                        <li><code>event</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> fs 发生变化的类型(The type of fs change)</li>
                         <li><code>filename</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a> | <a href="buffer.html#buffer_class_buffer" class="type">&lt;Buffer&gt;</a> The
-                            filename that changed (if relevant/available)</li>
+                            发生变化的文件的文件名(filename that changed (if relevant/available))</li>
                     </ul>
                 </div>
-                <p>Emitted when something changes in a watched directory or file. See more details in <a href="#fs_fs_watch_filename_options_listener"><code>fs.watch()</code></a>.</p>
-                <p>The <code>filename</code> argument may not be provided depending on operating system support. If <code>filename</code> is provided, it will be provided as a <code>Buffer</code> if
-                    <code>fs.watch()</code> is called with it&#39;s <code>encoding</code> option set to <code>&#39;buffer&#39;</code>, otherwise
-                    <code>filename</code> will be a string.</p>
+                <p>当被监视的目录或文件发生了某些变化时出发。详见 <a href="#fs_fs_watch_filename_options_listener"><code>fs.watch()</code></a>。</p>
+                <p><code>filename</code> 参数可能不会被提供，具体依操作系统的支持情况不同而定。
+                    参数 <code>encoding</code> 设置为 <code>&#39;buffer&#39;后调用</code>在 <code>fs.watch()</code>，
+                    如果 <code>filename</code> 有被给定(有时没有)，那么她将会是一个 <code>Buffer</code>。否则会是一个字符串。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Emitted when something changes in a watched directory or file. See more details in <a href="#fs_fs_watch_filename_options_listener"><code>fs.watch()</code></a>.</p>
+                        <p>The <code>filename</code> argument may not be provided depending on operating system support. If <code>filename</code> is provided, it will be provided as a <code>Buffer</code> if
+                            <code>fs.watch()</code> is called with it&#39;s <code>encoding</code> option set to <code>&#39;buffer&#39;</code>, otherwise
+                            <code>filename</code> will be a string.</p>
+                    </div>
+                </div>
                 <pre><code class="lang-js">fs.watch(&#39;./tmp&#39;, {encoding: &#39;buffer&#39;}, (event, filename) =&gt; {
   if (filename)
     console.log(filename);
@@ -304,24 +331,32 @@ Error: EISDIR: illegal operation on a directory, read
                         <li><code>error</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error" class="type">&lt;Error&gt;</a></li>
                     </ul>
                 </div>
-                <p>Emitted when an error occurs.</p>
+                <p>在发生错误时被触发。(Emitted when an error occurs.)</p>
                 <h3>watcher.close()<span><a class="mark" href="#fs_watcher_close" id="fs_watcher_close">#</a></span></h3>
-                <p>Stop watching for changes on the given <code>fs.FSWatcher</code>.</p>
+                <p>停止监视指定的 <code>fs.FSWatcher</code> 上的变化。(Stop watching for changes on the given <code>fs.FSWatcher</code>.)</p>
                 <h2>Class: fs.ReadStream<span><a class="mark" href="#fs_class_fs_readstream" id="fs_class_fs_readstream">#</a></span></h2>
-                <p><code>ReadStream</code> is a <a href="stream.html#stream_class_stream_readable">Readable Stream</a>.</p>
+                <p><code>ReadStream</code> 是一个 <a href="stream.html#stream_class_stream_readable">Readable Stream</a>。(<code>ReadStream</code> is a <a href="stream.html#stream_class_stream_readable">Readable Stream</a>.)</p>
                 <h3>Event: &#39;open&#39;<span><a class="mark" href="#fs_event_open" id="fs_event_open">#</a></span></h3>
                 <div class="signature">
                     <ul>
-                        <li><code>fd</code> <span class="type">&lt;Integer&gt;</span> Integer file descriptor used by the ReadStream.</li>
+                        <li><code>fd</code> <span class="type">&lt;Integer&gt;</span> 给 ReadStream 用的文件描述符整数。(Integer file descriptor used by the ReadStream.)</li>
                     </ul>
                 </div>
-                <p>Emitted when the ReadStream&#39;s file is opened.</p>
+                <p>在 ReadStream 的文件被打开时触发。(Emitted when the ReadStream&#39;s file is opened.)</p>
                 <h3>Event: &#39;close&#39;<span><a class="mark" href="#fs_event_close" id="fs_event_close">#</a></span></h3>
-                <p>Emitted when the <code>ReadStream</code>&#39;s underlying file descriptor has been closed using the <code>fs.close()</code> method.</p>
+                <p>在 ReadStream 的底层文件描述符已经被 <code>fs.close()</code> 方法关闭时触发。(Emitted when the <code>ReadStream</code>&#39;s underlying file descriptor has been closed using the <code>fs.close()</code> method.)</p>
                 <h3>readStream.path<span><a class="mark" href="#fs_readstream_path" id="fs_readstream_path">#</a></span></h3>
-                <p>The path to the file the stream is reading from as specified in the first argument to <code>fs.createReadStream()</code>. If <code>path</code> is passed as a string, then
-                    <code>readStream.path</code> will be a string. If <code>path</code> is passed as a <code>Buffer</code>, then
-                    <code>readStream.path</code> will be a <code>Buffer</code>.</p>
+                <p>指向流读取的文件的路径，由 <code>fs.createReadStream()</code> 接受的第一个参数指定。如果 <code>path</code> 传递的
+                    是字符串，那么， <code>readStream.path</code> 也将会是字符串。如果 <code>path</code> 传递的是一个 <code>Buffer</code>，
+                    那么 <code>readStream.path</code> 也将会是一个 <code>Buffer</code>。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>The path to the file the stream is reading from as specified in the first argument to <code>fs.createReadStream()</code>. If <code>path</code> is passed as a string, then
+                            <code>readStream.path</code> will be a string. If <code>path</code> is passed as a <code>Buffer</code>, then
+                            <code>readStream.path</code> will be a <code>Buffer</code>.</p>
+                    </div>
+                </div>
                 <h2>Class: fs.Stats<span><a class="mark" href="#fs_class_fs_stats" id="fs_class_fs_stats">#</a></span></h2>
                 <p><a href="#fs_fs_stat_path_callback"><code>fs.stat()</code></a>, <a href="#fs_fs_lstat_path_callback"><code>fs.lstat()</code></a> and <a href="#fs_fs_fstat_fd_callback"><code>fs.fstat()</code></a> 和他们的同步版本返回值都是对象类型。</p>
                 <div class="hhy-original-div">
@@ -1997,9 +2032,8 @@ fs.open(&#39;&lt;directory&gt;&#39;, &#39;a+&#39;, (err, fd) =&gt; {
                 <p><em>注意：当一个 <code>fs.watchFile</code> 操作导致一个 <code>ENOENT</code> 错误，她将会用所有的字段都归零(对于时间字段，使用 UNIX 新纪元)
                     的参数调用监听器一次。在 Windows 上 <code>blksize</code> 和 <code>blocks</code> 字段是 <code>undefined</code> 而不是零，如果文件稍后创建，
                     监听器将会再次被调用，接受的参数是最后一个状态(stat)对象。这个改变始于 v0.10.</em></p>
-                <p><em>Note: <a href="#fs_fs_watch_filename_options_listener"><code>fs.watch()</code></a> is more efficient than <code>fs.watchFile</code> and <code>fs.unwatchFile</code>.
-                    <code>fs.watch</code> should be used instead of <code>fs.watchFile</code> and <code>fs.unwatchFile</code>
-                    when possible.</em></p>
+                    <p><em>注意：<a href="#fs_fs_watch_filename_options_listener"><code>fs.watch()</code></a> 比 <code>fs.watchFile()</code> 和
+                         <code>fs.unwatchFile()</code> 更高效。应该尽可能使用 <code>fs.watch()</code> 来替换 <code>fs.watchFile()</code> 和 <code>fs.unwatchFile()</code></em></p>
                 <div class="hhy-original-div">
                     <button class="hhy-toggle-btn">原文</button>
                     <div class="hhy-original-text">
@@ -2026,14 +2060,26 @@ fs.open(&#39;&lt;directory&gt;&#39;, &#39;a+&#39;, (err, fd) =&gt; {
                         <li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
                     </ul>
                 </div>
-                <p>Write <code>buffer</code> to the file specified by <code>fd</code>.</p>
-                <p><code>offset</code> and <code>length</code> determine the part of the buffer to be written.</p>
-                <p><code>position</code> refers to the offset from the beginning of the file where this data should be written. If <code>typeof position !== &#39;number&#39;</code>, the data will be written at the current position. See <a href="http://man7.org/linux/man-pages/man2/pwrite.2.html">pwrite(2)</a>.</p>
-                <p>The callback will be given three arguments <code>(err, written, buffer)</code> where
-                    <code>written</code> specifies how many <em>bytes</em> were written from <code>buffer</code>.</p>
-                <p>Note that it is unsafe to use <code>fs.write</code> multiple times on the same file without waiting for the callback. For this scenario,
-                    <code>fs.createWriteStream</code> is strongly recommended.</p>
-                <p>On Linux, positional writes don&#39;t work when the file is opened in append mode. The kernel ignores the position argument and always appends the data to the end of the file.</p>
+                <p>把 <code>buffer</code> 写入到 <code>fd</code> 指明的文件。</p>
+                <p><code>offset</code> 和 <code>length</code> 确定 buffer 要写入的部分。</p>
+                <p><code>position</code> 特指从文件开始位置到数据该写入的位置之间的偏移量。如果 <code>typeof position !== &#39;number&#39;</code>，数据
+                    将从文件当前的位置开始写入。见 <a href="http://man7.org/linux/man-pages/man2/pwrite.2.html">pwrite(2)</a>。</p>
+                <p>回调接受桑参数 <code>(err, written, buffer)</code>，其中，<code>written</code> 指明从 <code>buffer</code> 被写入的数据的<em>字节</em>数。</p>
+                <p>注意，在同一个文件上多次调用 <code>fs.write</code> 却没有等待回调执行完毕这种方式是不安全的，针对这道情景，强烈推荐使用 <code>fs.createWriteStream</code>。</p>
+                <p>在 Linux 上，在以追加方式打开文件后，指定位置写入时没有作用的。内核忽略位置参数并总是追加数据到文件末尾。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Write <code>buffer</code> to the file specified by <code>fd</code>.</p>
+                        <p><code>offset</code> and <code>length</code> determine the part of the buffer to be written.</p>
+                        <p><code>position</code> refers to the offset from the beginning of the file where this data should be written. If <code>typeof position !== &#39;number&#39;</code>, the data will be written at the current position. See <a href="http://man7.org/linux/man-pages/man2/pwrite.2.html">pwrite(2)</a>.</p>
+                        <p>The callback will be given three arguments <code>(err, written, buffer)</code> where
+                            <code>written</code> specifies how many <em>bytes</em> were written from <code>buffer</code>.</p>
+                        <p>Note that it is unsafe to use <code>fs.write</code> multiple times on the same file without waiting for the callback. For this scenario,
+                            <code>fs.createWriteStream</code> is strongly recommended.</p>
+                        <p>On Linux, positional writes don&#39;t work when the file is opened in append mode. The kernel ignores the position argument and always appends the data to the end of the file.</p>
+                    </div>
+                </div>
                 <h2>fs.write(fd, data[, position[, encoding]], callback)<span><a class="mark" href="#fs_fs_write_fd_data_position_encoding_callback" id="fs_fs_write_fd_data_position_encoding_callback">#</a></span></h2>
                 <div class="signature">
                     <ul>
@@ -2044,15 +2090,29 @@ fs.open(&#39;&lt;directory&gt;&#39;, &#39;a+&#39;, (err, fd) =&gt; {
                         <li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
                     </ul>
                 </div>
-                <p>Write <code>data</code> to the file specified by <code>fd</code>. If <code>data</code> is not a Buffer instance then the value will be coerced to a string.</p>
-                <p><code>position</code> refers to the offset from the beginning of the file where this data should be written. If <code>typeof position !== &#39;number&#39;</code> the data will be written at the current position. See <a href="http://man7.org/linux/man-pages/man2/pwrite.2.html">pwrite(2)</a>.</p>
-                <p><code>encoding</code> is the expected string encoding.</p>
-                <p>The callback will receive the arguments <code>(err, written, string)</code> where <code>written</code> specifies how many <em>bytes</em> the passed string required to be written. Note that bytes written is not the same as string characters.
-                    See <a href="buffer.html#buffer_class_method_buffer_bytelength_string_encoding"><code>Buffer.byteLength</code></a>.</p>
-                <p>Unlike when writing <code>buffer</code>, the entire string must be written. No substring may be specified. This is because the byte offset of the resulting data may not be the same as the string offset.</p>
-                <p>Note that it is unsafe to use <code>fs.write</code> multiple times on the same file without waiting for the callback. For this scenario,
-                    <code>fs.createWriteStream</code> is strongly recommended.</p>
-                <p>On Linux, positional writes don&#39;t work when the file is opened in append mode. The kernel ignores the position argument and always appends the data to the end of the file.</p>
+                <p>把 <code>data</code> 写入到 <code>fd</code> 指明的文件。如果 <code>data</code> 不是 Buffer 实例，那么她的值将被强制转型为字符串。</p>
+                <p><code>position</code> 特指从文件开始位置到数据该写入的位置之间的偏移量。如果 <code>typeof position !== &#39;number&#39;</code>，数据
+                    将从文件当前的位置开始写入。见 <a href="http://man7.org/linux/man-pages/man2/pwrite.2.html">pwrite(2)</a>。</p>
+                <p><code>encoding</code> 期望的字符串字符编码。</p>
+                <p>回调接受 <code>(err, written, string)</code> 参数，其中，<code>written</code> 指明要被写入字符串的<em>字节</em>数。注意，写入的字节数
+                    和字符串的字符个数不总是一样，见 <a href="buffer.html#buffer_class_method_buffer_bytelength_string_encoding"><code>Buffer.byteLength</code></a>。</p>
+                <p>不同于写入 <code>buffer</code> 那样必须整个字符串被写入。不得指定子字符串。这是因为结果数据的字节偏移量和字符串的偏移量可能不一致。</p>
+                <p>注意，在同一个文件上多次调用 <code>fs.write</code> 却没有等待回调执行完毕这种方式是不安全的，针对这道情景，强烈推荐使用 <code>fs.createWriteStream</code>。</p>
+                <p>在 Linux 上，在以追加方式打开文件后，指定位置写入时没有作用的。内核忽略位置参数并总是追加数据到文件末尾。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Write <code>data</code> to the file specified by <code>fd</code>. If <code>data</code> is not a Buffer instance then the value will be coerced to a string.</p>
+                        <p><code>position</code> refers to the offset from the beginning of the file where this data should be written. If <code>typeof position !== &#39;number&#39;</code> the data will be written at the current position. See <a href="http://man7.org/linux/man-pages/man2/pwrite.2.html">pwrite(2)</a>.</p>
+                        <p><code>encoding</code> is the expected string encoding.</p>
+                        <p>The callback will receive the arguments <code>(err, written, string)</code> where <code>written</code> specifies how many <em>bytes</em> the passed string required to be written. Note that bytes written is not the same as string characters.
+                            See <a href="buffer.html#buffer_class_method_buffer_bytelength_string_encoding"><code>Buffer.byteLength</code></a>.</p>
+                        <p>Unlike when writing <code>buffer</code>, the entire string must be written. No substring may be specified. This is because the byte offset of the resulting data may not be the same as the string offset.</p>
+                        <p>Note that it is unsafe to use <code>fs.write</code> multiple times on the same file without waiting for the callback. For this scenario,
+                            <code>fs.createWriteStream</code> is strongly recommended.</p>
+                        <p>On Linux, positional writes don&#39;t work when the file is opened in append mode. The kernel ignores the position argument and always appends the data to the end of the file.</p>
+                    </div>
+                </div>
                 <h2>fs.writeFile(file, data[, options], callback)<span><a class="mark" href="#fs_fs_writefile_file_data_options_callback" id="fs_fs_writefile_file_data_options_callback">#</a></span></h2>
                 <div class="signature">
                     <ul>
@@ -2071,22 +2131,37 @@ fs.open(&#39;&lt;directory&gt;&#39;, &#39;a+&#39;, (err, fd) =&gt; {
                         <li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a></li>
                     </ul>
                 </div>
-                <p>Asynchronously writes data to a file, replacing the file if it already exists.
-                    <code>data</code> can be a string or a buffer.</p>
-                <p>The <code>encoding</code> option is ignored if <code>data</code> is a buffer. It defaults to <code>&#39;utf8&#39;</code>.</p>
-                <p>Example:</p>
+                <p>异步写数据到文件，如果文件已存在则替换掉她。<code>data</code> 可以是一个字符串或 buffer。</p>
+                <p>如果 <code>data</code> 是 buffer 的话，<code>encoding</code> 参数被忽略，默认 <code>&#39;utf8&#39;</code>。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Asynchronously writes data to a file, replacing the file if it already exists.
+                            <code>data</code> can be a string or a buffer.</p>
+                        <p>The <code>encoding</code> option is ignored if <code>data</code> is a buffer. It defaults to <code>&#39;utf8&#39;</code>.</p>
+                    </div>
+                </div>
+                <p>示例(Example)：</p>
                 <pre><code class="lang-js">fs.writeFile(&#39;message.txt&#39;, &#39;Hello Node.js&#39;, (err) =&gt; {
   if (err) throw err;
   console.log(&#39;It\&#39;s saved!&#39;);
 });
 </code></pre>
-                <p>If <code>options</code> is a string, then it specifies the encoding. Example:</p>
+                <p>如果 <code>options</code> 是字符串，那她指明的是字符编码，示例：(If <code>options</code> is a string, then it specifies the encoding.)</p>
                 <pre><code class="lang-js">fs.writeFile(&#39;message.txt&#39;, &#39;Hello Node.js&#39;, &#39;utf8&#39;, callback);
 </code></pre>
-                <p>Any specified file descriptor has to support writing.</p>
-                <p>Note that it is unsafe to use <code>fs.writeFile</code> multiple times on the same file without waiting for the callback. For this scenario,
-                    <code>fs.createWriteStream</code> is strongly recommended.</p>
-                <p><em>Note: Specified file descriptors will not be closed automatically.</em></p>
+                <p>指明的任何文件描述符都必须支持可写。</p>
+                <p>注意，在同一个文件上多次调用 <code>fs.writeFile</code> 却没有等待回调执行完毕这种方式是不安全的，针对这道情景，强烈推荐使用 <code>fs.createWriteStream</code>。</p>
+                <p><em>注意：指明的文件描述符不会自动关闭。</em></p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Any specified file descriptor has to support writing.</p>
+                        <p>Note that it is unsafe to use <code>fs.writeFile</code> multiple times on the same file without waiting for the callback. For this scenario,
+                            <code>fs.createWriteStream</code> is strongly recommended.</p>
+                        <p><em>Note: Specified file descriptors will not be closed automatically.</em></p>
+                    </div>
+                </div>
                 <h2>fs.writeFileSync(file, data[, options])<span><a class="mark" href="#fs_fs_writefilesync_file_data_options" id="fs_fs_writefilesync_file_data_options">#</a></span></h2>
                 <div class="signature">
                     <ul>
@@ -2104,7 +2179,13 @@ fs.open(&#39;&lt;directory&gt;&#39;, &#39;a+&#39;, (err, fd) =&gt; {
                         </li>
                     </ul>
                 </div>
-                <p>The synchronous version of <a href="#fs_fs_writefile_file_data_options_callback"><code>fs.writeFile()</code></a>. Returns <code>undefined</code>.</p>
+                <p><a href="#fs_fs_writefile_file_data_options_callback"><code>fs.writeFile()</code></a> 的同步版本。返回 <code>undefined</code>。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>The synchronous version of <a href="#fs_fs_writefile_file_data_options_callback"><code>fs.writeFile()</code></a>. Returns <code>undefined</code>.</p>
+                    </div>
+                </div>
                 <h2>fs.writeSync(fd, buffer, offset, length[, position])<span><a class="mark" href="#fs_fs_writesync_fd_buffer_offset_length_position" id="fs_fs_writesync_fd_buffer_offset_length_position">#</a></span></h2>
                 <div class="signature">
                     <ul>
@@ -2124,8 +2205,13 @@ fs.open(&#39;&lt;directory&gt;&#39;, &#39;a+&#39;, (err, fd) =&gt; {
                         <li><code>encoding</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type" class="type">&lt;String&gt;</a></li>
                     </ul>
                 </div>
-                <p>Synchronous versions of <a href="#fs_fs_write_fd_buffer_offset_length_position_callback"><code>fs.write()</code></a>. Returns the number of bytes written.</p>
-
+                <p><a href="#fs_fs_write_fd_buffer_offset_length_position_callback"><code>fs.write()</code></a> 的同步版本。返回被写入的字节数。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Synchronous versions of <a href="#fs_fs_write_fd_buffer_offset_length_position_callback"><code>fs.write()</code></a>. Returns the number of bytes written.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
