@@ -213,7 +213,8 @@
                 <p>为了全面支持各种可能的 HTTP 应用，Node.js 提供的 HTTP API 都很底层。它处理的只有流处理和消息解析。它把一份消息解析成报文头和报文体，
                     但是它不解析实际的报文头和报文体。</p>
                 <p>参考 <a href="#http_message_headers"><code>message.headers</code></a> 了解如何复制和处理文头。</p>
-                <p>The raw headers as they were received are retained in the <code>rawHeaders</code> property, which is an array of <code>[key, value, key2, value2, ...]</code>. For example, the previous message header object might have a <code>rawHeaders</code>                    list like the following:</p>
+                <p>接收到的原始报文头信息以数组形式 <code>[key, value, key2, value2, ...]</code> 保存在 <code>rawHeaders</code> 属性中. 例如,
+                    前面提到的消息对象可能会有 <code>rawHeaders</code> 列表如下：</p>
                 <div class="hhy-original-div">
                     <button class="hhy-toggle-btn">原文</button>
                     <div class="hhy-original-text">
@@ -232,25 +233,41 @@
   &#39;accepT&#39;, &#39;*/*&#39; ]
 </code></pre>
                 <h2>Class: http.Agent<span><a class="mark" href="#http_class_http_agent" id="http_class_http_agent">#</a></span></h2>
-                <p>The HTTP Agent is used for pooling sockets used in HTTP client requests.
-                </p>
-                <p>The HTTP Agent also defaults client requests to using Connection:keep-alive. If no pending HTTP requests are waiting on a socket to become free the socket is closed. This means that Node.js&#39;s pool has the benefit of keep-alive when
-                    under load but still does not require developers to manually close the HTTP clients using KeepAlive.
-                </p>
-                <p>If you opt into using HTTP KeepAlive, you can create an Agent object with that flag set to <code>true</code>. (See the <a href="#http_new_agent_options">constructor options</a>.) Then, the Agent will keep unused sockets in a pool for later
-                    use. They will be explicitly marked so as to not keep the Node.js process running. However, it is still a good idea to explicitly <a href="#http_agent_destroy"><code>destroy()</code></a> KeepAlive agents when they are no longer in
-                    use, so that the Sockets will be shut down.
-                </p>
-                <p>Sockets are removed from the agent&#39;s pool when the socket emits either a <code>&#39;close&#39;</code> event or a special <code>&#39;agentRemove&#39;</code> event. This means that if you intend to keep one HTTP request open for a long
-                    time and don&#39;t want it to stay in the pool you can do something along the lines of:</p>
+                <p>HTTP Agent 是用于把套接字做成资源池，用于 HTTP 客户端请求。</p>
+                <p>HTTP Agent 也把客户端的请求默认为使用 Connection:keep-alive。如果没有HTTP请求正在等待成为空闲的套接字的话，
+                    那么套接字将关闭。这意味着 keep-alive 给 Node.js 的资源池在负载带来好处是：当处于未满负荷状态时，
+                    仍然不需要开发人员使用 KeepAlive 来手动关闭 HTTP 客户端。</p>
+                <p>如果你选择使用 HTTP KeepAlive，那么你可以创建一个标志设为 <code>true</code> 的 Agent 对象。(见 <a href="#http_new_agent_options">构造函数参数</a>.)
+                    然后，Agent 将会在资源池中保持未被使用的套接字，用于后续使用。它们将会被显式标记，以致 Node.js 进程不会一直保持运行状态。
+                    但是，当 KeepAlive agent 没有被使用时，显式地 <a href="#http_agent_destroy"><code>destroy()</code></a> KeepAlive agent 仍然是个好主意，
+                    这样套接字们会被关闭。</p>
+                <p>当套接字触发了 <code>&#39;close&#39;</code> 事件或者专用的 <code>&#39;agentRemove&#39;</code> 事件时，套接字们会从 agent 的资源池中被移除。
+                    这意味着如果你打算保持一个 HTTP 请求长时间开启，并且不希望它保持在资源池中，你可以按下列代码来：</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>The HTTP Agent is used for pooling sockets used in HTTP client requests.
+                        </p>
+                        <p>The HTTP Agent also defaults client requests to using Connection:keep-alive. If no pending HTTP requests are waiting on a socket to become free the socket is closed. This means that Node.js&#39;s pool has the benefit of keep-alive when
+                            under load but still does not require developers to manually close the HTTP clients using KeepAlive.
+                        </p>
+                        <p>If you opt into using HTTP KeepAlive, you can create an Agent object with that flag set to <code>true</code>. (See the <a href="#http_new_agent_options">constructor options</a>.) Then, the Agent will keep unused sockets in a pool for later
+                            use. They will be explicitly marked so as to not keep the Node.js process running. However, it is still a good idea to explicitly <a href="#http_agent_destroy"><code>destroy()</code></a> KeepAlive agents when they are no longer in
+                            use, so that the Sockets will be shut down.
+                        </p>
+                        <p>Sockets are removed from the agent&#39;s pool when the socket emits either a <code>&#39;close&#39;</code> event or a special <code>&#39;agentRemove&#39;</code> event. This means that if you intend to keep one HTTP request open for a long
+                            time and don&#39;t want it to stay in the pool you can do something along the lines of:</p>
+                    </div>
+                </div>
                 <pre><code class="lang-js">http.get(options, (res) =&gt; {
   // Do stuff
 }).on(&#39;socket&#39;, (socket) =&gt; {
   socket.emit(&#39;agentRemove&#39;);
 });
 </code></pre>
-                <p>Alternatively, you could just opt out of pooling entirely using
-                    <code>agent:false</code>:</p>
+                <p>另一个选择，你可以直接使用 <code>agent:false</code> 选择完全停用资源池。
+                    (Alternatively, you could just opt out of pooling entirely using
+                    <code>agent:false</code>)：</p>
                 <pre><code class="lang-js">http.get({
   hostname: &#39;localhost&#39;,
   port: 80,
@@ -263,78 +280,208 @@
                 <h3>new Agent([options])<span><a class="mark" href="#http_new_agent_options" id="http_new_agent_options">#</a></span></h3>
                 <div class="signature">
                     <ul>
-                        <li><code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a> Set of configurable options to set on the agent. Can have the following fields:
+                        <li><code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a>
+                            设置于 agent 上的那些可配置选项的集合。可以有下列字段：
                             <ul>
-                                <li><code>keepAlive</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;Boolean&gt;</a> Keep sockets around in a pool to be used by other requests in the future.
-                                    Default = <code>false</code></li>
-                                <li><code>keepAliveMsecs</code> <span class="type">&lt;Integer&gt;</span> When using HTTP KeepAlive, how often to send TCP KeepAlive packets over sockets being kept alive. Default = <code>1000</code>. Only relevant if <code>keepAlive</code>                                    is set to <code>true</code>.</li>
-                                <li><code>maxSockets</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Number&gt;</a> Maximum number of sockets to allow per host. Default = <code>Infinity</code>.</li>
-                                <li><code>maxFreeSockets</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Number&gt;</a> Maximum number of sockets to leave open in a free state. Only relevant
-                                    if <code>keepAlive</code> is set to <code>true</code>. Default = <code>256</code>.</li>
+                                <li><code>keepAlive</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;Boolean&gt;</a>
+                                    在资源池中维持套接字，后续可被其它请求使用。默认 = <code>false</code></li>
+                                <li><code>keepAliveMsecs</code> <span class="type">&lt;Integer&gt;</span>
+                                    当使用 HTTP KeepAlive 时，通过保持活跃的套接字发送 TCP KeepAlive 数据包的频率(以毫秒计算)。默认 = <code>1000</code>。
+                                    只针对于如果 <code>keepAlive</code> 设置为 <code>true</code> 的情况</li>
+                                <li><code>maxSockets</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Number&gt;</a>
+                                    每台主机允许的套接字的数目的最大值。默认 = <code>无穷(Infinity)</code>。</li>
+                                <li><code>maxFreeSockets</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Number&gt;</a>
+                                    在空闲状态下还依然开启的套接字的最大值。仅当 <code>keepAlive</code> 设置为 <code>true</code> 时有效。默认 = <code>256</code>。</li>
                             </ul>
                         </li>
                     </ul>
                 </div>
-                <p>The default <a href="#http_http_globalagent"><code>http.globalAgent</code></a> that is used by <a href="#http_http_request_options_callback"><code>http.request()</code></a> has all of these values set to their respective defaults.</p>
-                <p>To configure any of them, you must create your own <a href="#http_class_http_agent"><code>http.Agent</code></a> object.</p>
+                <p>被 <a href="#http_http_request_options_callback"><code>http.request()</code></a> 使用的默认
+                    的 <a href="#http_http_globalagent"><code>http.globalAgent</code></a>，她所有的这些设置都被设置为对于的默认值。</p>
+                <p>要配置这些值，你必须创建你自己的 <a href="#http_class_http_agent"><code>http.Agent</code></a> 对象。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <div class="signature">
+                            <ul>
+                                <li><code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type">&lt;Object&gt;</a> Set of configurable options to set on the agent. Can have the following fields:
+                                    <ul>
+                                        <li><code>keepAlive</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type" class="type">&lt;Boolean&gt;</a> Keep sockets around in a pool to be used by other requests in the future.
+                                            Default = <code>false</code></li>
+                                        <li><code>keepAliveMsecs</code> <span class="type">&lt;Integer&gt;</span> When using HTTP KeepAlive, how often to send TCP KeepAlive packets over sockets being kept alive. Default = <code>1000</code>. Only relevant if <code>keepAlive</code>                                    is set to <code>true</code>.</li>
+                                        <li><code>maxSockets</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Number&gt;</a> Maximum number of sockets to allow per host. Default = <code>Infinity</code>.</li>
+                                        <li><code>maxFreeSockets</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Number&gt;</a> Maximum number of sockets to leave open in a free state. Only relevant
+                                            if <code>keepAlive</code> is set to <code>true</code>. Default = <code>256</code>.</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <p>The default <a href="#http_http_globalagent"><code>http.globalAgent</code></a> that is used by <a href="#http_http_request_options_callback"><code>http.request()</code></a> has all of these values set to their respective defaults.</p>
+                        <p>To configure any of them, you must create your own <a href="#http_class_http_agent"><code>http.Agent</code></a> object.</p>
+                    </div>
+                </div>
                 <pre><code class="lang-js">const http = require(&#39;http&#39;);
 var keepAliveAgent = new http.Agent({ keepAlive: true });
 options.agent = keepAliveAgent;
 http.request(options, onResponseCallback);
 </code></pre>
                 <h3>agent.createConnection(options[, callback])<span><a class="mark" href="#http_agent_createconnection_options_callback" id="http_agent_createconnection_options_callback">#</a></span></h3>
-                <p>Produces a socket/stream to be used for HTTP requests.</p>
-                <p>By default, this function is the same as <a href="net.html#net_net_createconnection_options_connectlistener"><code>net.createConnection()</code></a>. However, custom Agents may override this method in case greater flexibility is desired.</p>
-                <p>A socket/stream can be supplied in one of two ways: by returning the socket/stream from this function, or by passing the socket/stream to <code>callback</code>.</p>
-                <p><code>callback</code> has a signature of <code>(err, stream)</code>.</p>
+                <p>为 HTTP 请求产生一个套接字/流。</p>
+                <p>默认，这个方法和 <a href="net.html#net_net_createconnection_options_connectlistener"><code>net.createConnection()</code></a> 一样。
+                    但在这个方法里面使用自定义的重载的 Agent 的情况下非常的灵活。</p>
+                <p>一个套接字/流可以以两种方式提供：从这个方法里面返回一个套接字/流，或传递一个套接字/流给回调。</p>
+                <p><code>callback</code> 函数签名带两个参数 <code>(err, stream)</code>。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Produces a socket/stream to be used for HTTP requests.</p>
+                        <p>By default, this function is the same as <a href="net.html#net_net_createconnection_options_connectlistener"><code>net.createConnection()</code></a>. However, custom Agents may override this method in case greater flexibility is desired.</p>
+                        <p>A socket/stream can be supplied in one of two ways: by returning the socket/stream from this function, or by passing the socket/stream to <code>callback</code>.</p>
+                        <p><code>callback</code> has a signature of <code>(err, stream)</code>.</p>
+                    </div>
+                </div>
                 <h3>agent.destroy()<span><a class="mark" href="#http_agent_destroy" id="http_agent_destroy">#</a></span></h3>
-                <p>Destroy any sockets that are currently in use by the agent.</p>
-                <p>It is usually not necessary to do this. However, if you are using an agent with KeepAlive enabled, then it is best to explicitly shut down the agent when you know that it will no longer be used. Otherwise, sockets may hang open for quite
-                    a long time before the server terminates them.</p>
+                <p>销毁当前被此 agent 占用的任何套接字。</p>
+                <p>通常并不需要这样做。但是，如果 agent 开启了 KeepAlive，那么当我们知道一个保持连接的代理不会再被用到时，最好还是把它关掉。
+                    否则，套接字在被服务器结束之前可能会保持相当长的一段时间的打开状态。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Destroy any sockets that are currently in use by the agent.</p>
+                        <p>It is usually not necessary to do this. However, if you are using an agent with KeepAlive enabled, then it is best to explicitly shut down the agent when you know that it will no longer be used. Otherwise, sockets may hang open for quite
+                            a long time before the server terminates them.</p>
+                    </div>
+                </div>
                 <h3>agent.freeSockets<span><a class="mark" href="#http_agent_freesockets" id="http_agent_freesockets">#</a></span></h3>
-                <p>An object which contains arrays of sockets currently awaiting use by the Agent when HTTP KeepAlive is used. Do not modify.</p>
+                <p>一个数组，在 HTTP KeepAlive 开启时，数组里面包含了那些等待被 Agent 使用的套接字。请不要修改。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>An object which contains arrays of sockets currently awaiting use by the Agent when HTTP KeepAlive is used. Do not modify.</p>
+                    </div>
+                </div>
                 <h3>agent.getName(options)<span><a class="mark" href="#http_agent_getname_options" id="http_agent_getname_options">#</a></span></h3>
-                <p>Get a unique name for a set of request options, to determine whether a connection can be reused. In the http agent, this returns
-                    <code>host:port:localAddress</code>. In the https agent, the name includes the CA, cert, ciphers, and other HTTPS/TLS-specific options that determine socket reusability.</p>
-                <p>Options:</p>
+                <p>为一组请求选项(options)集合获得一个独一无二的名称，来决定是否一个连接是否可复用。 在 http 代理中，它将返回 <code>host:port:localAddress</code>。
+                    在 https 代理中，这个名称包含CA、cert、ciphers和其他 HTTPS/TLS 特殊选项来决定一个套接字的可复用性。</p>
+                <p>选项：</p>
                 <ul>
-                    <li><code>host</code>: A domain name or IP address of the server to issue the request to.</li>
-                    <li><code>port</code>: Port of remote server.</li>
-                    <li><code>localAddress</code>: Local interface to bind for network connections when issuing the request.</li>
+                    <li><code>host</code>: 发出请求的目标服务器的域名或 IP 地址。</li>
+                    <li><code>port</code>: 远程服务器的端口。</li>
+                    <li><code>localAddress</code>: 当发出请求时，绑定给网络连接的本地接口。</li>
                 </ul>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Get a unique name for a set of request options, to determine whether a connection can be reused. In the http agent, this returns
+                            <code>host:port:localAddress</code>. In the https agent, the name includes the CA, cert, ciphers, and other HTTPS/TLS-specific options that determine socket reusability.</p>
+                        <p>Options:</p>
+                        <ul>
+                            <li><code>host</code>: A domain name or IP address of the server to issue the request to.</li>
+                            <li><code>port</code>: Port of remote server.</li>
+                            <li><code>localAddress</code>: Local interface to bind for network connections when issuing the request.</li>
+                        </ul>
+                    </div>
+                </div>
                 <h3>agent.maxFreeSockets<span><a class="mark" href="#http_agent_maxfreesockets" id="http_agent_maxfreesockets">#</a></span></h3>
-                <p>By default set to 256. For Agents supporting HTTP KeepAlive, this sets the maximum number of sockets that will be left open in the free state.
-                </p>
+                <p>默认为 256，因为 Agents 支持 HTTP KeepAlive，所以这个参数设置的是套接字在空闲状态下保持打开状态的最大数目。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>By default set to 256. For Agents supporting HTTP KeepAlive, this sets the maximum number of sockets that will be left open in the free state.</p>
+                    </div>
+                </div>
                 <h3>agent.maxSockets<span><a class="mark" href="#http_agent_maxsockets" id="http_agent_maxsockets">#</a></span></h3>
-                <p>By default set to Infinity. Determines how many concurrent sockets the agent can have open per origin. Origin is either a &#39;host:port&#39; or &#39;host:port:localAddress&#39; combination.</p>
+                <p>默认为无穷(Infinity)。决定每打开一个源，代理 agnet 可以占有的并发套接字的数量。源是一个 &#39;host:port&#39; 或 &#39;host:port:localAddress&#39; 组合。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>By default set to Infinity. Determines how many concurrent sockets the agent can have open per origin. Origin is either a &#39;host:port&#39; or &#39;host:port:localAddress&#39; combination.</p>
+                    </div>
+                </div>
                 <h3>agent.requests<span><a class="mark" href="#http_agent_requests" id="http_agent_requests">#</a></span></h3>
-                <p>An object which contains queues of requests that have not yet been assigned to sockets. Do not modify.</p>
+                <p>一个保存还没有指定套接字的请求队列对象。请不要修改。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>An object which contains queues of requests that have not yet been assigned to sockets. Do not modify.</p>
+                    </div>
+                </div>
                 <h3>agent.sockets<span><a class="mark" href="#http_agent_sockets" id="http_agent_sockets">#</a></span></h3>
-                <p>An object which contains arrays of sockets currently in use by the Agent. Do not modify.</p>
+                <p>一个保存当前被代理使用的套接字的数组对象。请不要修改。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>An object which contains arrays of sockets currently in use by the Agent. Do not modify.</p>
+                    </div>
+                </div>
                 <h2>Class: http.ClientRequest<span><a class="mark" href="#http_class_http_clientrequest" id="http_class_http_clientrequest">#</a></span></h2>
-                <p>This object is created internally and returned from <a href="#http_http_request_options_callback"><code>http.request()</code></a>. It represents an <em>in-progress</em> request whose header has already been queued. The header is still
-                    mutable using the <code>setHeader(name, value)</code>, <code>getHeader(name)</code>,
-                    <code>removeHeader(name)</code> API. The actual header will be sent along with the first data chunk or when closing the connection.</p>
-                <p>To get the response, add a listener for <code>&#39;response&#39;</code> to the request object.
-                    <code>&#39;response&#39;</code> will be emitted from the request object when the response headers have been received. The <code>&#39;response&#39;</code> event is executed with one argument which is an instance of <a href="#http_class_http_incomingmessage"><code>http.IncomingMessage</code></a>.</p>
-                <p>During the <code>&#39;response&#39;</code> event, one can add listeners to the response object; particularly to listen for the <code>&#39;data&#39;</code> event.</p>
-                <p>If no <code>&#39;response&#39;</code> handler is added, then the response will be entirely discarded. However, if you add a <code>&#39;response&#39;</code> event handler, then you <strong>must</strong> consume the data from the response
-                    object, either by calling <code>response.read()</code> whenever there is a <code>&#39;readable&#39;</code> event, or by adding a <code>&#39;data&#39;</code> handler, or by calling the <code>.resume()</code> method. Until the data is
-                    consumed, the <code>&#39;end&#39;</code> event will not fire. Also, until the data is read it will consume memory that can eventually lead to a &#39;process out of memory&#39; error.</p>
-                <p>Note: Node.js does not check whether Content-Length and the length of the body which has been transmitted are equal or not.</p>
-                <p>The request implements the <a href="stream.html#stream_class_stream_writable">Writable Stream</a> interface. This is an
-                    <a href="events.html#events_class_eventemitter"><code>EventEmitter</code></a> with the following events:</p>
+                <p>该对象在内部创建，并由 <a href="#http_http_request_options_callback"><code>http.request()</code></a> 返回。它表示着一个<em>正在处理</em>的请求，
+                    其头部已经进入请求队列。该头部仍然可以通过 <code>setHeader(name, value)</code>、<code>getHeader(name)</code>、<code>removeHeader(name)</code>
+                    等 API 进行修改。实际的头部将会随着第一个数据块发送或在连接关闭时发送。</p>
+                <p>为了获得响应对象，得给请求对象添加一个 <code>&#39;response&#39;</code> 监听器。当接收到响应头时，请求对象将会触发 <code>&#39;response&#39;</code>。
+                    <code>&#39;response&#39;</code> 事件执行时带一个参数，该参数为 <a href="#http_class_http_incomingmessage"><code>http.IncomingMessage</code></a>
+                    的一个实例。</p>
+                <p>在 <code>&#39;response&#39;</code> 事件期间，可以为响应对象添加监听器，尤其是监听 <code>&#39;data&#39;</code> 事件。</p>
+                <p>如果没有添加 <code>&#39;response&#39;</code> 处理函数，响应将被完全丢弃。然而，如果你添加了一个 <code>&#39;response&#39;</code> 事件处理函数，
+                    那么你<strong>必须</strong>消费掉响应对象过来的数据：
+                    可以在有 <code>&#39;readable&#39;</code> 事件时调用 <code>response.read()</code>，或添加一个<code>&#39;data&#39;</code>处理函数，
+                    也可以调用 <code>.resume()</code> 方法。直到数据被消费掉后，<code>&#39;end&#39;</code> 事件被触发。
+                    如果数据未被读取，它将会消耗内存，最终产生 'process out of memory' 错误。</p>
+                <p>注意：Node.js 不会检查 Content-Length 和被传输的报文体长度是否相同。</p>
+                <p>该请求实现了 <a href="stream.html#stream_class_stream_writable">Writable Stream</a> 接口。这是一个包含下列事件
+                    的 <a href="events.html#events_class_eventemitter"><code>EventEmitter</code></a>：</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>This object is created internally and returned from <a href="#http_http_request_options_callback"><code>http.request()</code></a>. It represents an <em>in-progress</em> request whose header has already been queued. The header is still
+                            mutable using the <code>setHeader(name, value)</code>, <code>getHeader(name)</code>,
+                            <code>removeHeader(name)</code> API. The actual header will be sent along with the first data chunk or when closing the connection.</p>
+                        <p>To get the response, add a listener for <code>&#39;response&#39;</code> to the request object.
+                            <code>&#39;response&#39;</code> will be emitted from the request object when the response headers have been received. The <code>&#39;response&#39;</code> event is executed with one argument which is an instance of <a href="#http_class_http_incomingmessage"><code>http.IncomingMessage</code></a>.</p>
+                        <p>During the <code>&#39;response&#39;</code> event, one can add listeners to the response object; particularly to listen for the <code>&#39;data&#39;</code> event.</p>
+                        <p>If no <code>&#39;response&#39;</code> handler is added, then the response will be entirely discarded. However, if you add a <code>&#39;response&#39;</code> event handler, then you <strong>must</strong> consume the data from the response
+                            object, either by calling <code>response.read()</code> whenever there is a <code>&#39;readable&#39;</code> event, or by adding a <code>&#39;data&#39;</code> handler, or by calling the <code>.resume()</code> method. Until the data is
+                            consumed, the <code>&#39;end&#39;</code> event will not fire. Also, until the data is read it will consume memory that can eventually lead to a &#39;process out of memory&#39; error.</p>
+                        <p>Note: Node.js does not check whether Content-Length and the length of the body which has been transmitted are equal or not.</p>
+                        <p>The request implements the <a href="stream.html#stream_class_stream_writable">Writable Stream</a> interface. This is an
+                            <a href="events.html#events_class_eventemitter"><code>EventEmitter</code></a> with the following events:</p>
+                    </div>
+                </div>
                 <h3>Event: &#39;abort&#39;<span><a class="mark" href="#http_event_abort" id="http_event_abort">#</a></span></h3>
                 <p><code>function () { }</code></p>
-                <p>Emitted when the request has been aborted by the client. This event is only emitted on the first call to <code>abort()</code>.</p>
+                <p>当请求被客户端终止掉是触发。该事件只在首次调用 <code>abort()</code> 触发。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Emitted when the request has been aborted by the client. This event is only emitted on the first call to <code>abort()</code>.</p>
+                    </div>
+                </div>
                 <h3>Event: &#39;checkExpectation&#39;<span><a class="mark" href="#http_event_checkexpectation" id="http_event_checkexpectation">#</a></span></h3>
                 <p><code>function (request, response) { }</code></p>
-                <p>Emitted each time a request with an http Expect header is received, where the value is not 100-continue. If this event isn&#39;t listened for, the server will automatically respond with a 417 Expectation Failed as appropriate.</p>
-                <p>Note that when this event is emitted and handled, the <code>request</code> event will not be emitted.</p>
+                <p>每当接受到带有 http 期望报文头(http Expect header)的请求时触发。该期望值不是 100-继续。如果这个时间没有被监听，那么服务器会酌情自动以
+                    一个代号 417 请求头 Expect 中指定的预期内容无法被服务器满足(417 Expectation Failed)做回应。</p>
+                <p>(译者：在这里 <a target="_blank" href="https://zh.wikipedia.org/wiki/HTTP%E7%8A%B6%E6%80%81%E7%A0%81">HTTP状态码</a> 可以了解 100-Continue、417 状态码。)</p>
+            <p>注意，如果这个事件被触发和处理掉了，那 <code>request</code> 事件将不会被触发。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p><code>function (request, response) { }</code></p>
+                        <p>Emitted each time a request with an http Expect header is received, where the value is not 100-continue. If this event isn&#39;t listened for, the server will automatically respond with a 417 Expectation Failed as appropriate.</p>
+                        <p>Note that when this event is emitted and handled, the <code>request</code> event will not be emitted.</p>
+                    </div>
+                </div>
                 <h3>Event: &#39;connect&#39;<span><a class="mark" href="#http_event_connect" id="http_event_connect">#</a></span></h3>
                 <p><code>function (response, socket, head) { }</code></p>
-                <p>Emitted each time a server responds to a request with a <code>CONNECT</code> method. If this event isn&#39;t being listened for, clients receiving a <code>CONNECT</code> method will have their connections closed.</p>
-                <p>A client server pair that show you how to listen for the <code>&#39;connect&#39;</code> event.</p>
+                <p>每当服务器用 <code>CONNECT</code> 方法回应一个客户端请求时触发。如果未监听该事件，那些接受 <code>CONNECT</code> 方法的客户端会关闭她们自己的连接。</p>
+                <p>下面一组客户端服务器对，展示如何监听 <code>&#39;connect&#39;</code> 事件。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p><code>function (response, socket, head) { }</code></p>
+                        <p>Emitted each time a server responds to a request with a <code>CONNECT</code> method. If this event isn&#39;t being listened for, clients receiving a <code>CONNECT</code> method will have their connections closed.</p>
+                        <p>A client server pair that show you how to listen for the <code>&#39;connect&#39;</code> event.</p>
+                    </div>
+                </div>
                 <pre><code class="lang-js">const http = require(&#39;http&#39;);
 const net = require(&#39;net&#39;);
 const url = require(&#39;url&#39;);
@@ -390,17 +537,36 @@ proxy.listen(1337, &#39;127.0.0.1&#39;, () =&gt; {
 </code></pre>
                 <h3>Event: &#39;continue&#39;<span><a class="mark" href="#http_event_continue" id="http_event_continue">#</a></span></h3>
                 <p><code>function () { }</code></p>
-                <p>Emitted when the server sends a &#39;100 Continue&#39; HTTP response, usually because the request contained &#39;Expect: 100-continue&#39;. This is an instruction that the client should send the request body.</p>
+                <p>当服务器发送一个 &#39;100 Continue&#39; HTTP 回应是触发，通常，这个回应包含了 &#39;Expect: 100-continue&#39;。这是一条指令让客户端必须发生请求报文体。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Emitted when the server sends a &#39;100 Continue&#39; HTTP response, usually because the request contained &#39;Expect: 100-continue&#39;. This is an instruction that the client should send the request body.</p>
+                    </div>
+                </div>
                 <h3>Event: &#39;response&#39;<span><a class="mark" href="#http_event_response" id="http_event_response">#</a></span></h3>
                 <p><code>function (response) { }</code></p>
-                <p>Emitted when a response is received to this request. This event is emitted only once. The <code>response</code> argument will be an instance of <a href="#http_class_http_incomingmessage"><code>http.IncomingMessage</code></a>.</p>
+                <p>当该请求接收到响应时触发，该事件只被触发一次。<code>response</code> 参数是 <a href="#http_class_http_incomingmessage"><code>http.IncomingMessage</code></a> 的一个实例。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Emitted when a response is received to this request. This event is emitted only once. The <code>response</code> argument will be an instance of <a href="#http_class_http_incomingmessage"><code>http.IncomingMessage</code></a>.</p>
+                    </div>
+                </div>
                 <h3>Event: &#39;socket&#39;<span><a class="mark" href="#http_event_socket" id="http_event_socket">#</a></span></h3>
                 <p><code>function (socket) { }</code></p>
-                <p>Emitted after a socket is assigned to this request.</p>
+                <p>在一个套接字被赋予这个请求的时候触发(Emitted after a socket is assigned to this request)。</p>
                 <h3>Event: &#39;upgrade&#39;<span><a class="mark" href="#http_event_upgrade" id="http_event_upgrade">#</a></span></h3>
                 <p><code>function (response, socket, head) { }</code></p>
-                <p>Emitted each time a server responds to a request with an upgrade. If this event isn&#39;t being listened for, clients receiving an upgrade header will have their connections closed.</p>
-                <p>A client server pair that show you how to listen for the <code>&#39;upgrade&#39;</code> event.</p>
+                <p>每当服务器返回 upgrade 响应给请求时触发。如果该事件未被监听，接受 upgrade 报文头的客户端将关闭她们自己的连接。</p>
+                <p>下面一组客户端服务器对，展示如何监听  <code>&#39;upgrade&#39;</code> 事件。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Emitted each time a server responds to a request with an upgrade. If this event isn&#39;t being listened for, clients receiving an upgrade header will have their connections closed.</p>
+                        <p>A client server pair that show you how to listen for the <code>&#39;upgrade&#39;</code> event.</p>
+                    </div>
+                </div>
                 <pre><code class="lang-js">const http = require(&#39;http&#39;);
 
 // Create an HTTP server
@@ -441,39 +607,93 @@ srv.listen(1337, &#39;127.0.0.1&#39;, () =&gt; {
 });
 </code></pre>
                 <h3>request.abort()<span><a class="mark" href="#http_request_abort" id="http_request_abort">#</a></span></h3>
-                <p>Marks the request as aborting. Calling this will cause remaining data in the response to be dropped and the socket to be destroyed.</p>
+                <p>终止一个请求。调用了这个方法将导致留在回应报文里面的数据被丢弃、套接字被销毁。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Marks the request as aborting. Calling this will cause remaining data in the response to be dropped and the socket to be destroyed.</p>
+                    </div>
+                </div>
                 <h3>request.end([data][, encoding][, callback])<span><a class="mark" href="#http_request_end_data_encoding_callback" id="http_request_end_data_encoding_callback">#</a></span></h3>
-                <p>Finishes sending the request. If any parts of the body are unsent, it will flush them to the stream. If the request is chunked, this will send the terminating <code>&#39;0\r\n\r\n&#39;</code>.</p>
-                <p>If <code>data</code> is specified, it is equivalent to calling
-                    <a href="#http_response_write_chunk_encoding_callback"><code>response.write(data, encoding)</code></a> followed by <code>request.end(callback)</code>.</p>
-                <p>If <code>callback</code> is specified, it will be called when the request stream is finished.</p>
+                <p>结束发送请求。如果请求体的某些部分还未发送，该函数将会把它们刷新到流中。如果该请求是分块的，该方法将会发送终结符<code>&#39;0\r\n\r\n&#39;</code>。</p>
+                <p>如果指定了 <code>data</code>，那么等价于先调用 <a href="#http_response_write_chunk_encoding_callback"><code>response.write(data, encoding)</code></a>，
+                    随后调用 <code>request.end(callback)</code>。</p>
+                <p>如果指定了 <code>callback</code>，函数会在请求流完成后调用。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Finishes sending the request. If any parts of the body are unsent, it will flush them to the stream. If the request is chunked, this will send the terminating <code>&#39;0\r\n\r\n&#39;</code>.</p>
+                        <p>If <code>data</code> is specified, it is equivalent to calling
+                            <a href="#http_response_write_chunk_encoding_callback"><code>response.write(data, encoding)</code></a> followed by <code>request.end(callback)</code>.</p>
+                        <p>If <code>callback</code> is specified, it will be called when the request stream is finished.</p>
+                    </div>
+                </div>
                 <h3>request.flushHeaders()<span><a class="mark" href="#http_request_flushheaders" id="http_request_flushheaders">#</a></span></h3>
-                <p>Flush the request headers.</p>
-                <p>For efficiency reasons, Node.js normally buffers the request headers until you call <code>request.end()</code> or write the first chunk of request data. It then tries hard to pack the request headers and data into a single TCP packet.</p>
-                <p>That&#39;s usually what you want (it saves a TCP round-trip) but not when the first data isn&#39;t sent until possibly much later. <code>request.flushHeaders()</code> lets you bypass the optimization and kickstart the request.</p>
+                <p>刷入请求头。</p>
+                <p>出于效率的原因，Node.js 通常缓冲了请求头知道你调用 <code>request.end()</code> 或写第一块请求数据，然后方法努力打包请求头和数据到一个单一的 TCP 封包。</p>
+                <p>一般地，这个就是你要的(节省了 TCP 往返开销)，但第一个数据可能很久以后才会被发送。<code>request.flushHeaders()</code> 让你绕过这个优化去启动请求。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Flush the request headers.</p>
+                        <p>For efficiency reasons, Node.js normally buffers the request headers until you call <code>request.end()</code> or write the first chunk of request data. It then tries hard to pack the request headers and data into a single TCP packet.</p>
+                        <p>That&#39;s usually what you want (it saves a TCP round-trip) but not when the first data isn&#39;t sent until possibly much later. <code>request.flushHeaders()</code> lets you bypass the optimization and kickstart the request.</p>
+                    </div>
+                </div>
                 <h3>request.setNoDelay([noDelay])<span><a class="mark" href="#http_request_setnodelay_nodelay" id="http_request_setnodelay_nodelay">#</a></span></h3>
-                <p>Once a socket is assigned to this request and is connected
-                    <a href="net.html#net_socket_setnodelay_nodelay"><code>socket.setNoDelay()</code></a> will be called.</p>
+                <p>一旦一个套接字被分配给该请求并且已连接，<a href="net.html#net_socket_setnodelay_nodelay"><code>socket.setNoDelay()</code></a> 将会被调用。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Once a socket is assigned to this request and is connected
+                            <a href="net.html#net_socket_setnodelay_nodelay"><code>socket.setNoDelay()</code></a> will be called.</p>
+                    </div>
+                </div>
                 <h3>request.setSocketKeepAlive([enable][, initialDelay])<span><a class="mark" href="#http_request_setsocketkeepalive_enable_initialdelay" id="http_request_setsocketkeepalive_enable_initialdelay">#</a></span></h3>
-                <p>Once a socket is assigned to this request and is connected
-                    <a href="net.html#net_socket_setkeepalive_enable_initialdelay"><code>socket.setKeepAlive()</code></a> will be called.</p>
+                <p>一旦一个套接字被分配到这个请求，而且已连接，<a href="net.html#net_socket_setkeepalive_enable_initialdelay"><code>socket.setKeepAlive()</code></a> 就会被调用。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Once a socket is assigned to this request and is connected <a href="net.html#net_socket_setkeepalive_enable_initialdelay"><code>socket.setKeepAlive()</code></a> will be called.</p>
+                    </div>
+                </div>
                 <h3>request.setTimeout(timeout[, callback])<span><a class="mark" href="#http_request_settimeout_timeout_callback" id="http_request_settimeout_timeout_callback">#</a></span></h3>
-                <p>Once a socket is assigned to this request and is connected
-                    <a href="net.html#net_socket_settimeout_timeout_callback"><code>socket.setTimeout()</code></a> will be called.</p>
+                <p>一旦一个套接字被分配到这个请求，而且已连接， <a href="net.html#net_socket_settimeout_timeout_callback"><code>socket.setTimeout()</code></a> 就会被调用。</p>
                 <ul>
-                    <li><code>timeout</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Number&gt;</a> Milliseconds before a request is considered to be timed out.</li>
-                    <li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a> Optional function to be called when a timeout occurs. Same as binding to the
-                        <code>timeout</code> event.</li>
+                    <li><code>timeout</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Number&gt;</a> 请求超时的毫秒数。</li>
+                    <li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a> 可选方法，在超时时调用，和绑定到 <code>timeout</code> 事件一样。</li>
                 </ul>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Once a socket is assigned to this request and is connected
+                            <a href="net.html#net_socket_settimeout_timeout_callback"><code>socket.setTimeout()</code></a> will be called.</p>
+                        <ul>
+                            <li><code>timeout</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type" class="type">&lt;Number&gt;</a> Milliseconds before a request is considered to be timed out.</li>
+                            <li><code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type">&lt;Function&gt;</a> Optional function to be called when a timeout occurs. Same as binding to the
+                                <code>timeout</code> event.</li>
+                        </ul>
+                    </div>
+                </div>
                 <h3>request.write(chunk[, encoding][, callback])<span><a class="mark" href="#http_request_write_chunk_encoding_callback" id="http_request_write_chunk_encoding_callback">#</a></span></h3>
-                <p>Sends a chunk of the body. By calling this method many times, the user can stream a request body to a server--in that case it is suggested to use the
-                    <code>[&#39;Transfer-Encoding&#39;, &#39;chunked&#39;]</code> header line when creating the request.</p>
-                <p>The <code>chunk</code> argument should be a <a href="buffer.html#buffer_buffer"><code>Buffer</code></a> or a string.</p>
-                <p>The <code>encoding</code> argument is optional and only applies when <code>chunk</code> is a string. Defaults to <code>&#39;utf8&#39;</code>.</p>
-                <p>The <code>callback</code> argument is optional and will be called when this chunk of data is flushed.</p>
-                <p>Returns <code>request</code>.</p>
+                <p>发送一块请求体。调用该方法多次，用户可以流式地发送请求体至服务器——在这种情况下，建议创建请求时使用<code>[&#39;Transfer-Encoding&#39;, &#39;chunked&#39;]</code>头。</p>
+                <p><code>chunk</code> 参数必须是 <a href="buffer.html#buffer_buffer"><code>Buffer</code></a> 或者 string。</p>
+                <p><code>encoding</code> 参数是可选的, 并且只能在 <code>chunk</code> 是 string 类型的时候才能设置. 默认是 <code>&#39;utf8&#39;</code>。</p>
+                <p><code>callback</code> 参数可选，当块数据被刷入是调用。</p>
+                <p>返回 <code>request</code>。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Sends a chunk of the body. By calling this method many times, the user can stream a request body to a server--in that case it is suggested to use the
+                            <code>[&#39;Transfer-Encoding&#39;, &#39;chunked&#39;]</code> header line when creating the request.</p>
+                        <p>The <code>chunk</code> argument should be a <a href="buffer.html#buffer_buffer"><code>Buffer</code></a> or a string.</p>
+                        <p>The <code>encoding</code> argument is optional and only applies when <code>chunk</code> is a string. Defaults to <code>&#39;utf8&#39;</code>.</p>
+                        <p>The <code>callback</code> argument is optional and will be called when this chunk of data is flushed.</p>
+                        <p>Returns <code>request</code>.</p>
+                    </div>
+                </div>
                 <h2>Class: http.Server<span><a class="mark" href="#http_class_http_server" id="http_class_http_server">#</a></span></h2>
-                <p>This class inherits from <a href="net.html#net_class_net_server"><code>net.Server</code></a> and has the following additional events:</p>
+                <p>继承于 <a href="net.html#net_class_net_server"><code>net.Server</code></a> 且有下列这些额外的事件(This class inherits from <a href="net.html#net_class_net_server"><code>net.Server</code></a> and has the following additional events)：</p>
                 <h3>Event: &#39;checkContinue&#39;<span><a class="mark" href="#http_event_checkcontinue" id="http_event_checkcontinue">#</a></span></h3>
                 <p><code>function (request, response) { }</code></p>
                 <p>Emitted each time a request with an http Expect: 100-continue is received. If this event isn&#39;t listened for, the server will automatically respond with a 100 Continue as appropriate.</p>
