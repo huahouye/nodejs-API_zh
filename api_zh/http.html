@@ -696,16 +696,34 @@ srv.listen(1337, &#39;127.0.0.1&#39;, () =&gt; {
                 <p>继承于 <a href="net.html#net_class_net_server"><code>net.Server</code></a> 且有下列这些额外的事件(This class inherits from <a href="net.html#net_class_net_server"><code>net.Server</code></a> and has the following additional events)：</p>
                 <h3>Event: &#39;checkContinue&#39;<span><a class="mark" href="#http_event_checkcontinue" id="http_event_checkcontinue">#</a></span></h3>
                 <p><code>function (request, response) { }</code></p>
-                <p>Emitted each time a request with an http Expect: 100-continue is received. If this event isn&#39;t listened for, the server will automatically respond with a 100 Continue as appropriate.</p>
-                <p>Handling this event involves calling <a href="#http_response_writecontinue"><code>response.writeContinue()</code></a> if the client should continue to send the request body, or generating an appropriate HTTP response (e.g., 400 Bad Request)
-                    if the client should not continue to send the request body.</p>
-                <p>Note that when this event is emitted and handled, the <code>&#39;request&#39;</code> event will not be emitted.</p>
+                <p>每当接收到 Expect: 100-continue 的 http 请求触发事件。如果未监听该事件，服务器会酌情自动发送 100 Continue 响应。</p>
+                <p>处理该事件时，如果客户端还应该继续发送请求报文体则调用 <a href="#http_response_writecontinue"><code>response.writeContinue()</code></a>，
+                    或者，如果客户端不应该继续发送请求报文体，则生成一个合适的 HTTP 响应(例如，400 Bad Request)。</p>
+                <p>注意，当这个事件触发并且被处理，则 <code>&#39;request&#39;</code> 事件将不再会触发。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Emitted each time a request with an http Expect: 100-continue is received. If this event isn&#39;t listened for, the server will automatically respond with a 100 Continue as appropriate.</p>
+                        <p>Handling this event involves calling <a href="#http_response_writecontinue"><code>response.writeContinue()</code></a> if the client should continue to send the request body, or generating an appropriate HTTP response (e.g., 400 Bad Request)
+                            if the client should not continue to send the request body.</p>
+                        <p>Note that when this event is emitted and handled, the <code>&#39;request&#39;</code> event will not be emitted.</p>
+                    </div>
+                </div>
                 <h3>Event: &#39;clientError&#39;<span><a class="mark" href="#http_event_clienterror" id="http_event_clienterror">#</a></span></h3>
                 <p><code>function (exception, socket) { }</code></p>
-                <p>If a client connection emits an <code>&#39;error&#39;</code> event, it will be forwarded here. Listener of this event is responsible for closing/destroying the underlying socket. For example, one may wish to more gracefully close the socket
-                    with an HTTP &#39;400 Bad Request&#39; response instead of abruptly severing the connection.</p>
-                <p>Default behavior is to destroy the socket immediately on malformed request.</p>
-                <p><code>socket</code> is the <a href="net.html#net_class_net_socket"><code>net.Socket</code></a> object that the error originated from.</p>
+                <p>如果一个客户端连接触发了一个 <code>&#39;error&#39;</code> 事件，它就会转发到这里。该事件的监听器负责关闭/销毁底层套接字。
+                    例如，某人可能希望更加优雅的关闭 '400 Bad Request' http 请求，而不是唐突地切断连接。</p>
+                <p>默认行为是，立即销毁恶意请求的套接字。</p>
+                <p><code>socket</code> 是 <a href="net.html#net_class_net_socket"><code>net.Socket</code></a> 对象，该错误事件源于此对象。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>If a client connection emits an <code>&#39;error&#39;</code> event, it will be forwarded here. Listener of this event is responsible for closing/destroying the underlying socket. For example, one may wish to more gracefully close the socket
+                            with an HTTP &#39;400 Bad Request&#39; response instead of abruptly severing the connection.</p>
+                        <p>Default behavior is to destroy the socket immediately on malformed request.</p>
+                        <p><code>socket</code> is the <a href="net.html#net_class_net_socket"><code>net.Socket</code></a> object that the error originated from.</p>
+                    </div>
+                </div>
                 <pre><code class="lang-js">const http = require(&#39;http&#39;);
 
 const server = http.createServer((req, res) =&gt; {
@@ -716,21 +734,41 @@ server.on(&#39;clientError&#39;, (err, socket) =&gt; {
 });
 server.listen(8000);
 </code></pre>
-                <p>When the <code>&#39;clientError&#39;</code> event occurs, there is no <code>request</code> or <code>response</code> object, so any HTTP response sent, including response headers and payload,
-                    <em>must</em> be written directly to the <code>socket</code> object. Care must be taken to ensure the response is a properly formatted HTTP response message.</p>
+                <p>当 <code>&#39;clientError&#39;</code> 事件发生时，还没有 <code>request</code> 或 <code>response</code> 对象，所以任何
+                     HTTP 响应，包括响应头和数据，都<em>必须</em>直接写入 <code>socket</code> 对象。必须注意确保响应是一个正确格式化的 HTTP 响应消息。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>When the <code>&#39;clientError&#39;</code> event occurs, there is no <code>request</code> or <code>response</code> object, so any HTTP response sent, including response headers and payload,
+                            <em>must</em> be written directly to the <code>socket</code> object. Care must be taken to ensure the response is a properly formatted HTTP response message.</p>
+                    </div>
+                </div>
                 <h3>Event: &#39;close&#39;<span><a class="mark" href="#http_event_close" id="http_event_close">#</a></span></h3>
                 <p><code>function () { }</code></p>
-                <p>Emitted when the server closes.</p>
+                <p>当服务器关闭时触发(Emitted when the server closes)。</p>
                 <h3>Event: &#39;connect&#39;<span><a class="mark" href="#http_event_connect_1" id="http_event_connect_1">#</a></span></h3>
                 <p><code>function (request, socket, head) { }</code></p>
-                <p>Emitted each time a client requests a http <code>CONNECT</code> method. If this event isn&#39;t listened for, then clients requesting a <code>CONNECT</code> method will have their connections closed.</p>
+                <p>每当客户端请求 http <code>CONNECT</code> 方法是触发。如果未监听该事件，则这些请求 <code>CONNECT</code> 方法的客户端将关闭各自的连接。</p>
                 <ul>
-                    <li><code>request</code> is the arguments for the http request, as it is in the request event.
+                    <li><code>request</code> 代表该 http 请求，因为她就在请求事件里面。
                     </li>
-                    <li><code>socket</code> is the network socket between the server and client.</li>
-                    <li><code>head</code> is an instance of Buffer, the first packet of the tunneling stream, this may be empty.</li>
+                    <li><code>socket</code> 服务器和客户端之间的套接字。</li>
+                    <li><code>head</code> 一个 Buffer 实例，隧道流的第一个封包，可能为空。</li>
                 </ul>
-                <p>After this event is emitted, the request&#39;s socket will not have a <code>&#39;data&#39;</code> event listener, meaning you will need to bind to it in order to handle data sent to the server on that socket.</p>
+                <p>该事件触发后，由于套接字上没有 <code>&#39;data&#39;</code> 事件监听器，所以为了处理发送给服务器的数据，你必须把事件监听器绑定给。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>Emitted each time a client requests a http <code>CONNECT</code> method. If this event isn&#39;t listened for, then clients requesting a <code>CONNECT</code> method will have their connections closed.</p>
+                        <ul>
+                            <li><code>request</code> is the arguments for the http request, as it is in the request event.
+                            </li>
+                            <li><code>socket</code> is the network socket between the server and client.</li>
+                            <li><code>head</code> is an instance of Buffer, the first packet of the tunneling stream, this may be empty.</li>
+                        </ul>
+                        <p>After this event is emitted, the request&#39;s socket will not have a <code>&#39;data&#39;</code> event listener, meaning you will need to bind to it in order to handle data sent to the server on that socket.</p>
+                    </div>
+                </div>
                 <h3>Event: &#39;connection&#39;<span><a class="mark" href="#http_event_connection" id="http_event_connection">#</a></span></h3>
                 <p><code>function (socket) { }</code></p>
                 <p>When a new TCP stream is established. <code>socket</code> is an object of type
