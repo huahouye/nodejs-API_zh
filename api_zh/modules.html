@@ -170,7 +170,7 @@ exports.circumference = (r) =&gt; 2 * PI * r;
 var mySquare = square(2);
 console.log(`The area of my square is ${mySquare.area()}`);
 </code></pre>
-                <p>The <code>square</code> module is defined in <code>square.js</code>:</p>
+                <p><code>square</code> 模块定义在 <code>square.js</code> 文件里面(The <code>square</code> module is defined in <code>square.js</code>)：</p>
                 <pre><code class="lang-js">// assigning to exports will not modify module, must use module.exports
 module.exports = (width) =&gt; {
   return {
@@ -178,42 +178,84 @@ module.exports = (width) =&gt; {
   };
 }
 </code></pre>
-                <p>The module system is implemented in the <code>require(&quot;module&quot;)</code> module.</p>
-                <h2>Accessing the main module<span><a class="mark" href="#modules_accessing_the_main_module" id="modules_accessing_the_main_module">#</a></span></h2>
+                <p>模块系统在 <code>require(&quot;module&quot;)</code> 模块中实现(The module system is implemented in the <code>require(&quot;module&quot;)</code> module)。</p>
+                <h2>访问主模块(Accessing the main module)<span><a class="mark" href="#modules_accessing_the_main_module" id="modules_accessing_the_main_module">#</a></span></h2>
                 <!-- type=misc -->
-                <p>When a file is run directly from Node.js, <code>require.main</code> is set to its
-                    <code>module</code>. That means that you can determine whether a file has been run directly by testing</p>
+                <p>当 Node.js 直接运行一个文件时，<code>require.main</code> 就被设置为它的 <code>module</code>。也就是说你可以通过下面的检测来判断一个文件是否是直接被运行的</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>When a file is run directly from , <code>require.main</code> is set to its
+                            <code>module</code>. That means that you can determine whether a file has been run directly by testing</p>
+                    </div>
+                </div>
                 <pre><code class="lang-js">require.main === module
 </code></pre>
-                <p>For a file <code>foo.js</code>, this will be <code>true</code> if run via <code>node foo.js</code>, but
-                    <code>false</code> if run by <code>require(&#39;./foo&#39;)</code>.</p>
-                <p>Because <code>module</code> provides a <code>filename</code> property (normally equivalent to
-                    <code>__filename</code>), the entry point of the current application can be obtained by checking <code>require.main.filename</code>.</p>
-                <h2>Addenda: Package Manager Tips<span><a class="mark" href="#modules_addenda_package_manager_tips" id="modules_addenda_package_manager_tips">#</a></span></h2>
+                <p>对于 <code>foo.js</code> 文件，如果是通过 <code>node foo.js</code> 运行的话，结果会是 <code>true</code>，
+                    但是通过 <code>require(&#39;./foo&#39;)</code> 运行却是 <code>false</code>。</p>
+                <p>因为 <code>module</code> 提供了一个 <code>filename</code> 属性（通常等同于 <code>__filename</code>），
+                    所以当前程序的入口点可以通过 <code>require.main.filename</code> 来获取。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>For a file <code>foo.js</code>, this will be <code>true</code> if run via <code>node foo.js</code>, but
+                            <code>false</code> if run by <code>require(&#39;./foo&#39;)</code>.</p>
+                        <p>Because <code>module</code> provides a <code>filename</code> property (normally equivalent to
+                            <code>__filename</code>), the entry point of the current application can be obtained by checking <code>require.main.filename</code>.</p>
+                    </div>
+                </div>
+                <h2>附录：包管理技巧(Addenda: Package Manager Tips)<span><a class="mark" href="#modules_addenda_package_manager_tips" id="modules_addenda_package_manager_tips">#</a></span></h2>
                 <!-- type=misc -->
-                <p>The semantics of Node.js&#39;s <code>require()</code> function were designed to be general enough to support a number of reasonable directory structures. Package manager programs such as <code>dpkg</code>, <code>rpm</code>, and <code>npm</code>                    will hopefully find it possible to build native packages from Node.js modules without modification.</p>
-                <p>Below we give a suggested directory structure that could work:</p>
-                <p>Let&#39;s say that we wanted to have the folder at
-                    <code>/usr/lib/node/&lt;some-package&gt;/&lt;some-version&gt;</code> hold the contents of a specific version of a package.</p>
-                <p>Packages can depend on one another. In order to install package <code>foo</code>, you may have to install a specific version of package <code>bar</code>. The <code>bar</code> package may itself have dependencies, and in some cases, these
-                    dependencies may even collide or form cycles.</p>
-                <p>Since Node.js looks up the <code>realpath</code> of any modules it loads (that is, resolves symlinks), and then looks for their dependencies in the <code>node_modules</code> folders as described <a href="#modules_loading_from_node_modules_folders">here</a>,
-                    this situation is very simple to resolve with the following architecture:</p>
+                <p>Node.js 的 <code>require()</code> 函数的语义被设计的足够通用化，以支持各种常规目录结构。包管理程序
+                    如 <code>dpkg</code>、<code>rpm</code> 和 <code>npm</code> 无需修改即可从 Node.js 模块构建本地包。</p>
+                <p>接下来我们将给你一个可行的目录结构建议：</p>
+                <p>比方说我们希望将一个包的指定版本放在 <code>/usr/lib/node/&lt;some-package&gt;/&lt;some-version&gt;</code> 目录中。</p>
+                <p>包可以依赖于其他包。为了安装包 <code>foo</code>，可能需要安装某个版本的 <code>bar</code> 包。 包 <code>bar</code> 也可能有依赖关系，
+                    在某些情况下依赖关系可能发生冲突或者形成循环。</p>
+                <p>因为 Node.js 会查找它所加载的模块的真实路径 <code>realpath</code>(也就是解析符号链接)，然后按照上文描述的方式
+                    在<a href="#modules_loading_from_node_modules_folders">这里</a>的 <code>node_modules</code> 目录中寻找依赖关系，
+                    这种情形跟以下体系结构非常相像：</p>
                 <ul>
-                    <li><code>/usr/lib/node/foo/1.2.3/</code> - Contents of the <code>foo</code> package, version 1.2.3.</li>
-                    <li><code>/usr/lib/node/bar/4.3.2/</code> - Contents of the <code>bar</code> package that <code>foo</code> depends on.</li>
-                    <li><code>/usr/lib/node/foo/1.2.3/node_modules/bar</code> - Symbolic link to
-                        <code>/usr/lib/node/bar/4.3.2/</code>.</li>
-                    <li><code>/usr/lib/node/bar/4.3.2/node_modules/*</code> - Symbolic links to the packages that <code>bar</code> depends on.</li>
+                    <li><code>/usr/lib/node/foo/1.2.3/</code> -  <code>foo</code> 包 1.2.3 版本的内容。</li>
+                    <li><code>/usr/lib/node/bar/4.3.2/</code> - <code>bar</code> 包所依赖的 bar 包的内容。</li>
+                    <li><code>/usr/lib/node/foo/1.2.3/node_modules/bar</code> - 指向 <code>/usr/lib/node/bar/4.3.2/</code> 的符号链接。</li>
+                    <li><code>/usr/lib/node/bar/4.3.2/node_modules/*</code> - 指向 <code>bar</code> 包所依赖的包的符号链接.</li>
                 </ul>
-                <p>Thus, even if a cycle is encountered, or if there are dependency conflicts, every module will be able to get a version of its dependency that it can use.</p>
-                <p>When the code in the <code>foo</code> package does <code>require(&#39;bar&#39;)</code>, it will get the version that is symlinked into <code>/usr/lib/node/foo/1.2.3/node_modules/bar</code>. Then, when the code in the <code>bar</code> package
-                    calls <code>require(&#39;quux&#39;)</code>, it&#39;ll get the version that is symlinked into
-                    <code>/usr/lib/node/bar/4.3.2/node_modules/quux</code>.</p>
-                <p>Furthermore, to make the module lookup process even more optimal, rather than putting packages directly in <code>/usr/lib/node</code>, we could put them in
-                    <code>/usr/lib/node_modules/&lt;name&gt;/&lt;version&gt;</code>. Then Node.js will not bother looking for missing dependencies in <code>/usr/node_modules</code> or <code>/node_modules</code>.</p>
-                <p>In order to make modules available to the Node.js REPL, it might be useful to also add the <code>/usr/lib/node_modules</code> folder to the <code>$NODE_PATH</code> environment variable. Since the module lookups using <code>node_modules</code>                    folders are all relative, and based on the real path of the files making the calls to
-                    <code>require()</code>, the packages themselves can be anywhere.</p>
+                <p>因此即便存在循环依赖或依赖冲突，每个模块还是可以获得所依赖包的一个可用版本。</p>
+                <p>当 <code>foo</code> 包的代码 <code>require(&#39;bar&#39;)</code>，将获得符号链接 <code>/usr/lib/node/foo/1.2.3/node_modules/bar</code> 指向
+                    的版本。然后，当 <code>bar</code> 包的代码 <code>require(&#39;quux&#39;)</code>，将会获得符号链接 <code>/usr/lib/node/bar/4.3.2/node_modules/quux</code> 指向的版本。</p>
+                <p>此外，为了进一步优化模块搜索过程，不要将包直接放在 <code>/usr/lib/node</code> 目录中，而是将它们放在 <code>/usr/lib/node_modules/&lt;name&gt;/&lt;version&gt;</code> 目录中。
+                    这样 Node.js 就不用费劲地在 <code>/usr/node_modules</code>  或 <code>/node_modules</code> 目录下找缺失的依赖了。</p>
+                <p>为了使模块在 Node.js 的 REPL 中可用，将 <code>/usr/lib/node_modules</code> 目录也加入到 <code>$NODE_PATH</code> 环境变量中可能非常有用。
+                    因为在 <code>node_modules</code> 目录中搜索模块使用的是相对路径，基于调用 <code>require()</code> 的文件所在真实路径，所以包本身可以放在任何位置。</p>
+                <div class="hhy-original-div">
+                    <button class="hhy-toggle-btn">原文</button>
+                    <div class="hhy-original-text">
+                        <p>The semantics of Node.js&#39;s <code>require()</code> function were designed to be general enough to support a number of reasonable directory structures. Package manager programs such as <code>dpkg</code>, <code>rpm</code>, and <code>npm</code>                    will hopefully find it possible to build native packages from Node.js modules without modification.</p>
+                        <p>Below we give a suggested directory structure that could work:</p>
+                        <p>Let&#39;s say that we wanted to have the folder at
+                            <code>/usr/lib/node/&lt;some-package&gt;/&lt;some-version&gt;</code> hold the contents of a specific version of a package.</p>
+                        <p>Packages can depend on one another. In order to install package <code>foo</code>, you may have to install a specific version of package <code>bar</code>. The <code>bar</code> package may itself have dependencies, and in some cases, these
+                            dependencies may even collide or form cycles.</p>
+                        <p>Since Node.js looks up the <code>realpath</code> of any modules it loads (that is, resolves symlinks), and then looks for their dependencies in the <code>node_modules</code> folders as described <a href="#modules_loading_from_node_modules_folders">here</a>,
+                            this situation is very simple to resolve with the following architecture:</p>
+                        <ul>
+                            <li><code>/usr/lib/node/foo/1.2.3/</code> - Contents of the <code>foo</code> package, version 1.2.3.</li>
+                            <li><code>/usr/lib/node/bar/4.3.2/</code> - Contents of the <code>bar</code> package that <code>foo</code> depends on.</li>
+                            <li><code>/usr/lib/node/foo/1.2.3/node_modules/bar</code> - Symbolic link to
+                                <code>/usr/lib/node/bar/4.3.2/</code>.</li>
+                            <li><code>/usr/lib/node/bar/4.3.2/node_modules/*</code> - Symbolic links to the packages that <code>bar</code> depends on.</li>
+                        </ul>
+                        <p>Thus, even if a cycle is encountered, or if there are dependency conflicts, every module will be able to get a version of its dependency that it can use.</p>
+                        <p>When the code in the <code>foo</code> package does <code>require(&#39;bar&#39;)</code>, it will get the version that is symlinked into <code>/usr/lib/node/foo/1.2.3/node_modules/bar</code>. Then, when the code in the <code>bar</code> package
+                            calls <code>require(&#39;quux&#39;)</code>, it&#39;ll get the version that is symlinked into
+                            <code>/usr/lib/node/bar/4.3.2/node_modules/quux</code>.</p>
+                        <p>Furthermore, to make the module lookup process even more optimal, rather than putting packages directly in <code>/usr/lib/node</code>, we could put them in
+                            <code>/usr/lib/node_modules/&lt;name&gt;/&lt;version&gt;</code>. Then Node.js will not bother looking for missing dependencies in <code>/usr/node_modules</code> or <code>/node_modules</code>.</p>
+                        <p>In order to make modules available to the Node.js REPL, it might be useful to also add the <code>/usr/lib/node_modules</code> folder to the <code>$NODE_PATH</code> environment variable. Since the module lookups using <code>node_modules</code>                    folders are all relative, and based on the real path of the files making the calls to
+                            <code>require()</code>, the packages themselves can be anywhere.</p>
+                    </div>
+                </div>
                 <h2>All Together...<span><a class="mark" href="#modules_all_together" id="modules_all_together">#</a></span></h2>
                 <!-- type=misc -->
                 <p>To get the exact filename that will be loaded when <code>require()</code> is called, use the <code>require.resolve()</code> function.</p>
